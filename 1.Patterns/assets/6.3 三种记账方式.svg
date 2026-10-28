@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 500" width="860" height="500">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:14px;font-weight:600}
+    .sm{font-size:12px;fill:#57606a}
+    .box{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5}
+    .copy{fill:#ddf4ff;stroke:#0969da;stroke-width:1.8}
+    .share{fill:#fff8c5;stroke:#bf8700;stroke-width:1.8}
+    .app{fill:#fbefff;stroke:#8250df;stroke-width:1.8}
+    .arw{stroke:#8c959f;stroke-width:1.4;fill:none;marker-end:url(#a)}
+    .pt{font-size:12px;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8c959f"/>
+    </marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#cf222e"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="500" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="30" y="36">三种记账方式：谁需要「还」，取决于状态是不是被兄弟分支共享</text>
+  <text class="sub" x="30" y="58">同一棵递归树，只是「怎么记谁被用过」不同</text>
+
+  <!-- ============ 左：候选池 ============ -->
+  <rect class="box" x="30" y="76" width="256" height="316" rx="8"/>
+  <text class="cap" x="46" y="102" fill="#0969da">① 候选池：每层一份新副本</text>
+  <text class="mono sm" x="46" y="122">dfs(i + 1, s - {x})</text>
+
+  <rect class="copy" x="76" y="140" width="120" height="28" rx="6"/>
+  <text class="mono pt" x="136" y="159">{1,2,3}</text>
+  <path class="arw" d="M136 168 L136 198"/>
+  <text class="mono sm" x="146" y="187">选 1，造新集合</text>
+  <rect class="copy" x="88" y="200" width="96" height="28" rx="6"/>
+  <text class="mono pt" x="136" y="219">{2,3}</text>
+  <path class="arw" d="M136 228 L136 258"/>
+  <rect class="copy" x="100" y="260" width="72" height="28" rx="6"/>
+  <text class="mono pt" x="136" y="279">{3}</text>
+
+  <rect x="46" y="304" width="224" height="72" fill="#ddf4ff" stroke="#0969da" stroke-width="1.2" rx="6"/>
+  <text x="60" y="326" font-size="12.5" font-weight="600" fill="#0969da">不用恢复</text>
+  <text x="60" y="346" font-size="12">上一层的 <tspan class="mono">s</tspan> 从头到尾没被动过，</text>
+  <text x="60" y="364" font-size="12">兄弟分支拿到的还是原件。</text>
+
+  <!-- ============ 中：占用表 ============ -->
+  <rect class="box" x="302" y="76" width="256" height="316" rx="8"/>
+  <text class="cap" x="318" y="102" fill="#bf8700">② 占用表：整棵树共享一张</text>
+  <text class="mono sm" x="318" y="122">on_path[j] = True / False</text>
+
+  <g class="mono" font-size="12" text-anchor="middle">
+    <rect class="share" x="336" y="140" width="40" height="28" rx="4"/><text x="356" y="159">T</text>
+    <rect class="share" x="376" y="140" width="40" height="28" rx="4"/><text x="396" y="159">F</text>
+    <rect class="share" x="416" y="140" width="40" height="28" rx="4"/><text x="436" y="159">F</text>
+    <text x="396" y="182" font-size="11" fill="#57606a">进入分支：占住 0 号</text>
+
+    <rect class="share" x="336" y="200" width="40" height="28" rx="4"/><text x="356" y="219">T</text>
+    <rect class="share" x="376" y="200" width="40" height="28" rx="4"/><text x="396" y="219">T</text>
+    <rect class="share" x="416" y="200" width="40" height="28" rx="4"/><text x="436" y="219">F</text>
+    <text x="396" y="242" font-size="11" fill="#57606a">更深一层：再占 1 号</text>
+  </g>
+  <path d="M470 214 C512 214 512 160 478 154" stroke="#cf222e" stroke-width="1.6" fill="none" marker-end="url(#r)"/>
+  <text class="mono" x="484" y="192" font-size="11" fill="#cf222e">回来</text>
+  <text class="mono" x="484" y="206" font-size="11" fill="#cf222e">要还</text>
+
+  <rect x="318" y="260" width="224" height="116" fill="#fff8c5" stroke="#bf8700" stroke-width="1.2" rx="6"/>
+  <text x="332" y="282" font-size="12.5" font-weight="600" fill="#bf8700">必须恢复</text>
+  <text x="332" y="302" font-size="12">整棵树只有这一张表。子树探索完</text>
+  <text x="332" y="320" font-size="12">不还，兄弟分支会以为这个数</text>
+  <text x="332" y="338" font-size="12">还被占着，永远轮不到它。</text>
+  <text class="mono" x="332" y="362" font-size="11.5" fill="#cf222e">漏掉 = False → 答案大量变少</text>
+
+  <!-- ============ 右：追加式 path ============ -->
+  <rect class="box" x="574" y="76" width="256" height="316" rx="8"/>
+  <text class="cap" x="590" y="102" fill="#8250df">③ 追加式 path：也共享，也要还</text>
+  <text class="mono sm" x="590" y="122">path.append(x) … path.pop()</text>
+
+  <g class="mono" font-size="12" text-anchor="middle">
+    <rect class="app" x="608" y="140" width="40" height="28" rx="4"/><text x="628" y="159">1</text>
+    <text x="700" y="159" font-size="11" fill="#57606a" text-anchor="start">append 后长度 1</text>
+
+    <rect class="app" x="608" y="188" width="40" height="28" rx="4"/><text x="628" y="207">1</text>
+    <rect class="app" x="648" y="188" width="40" height="28" rx="4"/><text x="668" y="207">2</text>
+    <text x="700" y="207" font-size="11" fill="#57606a" text-anchor="start">再 append 长度 2</text>
+
+    <rect class="app" x="608" y="236" width="40" height="28" rx="4"/><text x="628" y="255">1</text>
+    <rect x="648" y="236" width="40" height="28" rx="4" fill="#ffebe9" stroke="#cf222e" stroke-width="1.6" stroke-dasharray="4 3"/>
+    <text x="668" y="255" fill="#cf222e">pop</text>
+    <text x="700" y="255" font-size="11" fill="#cf222e" text-anchor="start">回来必须弹掉</text>
+  </g>
+
+  <rect x="590" y="284" width="224" height="92" fill="#fbefff" stroke="#8250df" stroke-width="1.2" rx="6"/>
+  <text x="604" y="306" font-size="12.5" font-weight="600" fill="#8250df">必须恢复</text>
+  <text x="604" y="326" font-size="12">长度即层号，<tspan class="mono">path</tspan> 是一个被</text>
+  <text x="604" y="344" font-size="12">全树共用的栈——不 pop，下一个</text>
+  <text x="604" y="362" font-size="12">分支会接着上一条路径继续长。</text>
+
+  <!-- 底部：覆盖式对照 -->
+  <rect x="30" y="406" width="800" height="72" fill="#ffffff" stroke="#1a7f37" stroke-width="1.6" rx="8"/>
+  <text x="46" y="428" font-size="13.5" font-weight="600" fill="#1a7f37">唯一不用还的是「覆盖式 path」：<tspan class="mono" font-weight="400" fill="#1f2328">path = [0] * n</tspan> + <tspan class="mono" font-weight="400" fill="#1f2328">path[i] = x</tspan></text>
+  <text x="46" y="450" font-size="13">因为下标 <tspan class="mono">i</tspan> 就是<tspan font-weight="600">递归深度</tspan>：第 i 层永远只碰第 i 格，兄弟分支各写各的，而且下次进来一定<tspan font-weight="600">先写后读</tspan>。</text>
+  <text x="46" y="470" font-size="13">判断标准从来不是「变量是不是全局的」，而是——<tspan font-weight="600" fill="#cf222e">它的旧值会不会被兄弟分支读到</tspan>。</text>
+</svg>

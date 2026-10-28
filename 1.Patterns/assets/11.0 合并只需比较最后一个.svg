@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 450" width="820" height="450">
+  <defs>
+    <marker id="ar11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600}
+    .bar{stroke-width:1.5;rx:5}
+    .cur{fill:#dafbe1;stroke:#1a7f37}
+    .new{fill:#ddf4ff;stroke:#0969da}
+    .box{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:8}
+    .ar{stroke:#0969da;stroke-width:1.6;fill:none;marker-end:url(#ar11)}
+  </style>
+
+  <rect width="820" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">排序后只有三种相对位置 —— 这就是「为什么用 max，而不是直接赋值」</text>
+  <text class="sub" x="32" y="58">绿色 = 当前正在合并的区间 [s, e]；蓝色 = 下一个区间 [a, b]。左端点已递增，所以一定有 a ≥ s。</text>
+
+  <!-- 情形一 -->
+  <rect class="box" x="32" y="80" width="240" height="150"/>
+  <text class="cap" x="48" y="104" fill="#1a7f37">① 断开：a &gt; e</text>
+  <rect class="bar cur" x="52"  y="126" width="90" height="18"/>
+  <text class="mono sub" x="97"  y="120" font-size="11" text-anchor="middle">[s, e]</text>
+  <rect class="bar new" x="168" y="126" width="86" height="18"/>
+  <text class="mono sub" x="211" y="120" font-size="11" text-anchor="middle">[a, b]</text>
+  <text class="sub" x="48" y="176" font-size="12">把 [s, e] 收进答案，</text>
+  <text class="sub" x="48" y="196" font-size="12">用 [a, b] 开一段新的。</text>
+  <text class="mono" x="48" y="218" font-size="11.5" fill="#0969da">ans.append; s, e = a, b</text>
+
+  <!-- 情形二 -->
+  <rect class="box" x="290" y="80" width="240" height="150"/>
+  <text class="cap" x="306" y="104" fill="#0969da">② 相交：a ≤ e &lt; b</text>
+  <rect class="bar cur" x="310" y="126" width="120" height="18"/>
+  <text class="mono sub" x="370" y="120" font-size="11" text-anchor="middle">[s, e]</text>
+  <rect class="bar new" x="396" y="150" width="110" height="18"/>
+  <text class="mono sub" x="451" y="182" font-size="11" text-anchor="middle">[a, b]</text>
+  <text class="sub" x="306" y="204" font-size="12">右端点往外扩。</text>
+  <text class="mono" x="306" y="224" font-size="11.5" fill="#0969da">e = max(e, b)  → b</text>
+
+  <!-- 情形三 -->
+  <rect class="box" x="548" y="80" width="240" height="150"/>
+  <text class="cap" x="564" y="104" fill="#cf222e">③ 被包含：a ≤ b ≤ e</text>
+  <rect class="bar cur" x="568" y="126" width="200" height="18"/>
+  <text class="mono sub" x="668" y="120" font-size="11" text-anchor="middle">[s, e]</text>
+  <rect class="bar new" x="606" y="150" width="70"  height="18"/>
+  <text class="mono sub" x="641" y="182" font-size="11" text-anchor="middle">[a, b]</text>
+  <text class="sub" x="564" y="204" font-size="12">右端点必须原地不动。</text>
+  <text class="mono" x="564" y="224" font-size="11.5" fill="#cf222e">写成 e = b 就把区间截短了</text>
+
+  <line x1="32" y1="254" x2="788" y2="254" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- 证明 -->
+  <text class="cap" x="32" y="282" font-size="14">为什么只和「最后一个」比，不用回头比全部？</text>
+
+  <line x1="60" y1="360" x2="770" y2="360" stroke="#d0d7de" stroke-width="1.5"/>
+  <rect class="bar cur" x="90"  y="322" width="130" height="18"/>
+  <text class="mono sub" x="155" y="316" font-size="11" text-anchor="middle">已收进答案的旧区间</text>
+  <rect class="bar cur" x="300" y="322" width="180" height="18"/>
+  <text class="mono sub" x="390" y="316" font-size="11" text-anchor="middle">当前 [s, e]</text>
+  <rect class="bar new" x="430" y="378" width="200" height="18"/>
+  <text class="mono sub" x="530" y="404" font-size="11" text-anchor="middle">新来的 [a, b]，a ≥ s</text>
+  <path class="ar" d="M 440 374 L 420 344"/>
+
+  <text class="sub" x="32" y="428" font-size="12.5">反证：若 [a, b] 还能碰到某个更早的旧区间，说明那个旧区间的右端点 ≥ a ≥ 它后面所有区间的左端点 —— 那它当初就该被合并掉，不会以独立形态留在答案里。</text>
+</svg>

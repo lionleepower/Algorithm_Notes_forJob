@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .hdr{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1.5;rx:5}
+    .cell{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:5}
+    .no{fill:#ffebe9;stroke:#cf222e;stroke-width:1.5;rx:5}
+    .yes{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.5;rx:5}
+    .must{fill:#fff8c5;stroke:#bf8700;stroke-width:2;rx:5}
+  </style>
+
+  <rect width="800" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">三条转移 = 一张「儿子允许用哪些状态」的表</text>
+  <text class="sub" x="32" y="60">每条转移都在回答同一句话：node 处在这个状态时，儿子的三个状态里<tspan font-weight="600" fill="#1f2328">哪些还合法</tspan></text>
+
+  <!-- 列头 -->
+  <rect class="hdr" x="150" y="82" width="106" height="38"/>
+  <text x="203" y="106" font-size="13" text-anchor="middle" font-weight="600" fill="#0969da">儿子 蓝(装)</text>
+  <rect class="hdr" x="262" y="82" width="106" height="38"/>
+  <text x="315" y="106" font-size="13" text-anchor="middle" font-weight="600" fill="#bf8700">儿子 黄(靠父)</text>
+  <rect class="hdr" x="374" y="82" width="106" height="38"/>
+  <text x="427" y="106" font-size="13" text-anchor="middle" font-weight="600" fill="#cf222e">儿子 红(靠子)</text>
+
+  <!-- 行1：node 蓝 -->
+  <rect class="hdr" x="32" y="126" width="112" height="56"/>
+  <text x="88" y="150" font-size="13" text-anchor="middle" font-weight="600" fill="#0969da">node 蓝</text>
+  <text class="sub" x="88" y="168" font-size="11" text-anchor="middle">自己装了</text>
+  <rect class="yes" x="150" y="126" width="106" height="56"/>
+  <text x="203" y="159" font-size="16" text-anchor="middle" fill="#1a7f37">✓</text>
+  <rect class="yes" x="262" y="126" width="106" height="56"/>
+  <text x="315" y="153" font-size="16" text-anchor="middle" fill="#1a7f37">✓</text>
+  <text class="sub" x="315" y="172" font-size="10.5" text-anchor="middle" fill="#1a7f37">债由 node 还上</text>
+  <rect class="yes" x="374" y="126" width="106" height="56"/>
+  <text x="427" y="159" font-size="16" text-anchor="middle" fill="#1a7f37">✓</text>
+
+  <!-- 行2：node 黄 -->
+  <rect class="hdr" x="32" y="188" width="112" height="56"/>
+  <text x="88" y="212" font-size="13" text-anchor="middle" font-weight="600" fill="#bf8700">node 黄</text>
+  <text class="sub" x="88" y="230" font-size="11" text-anchor="middle">没装，等父亲</text>
+  <rect class="yes" x="150" y="188" width="106" height="56"/>
+  <text x="203" y="221" font-size="16" text-anchor="middle" fill="#1a7f37">✓</text>
+  <rect class="no" x="262" y="188" width="106" height="56"/>
+  <text x="315" y="215" font-size="16" text-anchor="middle" fill="#cf222e">✗</text>
+  <text class="sub" x="315" y="234" font-size="10.5" text-anchor="middle" fill="#cf222e">node 是空的</text>
+  <rect class="yes" x="374" y="188" width="106" height="56"/>
+  <text x="427" y="221" font-size="16" text-anchor="middle" fill="#1a7f37">✓</text>
+
+  <!-- 行3：node 红 -->
+  <rect class="hdr" x="32" y="250" width="112" height="56"/>
+  <text x="88" y="274" font-size="13" text-anchor="middle" font-weight="600" fill="#cf222e">node 红</text>
+  <text class="sub" x="88" y="292" font-size="11" text-anchor="middle">没装，靠儿子</text>
+  <rect class="must" x="150" y="250" width="106" height="56"/>
+  <text x="203" y="274" font-size="15" text-anchor="middle" fill="#bf8700">✓</text>
+  <text class="sub" x="203" y="292" font-size="10.5" text-anchor="middle" fill="#bf8700" font-weight="600">至少要有一个</text>
+  <rect class="no" x="262" y="250" width="106" height="56"/>
+  <text x="315" y="283" font-size="16" text-anchor="middle" fill="#cf222e">✗</text>
+  <rect class="yes" x="374" y="250" width="106" height="56"/>
+  <text x="427" y="283" font-size="16" text-anchor="middle" fill="#1a7f37">✓</text>
+
+  <text class="sub" x="32" y="330" font-size="12.5">蓝行与黄行<tspan font-weight="600" fill="#1f2328">唯一的差别</tspan>就是中间那一格 —— 这也是全篇最容易写错的地方。</text>
+
+  <!-- 右侧公式 -->
+  <rect x="504" y="82" width="264" height="224" fill="#ffffff" stroke="#8250df" stroke-width="1.5" rx="8"/>
+  <text x="522" y="108" font-size="14" font-weight="600" fill="#8250df">照着表把式子抄出来</text>
+  <text class="mono" x="522" y="136" font-size="11.5" fill="#0969da">choose = min(三个) + min(三个) + 1</text>
+  <text class="mono" x="522" y="164" font-size="11.5" fill="#bf8700">by_fa  = min(l_c, l_ch)</text>
+  <text class="mono" x="522" y="180" font-size="11.5" fill="#bf8700">       + min(r_c, r_ch)</text>
+  <text class="mono" x="522" y="208" font-size="11.5" fill="#cf222e">by_children = min(</text>
+  <text class="mono" x="534" y="226" font-size="11.5" fill="#cf222e">  l_c  + r_ch,   左装</text>
+  <text class="mono" x="534" y="244" font-size="11.5" fill="#cf222e">  l_ch + r_c,    右装</text>
+  <text class="mono" x="534" y="262" font-size="11.5" fill="#cf222e">  l_c  + r_c )   都装</text>
+  <text class="sub" x="522" y="288" font-size="11.5">第三项不能省 —— 见下方</text>
+
+  <!-- 底部：第三项 -->
+  <line x1="32" y1="352" x2="768" y2="352" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="376" font-size="14" font-weight="600" fill="#cf222e">为什么「两个都装」这一项不能删</text>
+  <text class="mono" x="32" y="400" font-size="12.5">叶子的三元组 = (choose 1, by_fa 0, by_children ∞)</text>
+  <text class="sub"  x="360" y="400" font-size="12.5">叶子没有儿子，红这条路本就不存在</text>
+  <text class="sub" x="32" y="424" font-size="12.5">于是当 node 的两个儿子都是叶子：前两项都含 ∞，<tspan font-weight="600" fill="#1f2328">只有「都装」是有限的</tspan>（1 + 1 = 2）。</text>
+  <text class="sub" x="32" y="444" font-size="12.5">现实含义：node 靠一个叶子覆盖，另一个叶子既没摄像头、上面 node 也没有、自己又没儿子 ⇒ 只能自己再装一台。</text>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440">
+  <defs>
+    <marker id="a43" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/>
+    </marker>
+    <marker id="g43" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .node{fill:#ffffff;stroke:#1f2328;stroke-width:1.8;rx:6}
+    .dum{fill:#eaeef2;stroke:#57606a;stroke-width:1.8;rx:6}
+    .del{fill:#ffebe9;stroke:#cf222e;stroke-width:2;rx:6}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#a43)}
+    .join{stroke:#1a7f37;stroke-width:2.4;fill:none;marker-end:url(#g43)}
+  </style>
+
+  <rect width="800" height="440" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="34">19 删除倒数第 n 个：把「倒数」翻译成「间距」</text>
+  <text class="sub" x="32" y="56">单链表只能往前走，数不出倒数第几个 —— 但两个指针之间的间距是恒定的，可以数。</text>
+
+  <!-- ① -->
+  <text class="sub" x="32" y="98" font-size="13" font-weight="600">① right 先走 n = 2 步</text>
+  <text class="mono sub" x="286" y="98" font-size="12" text-anchor="middle">left</text>
+  <text class="mono sub" x="454" y="98" font-size="12" text-anchor="middle">right</text>
+
+  <rect class="dum"  x="258" y="108" width="56" height="42"/>
+  <text class="mono" x="286" y="135" font-size="13" text-anchor="middle">dummy</text>
+  <line class="lnk" x1="316" y1="129" x2="340" y2="129"/>
+  <rect class="node" x="342" y="108" width="56" height="42"/>
+  <text class="mono" x="370" y="135" font-size="15" text-anchor="middle">1</text>
+  <line class="lnk" x1="400" y1="129" x2="424" y2="129"/>
+  <rect class="node" x="426" y="108" width="56" height="42"/>
+  <text class="mono" x="454" y="135" font-size="15" text-anchor="middle">2</text>
+  <line class="lnk" x1="484" y1="129" x2="508" y2="129"/>
+  <rect class="node" x="510" y="108" width="56" height="42"/>
+  <text class="mono" x="538" y="135" font-size="15" text-anchor="middle">3</text>
+  <line class="lnk" x1="568" y1="129" x2="592" y2="129"/>
+  <rect class="node" x="594" y="108" width="56" height="42"/>
+  <text class="mono" x="622" y="135" font-size="15" text-anchor="middle">4</text>
+  <line class="lnk" x1="652" y1="129" x2="676" y2="129"/>
+  <rect class="node" x="678" y="108" width="56" height="42"/>
+  <text class="mono" x="706" y="135" font-size="15" text-anchor="middle">5</text>
+
+  <line x1="286" y1="166" x2="454" y2="166" stroke="#bf8700" stroke-width="1.6"/>
+  <line x1="286" y1="160" x2="286" y2="172" stroke="#bf8700" stroke-width="1.6"/>
+  <line x1="454" y1="160" x2="454" y2="172" stroke="#bf8700" stroke-width="1.6"/>
+  <text class="mono" x="370" y="188" font-size="12.5" fill="#bf8700" text-anchor="middle">间距恒为 n</text>
+
+  <!-- ② -->
+  <text class="sub" x="32" y="238" font-size="13" font-weight="600">② 同步前进，直到 right.next 为空</text>
+  <text class="mono sub" x="538" y="238" font-size="12" text-anchor="middle">left</text>
+  <text class="mono sub" x="706" y="238" font-size="12" text-anchor="middle">right</text>
+
+  <rect class="dum"  x="258" y="248" width="56" height="42"/>
+  <text class="mono" x="286" y="275" font-size="13" text-anchor="middle">dummy</text>
+  <line class="lnk" x1="316" y1="269" x2="340" y2="269"/>
+  <rect class="node" x="342" y="248" width="56" height="42"/>
+  <text class="mono" x="370" y="275" font-size="15" text-anchor="middle">1</text>
+  <line class="lnk" x1="400" y1="269" x2="424" y2="269"/>
+  <rect class="node" x="426" y="248" width="56" height="42"/>
+  <text class="mono" x="454" y="275" font-size="15" text-anchor="middle">2</text>
+  <line class="lnk" x1="484" y1="269" x2="508" y2="269"/>
+  <rect class="node" x="510" y="248" width="56" height="42"/>
+  <text class="mono" x="538" y="275" font-size="15" text-anchor="middle">3</text>
+  <line class="lnk" x1="568" y1="269" x2="592" y2="269"/>
+  <rect class="del"  x="594" y="248" width="56" height="42"/>
+  <text class="mono" x="622" y="275" font-size="15" text-anchor="middle" fill="#cf222e">4</text>
+  <line class="lnk" x1="652" y1="269" x2="676" y2="269"/>
+  <rect class="node" x="678" y="248" width="56" height="42"/>
+  <text class="mono" x="706" y="275" font-size="15" text-anchor="middle">5</text>
+
+  <path class="join" d="M 538 294 Q 622 358 702 296"/>
+  <text class="mono" x="622" y="382" font-size="13" fill="#1a7f37" text-anchor="middle">left.next = left.next.next</text>
+
+  <!-- 底部 -->
+  <line x1="32" y1="398" x2="768" y2="398" stroke="#d0d7de" stroke-width="1"/>
+  <text class="sub" x="32" y="422" font-size="13">right 停在尾节点时，left 正好是倒数第 n+1 个 —— 也就是待删节点的前驱。dummy 让 n 等于链表长度（删头节点）时也不用特判。</text>
+</svg>

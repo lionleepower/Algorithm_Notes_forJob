@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <defs>
+    <marker id="ab5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+    <marker id="ag5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+    <marker id="as5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c959f"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .node{fill:#ffffff;stroke:#1f2328;stroke-width:2}
+    .sell{stroke:#1a7f37;stroke-width:2.5;fill:none;marker-end:url(#ag5)}
+    .buy{stroke:#0969da;stroke-width:2.5;fill:none;marker-end:url(#ab5)}
+    .stay{stroke:#8c959f;stroke-width:2;fill:none;marker-end:url(#as5)}
+  </style>
+
+  <rect width="800" height="460" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">状态机 DP：一天结束时只有两种状态</text>
+  <text class="sub" x="32" y="60">dfs(i, hold) = 第 i 天收盘时持股状态为 hold 的最大利润；买卖动作发生在 i-1 → i 的那条边上</text>
+
+  <!-- 卖出 -->
+  <text x="400" y="92" font-size="15" font-weight="600" fill="#1a7f37" text-anchor="middle">卖　出</text>
+  <text class="mono" x="400" y="118" font-size="13" fill="#1a7f37" text-anchor="middle">dfs(i, 0) = dfs(i-1, 1) + prices[i]</text>
+  <path class="sell" d="M 492 172 Q 400 112 308 172"/>
+
+  <!-- 买入 -->
+  <path class="buy" d="M 308 248 Q 400 308 492 248"/>
+  <text class="mono" x="400" y="334" font-size="13" fill="#0969da" text-anchor="middle">dfs(i, 1) = dfs(i-1, 0) - prices[i]</text>
+  <text x="400" y="360" font-size="15" font-weight="600" fill="#0969da" text-anchor="middle">买　入</text>
+
+  <!-- 自环 -->
+  <path class="stay" d="M 222 184 C 146 148, 146 278, 218 238"/>
+  <path class="stay" d="M 578 184 C 654 148, 654 278, 582 238"/>
+  <text class="sub" x="176" y="300" font-size="13" text-anchor="middle">什么也不做</text>
+  <text class="mono sub" x="176" y="322" font-size="12" text-anchor="middle">dfs(i-1, 0)</text>
+  <text class="sub" x="624" y="300" font-size="13" text-anchor="middle">什么也不做</text>
+  <text class="mono sub" x="624" y="322" font-size="12" text-anchor="middle">dfs(i-1, 1)</text>
+
+  <!-- 两个节点 -->
+  <circle class="node" cx="270" cy="210" r="54"/>
+  <text x="270" y="206" font-size="19" font-weight="600" text-anchor="middle">未持有</text>
+  <text class="mono sub" x="270" y="230" font-size="12" text-anchor="middle">hold = 0</text>
+
+  <circle class="node" cx="530" cy="210" r="54"/>
+  <text x="530" y="206" font-size="19" font-weight="600" text-anchor="middle">持　有</text>
+  <text class="mono sub" x="530" y="230" font-size="12" text-anchor="middle">hold = 1</text>
+
+  <!-- 底部：改一处就是另一道题 -->
+  <line x1="32" y1="378" x2="768" y2="378" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="402" font-size="14" font-weight="600">同一张图，改一条边就是另一道题</text>
+  <text class="mono" x="32" y="426" font-size="12.5">309 冷静期：买入边改读 dfs(i-2, 0)　　714 手续费：卖出边写 dfs(i-1, 1) + prices[i] - fee</text>
+  <text class="mono" x="32" y="448" font-size="12.5">188 至多 k 笔：整张图加一维 j，只在卖出边把预算减 1 → dfs(i-1, j-1, 1) + prices[i]</text>
+</svg>

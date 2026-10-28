@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 450" width="820" height="450">
+  <defs>
+    <marker id="ar240" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+    <marker id="q240" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600;fill:#0969da}
+    .c{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:4}
+    .cut{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1;rx:4}
+    .cur{fill:#ddf4ff;stroke:#0969da;stroke-width:2.2;rx:4}
+    .hit{fill:#dafbe1;stroke:#1a7f37;stroke-width:2.2;rx:4}
+    .ar{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#ar240)}
+    .q{stroke:#cf222e;stroke-width:2;fill:none;stroke-dasharray:4 3;marker-end:url(#q240)}
+  </style>
+
+  <rect width="820" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">240 搜索二维矩阵 II：从右上角出发，每一步都能永久删掉一整行或一整列</text>
+  <text class="sub" x="32" y="58">右上角是唯一「往左只会变小、往下只会变大」的位置 —— 它把二维矩阵变成了一棵二叉搜索树的根。target = 14</text>
+
+  <!-- 矩阵 5x5 -->
+  <g class="mono" font-size="14" text-anchor="middle">
+    <rect class="cut" x="60"  y="90" width="52" height="38"/><text x="86"  y="115" fill="#8c959f">1</text>
+    <rect class="cut" x="116" y="90" width="52" height="38"/><text x="142" y="115" fill="#8c959f">4</text>
+    <rect class="cut" x="172" y="90" width="52" height="38"/><text x="198" y="115" fill="#8c959f">7</text>
+    <rect class="cut" x="228" y="90" width="52" height="38"/><text x="254" y="115" fill="#8c959f">11</text>
+    <rect class="cur" x="284" y="90" width="52" height="38"/><text x="310" y="115" fill="#0969da">15</text>
+
+    <rect class="cut" x="60"  y="132" width="52" height="38"/><text x="86"  y="157" fill="#8c959f">2</text>
+    <rect class="cut" x="116" y="132" width="52" height="38"/><text x="142" y="157" fill="#8c959f">5</text>
+    <rect class="cut" x="172" y="132" width="52" height="38"/><text x="198" y="157" fill="#8c959f">8</text>
+    <rect class="cur" x="228" y="132" width="52" height="38"/><text x="254" y="157" fill="#0969da">12</text>
+    <rect class="cut" x="284" y="132" width="52" height="38"/><text x="310" y="157" fill="#8c959f">19</text>
+
+    <rect class="cut" x="60"  y="174" width="52" height="38"/><text x="86"  y="199" fill="#8c959f">3</text>
+    <rect class="cut" x="116" y="174" width="52" height="38"/><text x="142" y="199" fill="#8c959f">6</text>
+    <rect class="cut" x="172" y="174" width="52" height="38"/><text x="198" y="199" fill="#8c959f">9</text>
+    <rect class="hit" x="228" y="174" width="52" height="38"/><text x="254" y="199" fill="#1a7f37" font-weight="600">14</text>
+    <rect class="cut" x="284" y="174" width="52" height="38"/><text x="310" y="199" fill="#8c959f">22</text>
+
+    <rect class="c" x="60"  y="216" width="52" height="38"/><text x="86"  y="241">10</text>
+    <rect class="c" x="116" y="216" width="52" height="38"/><text x="142" y="241">13</text>
+    <rect class="c" x="172" y="216" width="52" height="38"/><text x="198" y="241">14</text>
+    <rect class="c" x="228" y="216" width="52" height="38"/><text x="254" y="241">17</text>
+    <rect class="c" x="284" y="216" width="52" height="38"/><text x="310" y="241">24</text>
+
+    <rect class="c" x="60"  y="258" width="52" height="38"/><text x="86"  y="283">18</text>
+    <rect class="c" x="116" y="258" width="52" height="38"/><text x="142" y="283">21</text>
+    <rect class="c" x="172" y="258" width="52" height="38"/><text x="198" y="283">23</text>
+    <rect class="c" x="228" y="258" width="52" height="38"/><text x="254" y="283">26</text>
+    <rect class="c" x="284" y="258" width="52" height="38"/><text x="310" y="283">30</text>
+  </g>
+
+  <path class="ar" d="M 300 130 L 300 134"/>
+  <path class="ar" d="M 282 109 L 226 109"/>
+  <path class="ar" d="M 254 130 L 254 168"/>
+
+  <text class="mono sub" x="366" y="112" font-size="12.5">15 &gt; 14 ⇒ 这一整列的下方都 ≥ 15，第 4 列被删掉，j −= 1</text>
+  <text class="mono sub" x="366" y="140" font-size="12.5">12 &lt; 14 ⇒ 这一整行的左边都 ≤ 12，第 1 行被删掉，i += 1</text>
+  <text class="mono" x="366" y="168" font-size="12.5" fill="#1a7f37">14 == 14 ⇒ 命中，返回 True</text>
+  <text class="mono sub" x="366" y="200" font-size="12.5">每步至少删掉一行或一列 ⇒ 最多走 m + n 步</text>
+
+  <line x1="32" y1="316" x2="788" y2="316" stroke="#d0d7de" stroke-width="1"/>
+
+  <text x="32" y="342" font-size="14" font-weight="600" fill="#cf222e">为什么不能从左上角开始</text>
+  <text class="sub" x="32" y="364" font-size="12.5">左上角往右和往下都是变大，比 target 小的时候有两个方向可走，没法排除任何一半 —— 这不是二分，是分叉。右上 / 左下两角才具备「两个方向单调相反」的性质。</text>
+
+  <text x="32" y="400" font-size="14" font-weight="600" fill="#0969da">和 74 搜索二维矩阵的区别</text>
+  <text class="sub" x="32" y="422" font-size="12.5">74 保证「上一行末尾 &lt; 下一行开头」，整个矩阵摊平后完全有序，可以直接当长度 m×n 的数组做二分；240 只保证行内、列内有序，摊平后并不有序，二分不成立。</text>
+</svg>

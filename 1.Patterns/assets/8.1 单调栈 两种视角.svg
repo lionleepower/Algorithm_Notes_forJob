@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <defs>
+    <marker id="s2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+    <marker id="s2o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bf8700"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .box{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:5}
+    .cur{fill:#dafbe1;stroke:#1a7f37;stroke-width:2.5;rx:5}
+    .ab{stroke:#0969da;stroke-width:2.5;fill:none;marker-end:url(#s2b)}
+    .ao{stroke:#bf8700;stroke-width:2.5;fill:none;marker-end:url(#s2o)}
+  </style>
+
+  <rect width="800" height="460" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">同一道 739，两种视角：栈里装的到底是谁？</text>
+  <text class="sub" x="32" y="60">两者都是 O(n)、都对。<tspan font-weight="600" fill="#cf222e">建议只精熟一种</tspan>，另一种能读懂即可 —— 否则等号方向必串</text>
+
+  <!-- ===== 左：从右往左 ===== -->
+  <rect x="32" y="80" width="356" height="216" fill="#ffffff" stroke="#0969da" stroke-width="1.5" rx="8"/>
+  <text x="50" y="106" font-size="14" font-weight="600" fill="#0969da">从右往左　栈 = 候选答案池</text>
+  <text class="sub" x="50" y="128" font-size="12">栈里存的是：i 右边所有「还可能成为某人答案」的下标</text>
+
+  <rect class="cur" x="54" y="148" width="56" height="46"/>
+  <text class="mono" x="82" y="177" font-size="14" text-anchor="middle" font-weight="600">i</text>
+  <text class="sub" x="82" y="212" font-size="11" text-anchor="middle" fill="#1a7f37">当前</text>
+
+  <rect class="box" x="150" y="148" width="52" height="46"/>
+  <text class="mono" x="176" y="177" font-size="13" text-anchor="middle">栈顶</text>
+  <rect class="box" x="206" y="148" width="52" height="46"/>
+  <rect class="box" x="262" y="148" width="52" height="46"/>
+  <text class="mono" x="288" y="177" font-size="13" text-anchor="middle">栈底</text>
+  <text class="sub" x="232" y="212" font-size="11" text-anchor="middle">温度自顶向底递增</text>
+
+  <path class="ab" d="M 118 158 L 146 158"/>
+  <text class="sub" x="132" y="150" font-size="10.5" fill="#0969da">查</text>
+
+  <text class="mono" x="50" y="242" font-size="12">while st and t &gt;= temperatures[st[-1]]:</text>
+  <text class="mono" x="50" y="258" font-size="12">    st.pop()          # 清理无效候选</text>
+  <text class="mono" x="50" y="274" font-size="12">if st: ans[i] = st[-1] - i   # 自己写自己</text>
+  <text class="sub" x="50" y="290" font-size="11.5" fill="#0969da">先清理，再<tspan font-weight="600">查询</tspan>；比较符含等号</text>
+
+  <!-- ===== 右：从左往右 ===== -->
+  <rect x="412" y="80" width="356" height="216" fill="#ffffff" stroke="#bf8700" stroke-width="1.5" rx="8"/>
+  <text x="430" y="106" font-size="14" font-weight="600" fill="#bf8700">从左往右　栈 = 还没拿到答案的欠债人</text>
+  <text class="sub" x="430" y="128" font-size="12">栈里存的是：还在等一个「更大值」来结算的下标</text>
+
+  <rect class="box" x="434" y="148" width="52" height="46"/>
+  <text class="mono" x="460" y="177" font-size="13" text-anchor="middle">栈底</text>
+  <rect class="box" x="490" y="148" width="52" height="46"/>
+  <rect class="box" x="546" y="148" width="52" height="46"/>
+  <text class="mono" x="572" y="177" font-size="13" text-anchor="middle">栈顶</text>
+  <text class="sub" x="516" y="212" font-size="11" text-anchor="middle">温度自底向顶递减</text>
+
+  <rect class="cur" x="638" y="148" width="56" height="46"/>
+  <text class="mono" x="666" y="177" font-size="14" text-anchor="middle" font-weight="600">i</text>
+  <text class="sub" x="666" y="212" font-size="11" text-anchor="middle" fill="#1a7f37">当前</text>
+
+  <path class="ao" d="M 634 158 L 602 158"/>
+  <text class="sub" x="612" y="150" font-size="10.5" fill="#bf8700">还债</text>
+
+  <text class="mono" x="430" y="242" font-size="12">while st and t &gt; temperatures[st[-1]]:</text>
+  <text class="mono" x="430" y="258" font-size="12">    j = st.pop(); ans[j] = i - j</text>
+  <text class="mono" x="430" y="274" font-size="12">st.append(i)          # 自己也去排队欠债</text>
+  <text class="sub" x="430" y="290" font-size="11.5" fill="#bf8700">先<tspan font-weight="600">结算</tspan>，再入栈；比较符不含等号</text>
+
+  <!-- ===== 对照表 ===== -->
+  <line x1="32" y1="322" x2="768" y2="322" stroke="#d0d7de" stroke-width="1"/>
+  <text class="sub" x="32" y="344" font-size="12" font-weight="600">对照</text>
+  <text class="sub" x="200" y="344" font-size="12" font-weight="600" fill="#0969da">从右往左</text>
+  <text class="sub" x="470" y="344" font-size="12" font-weight="600" fill="#bf8700">从左往右</text>
+  <line x1="32" y1="352" x2="768" y2="352" stroke="#d0d7de" stroke-width="1"/>
+
+  <text class="sub" x="32" y="374" font-size="12">当前元素干什么</text>
+  <text class="sub" x="200" y="374" font-size="12">清理无效候选，然后<tspan font-weight="600" fill="#1f2328">查询</tspan></text>
+  <text class="sub" x="470" y="374" font-size="12">给栈里的人<tspan font-weight="600" fill="#1f2328">结算</tspan>，然后入栈</text>
+
+  <text class="sub" x="32" y="398" font-size="12">谁负责写 ans</text>
+  <text class="mono" x="200" y="398" font-size="12">ans[i]，自己写自己</text>
+  <text class="mono" x="470" y="398" font-size="12">ans[j]，写别人</text>
+
+  <text class="sub" x="32" y="422" font-size="12">比较符</text>
+  <text class="mono" x="200" y="422" font-size="12" fill="#cf222e" font-weight="600">t &gt;= t[st[-1]] 时 pop</text>
+  <text class="mono" x="470" y="422" font-size="12" fill="#cf222e" font-weight="600">t &gt; t[st[-1]] 时 pop</text>
+  <line x1="32" y1="434" x2="768" y2="434" stroke="#d0d7de" stroke-width="1"/>
+  <text class="sub" x="32" y="452" font-size="12">等号方向相反，是因为一边判断「这个候选还有没有用」，另一边判断「够不够格给栈顶结算」—— 语义不同。</text>
+</svg>

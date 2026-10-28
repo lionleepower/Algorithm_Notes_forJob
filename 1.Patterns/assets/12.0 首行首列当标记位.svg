@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" width="820" height="440">
+  <defs>
+    <marker id="ar73" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600;fill:#0969da}
+    .c{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:4}
+    .lane{fill:#fff8c5;stroke:#bf8700;stroke-width:1.5;rx:4}
+    .clash{fill:#ffebe9;stroke:#cf222e;stroke-width:2.2;rx:4}
+    .zero{fill:#ddf4ff;stroke:#0969da;stroke-width:2;rx:4}
+    .ar{stroke:#cf222e;stroke-width:1.8;fill:none;marker-end:url(#ar73)}
+  </style>
+
+  <rect width="820" height="440" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">73 矩阵置零：把第 0 行和第 0 列借来当标记数组，空间从 O(m+n) 降到 O(1)</text>
+  <text class="sub" x="32" y="58">m[i][0] 记「第 i 行要清零」，m[0][j] 记「第 j 列要清零」—— 但 m[0][0] 被两边同时征用，这是全题唯一的坑。</text>
+
+  <!-- 网格 -->
+  <text class="cap" x="60" y="98">标记阶段（黄色 = 标记通道）</text>
+  <rect class="clash" x="60"  y="112" width="52" height="40"/><text class="mono" x="86"  y="138" font-size="14" text-anchor="middle" fill="#cf222e">m[0][0]</text>
+  <rect class="lane"  x="116" y="112" width="52" height="40"/><text class="mono" x="142" y="138" font-size="13" text-anchor="middle">col1</text>
+  <rect class="lane"  x="172" y="112" width="52" height="40"/><text class="mono" x="198" y="138" font-size="13" text-anchor="middle">col2</text>
+  <rect class="lane"  x="228" y="112" width="52" height="40"/><text class="mono" x="254" y="138" font-size="13" text-anchor="middle">col3</text>
+
+  <rect class="lane" x="60"  y="156" width="52" height="40"/><text class="mono" x="86"  y="182" font-size="13" text-anchor="middle">row1</text>
+  <rect class="c"    x="116" y="156" width="52" height="40"/><text class="mono" x="142" y="182" font-size="14" text-anchor="middle">1</text>
+  <rect class="zero" x="172" y="156" width="52" height="40"/><text class="mono" x="198" y="182" font-size="14" text-anchor="middle" fill="#0969da">0</text>
+  <rect class="c"    x="228" y="156" width="52" height="40"/><text class="mono" x="254" y="182" font-size="14" text-anchor="middle">3</text>
+
+  <rect class="lane" x="60"  y="200" width="52" height="40"/><text class="mono" x="86"  y="226" font-size="13" text-anchor="middle">row2</text>
+  <rect class="c"    x="116" y="200" width="52" height="40"/><text class="mono" x="142" y="226" font-size="14" text-anchor="middle">4</text>
+  <rect class="c"    x="172" y="200" width="52" height="40"/><text class="mono" x="198" y="226" font-size="14" text-anchor="middle">5</text>
+  <rect class="c"    x="228" y="200" width="52" height="40"/><text class="mono" x="254" y="226" font-size="14" text-anchor="middle">6</text>
+
+  <path class="ar" d="M 196 154 L 196 146"/>
+  <path class="ar" d="M 170 176 L 116 176"/>
+  <text class="mono sub" x="300" y="182" font-size="12">发现 m[1][2] = 0 ⇒ 置 m[0][2] 和 m[1][0] 为 0</text>
+
+  <path class="ar" d="M 86 106 L 86 84"/>
+  <text class="mono" x="106" y="82" font-size="12.5" fill="#cf222e">这一格既代表「第 0 行要清零」，又代表「第 0 列要清零」，一个格子存不下两个 bit</text>
+
+  <line x1="32" y1="264" x2="788" y2="264" stroke="#d0d7de" stroke-width="1"/>
+
+  <text x="32" y="290" font-size="14" font-weight="600" fill="#0969da">解法：额外一个布尔变量，把第 0 列单独拎出来</text>
+  <text class="mono sub" x="32" y="314" font-size="12.5">col0 = any(m[i][0] == 0 for i in range(m))　　# 先把第 0 列的答案存进普通变量，之后 m[i][0] 就只表示「行标记」</text>
+
+  <text x="32" y="348" font-size="14" font-weight="600" fill="#cf222e">写回必须倒着来</text>
+  <text class="sub" x="32" y="372" font-size="12.5">从上往下写回时，一旦把第 0 行清成 0，下面的行读 m[0][j] 就全是 0，会把整个矩阵抹平。</text>
+  <text class="mono sub" x="32" y="394" font-size="12.5">正确顺序：先处理 i ≥ 1、j ≥ 1 的内部区域 → 再看 m[0][0] 决定第 0 行 → 最后用 col0 决定第 0 列。</text>
+  <text class="mono" x="32" y="422" font-size="12.5" fill="#1a7f37">等价写法：for i in range(m-1, -1, -1): for j in range(n-1, 0, -1) —— 倒序天然保证标记通道最后才被覆盖。</text>
+</svg>

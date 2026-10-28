@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" width="800" height="430">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .edge{stroke:#8c959f;stroke-width:1.5}
+    .nd{fill:#ffffff;stroke:#1f2328;stroke-width:2}
+    .sel{fill:#ffd8a8;stroke:#bf8700;stroke-width:2.5}
+  </style>
+
+  <rect width="800" height="430" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">抽象感的来源：返回值突然从「一个数」变成「一个二元组」</text>
+  <text class="sub" x="32" y="60">约束是「相邻两点不能同时选」——它只作用在<tspan font-weight="600" fill="#1f2328">一条边的两端</tspan>，所以父亲只需要知道一件事：儿子自己选没选</text>
+
+  <!-- ===== 左：一个数不够 ===== -->
+  <rect x="32" y="80" width="356" height="238" fill="#ffffff" stroke="#cf222e" stroke-width="1.5" rx="8"/>
+  <text x="50" y="106" font-size="14" font-weight="600" fill="#cf222e">✗ 只返回一个 max：信息被抹掉了</text>
+
+  <line class="edge" x1="150" y1="146" x2="110" y2="190"/>
+  <circle class="nd" cx="150" cy="134" r="16"/>
+  <text class="mono" x="150" y="139" font-size="13" text-anchor="middle" font-weight="600">x</text>
+  <circle class="nd" cx="102" cy="200" r="15"/>
+  <text class="mono" x="102" y="205" font-size="12" text-anchor="middle">L</text>
+  <path d="M 102 216 L 62 268 L 142 268 Z" fill="#f6f8fa" stroke="#8c959f" stroke-width="1.5"/>
+  <text class="sub" x="102" y="256" font-size="11" text-anchor="middle">子树</text>
+
+  <text class="mono" x="176" y="196" font-size="13">dfs(L) = 10</text>
+  <text class="sub"  x="176" y="220" font-size="12">这 10 块钱里，</text>
+  <text class="sub"  x="176" y="240" font-size="12" fill="#cf222e" font-weight="600">到底有没有包含 L 自己？</text>
+  <text class="mono" x="176" y="264" font-size="20" fill="#cf222e" font-weight="600">?</text>
+
+  <text class="sub" x="50" y="294" font-size="12.5">有 ⇒ x 不能选；没有 ⇒ x 可以选。这一位信息被 max</text>
+  <text class="sub" x="50" y="310" font-size="12.5">抹平了，<tspan fill="#cf222e" font-weight="600">父亲无法做决策</tspan>。</text>
+
+  <!-- ===== 右：二元组 ===== -->
+  <rect x="412" y="80" width="356" height="238" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5" rx="8"/>
+  <text x="430" y="106" font-size="14" font-weight="600" fill="#1a7f37">✓ 返回二元组：把那一位提升成状态的一维</text>
+
+  <line class="edge" x1="530" y1="146" x2="490" y2="190"/>
+  <circle class="nd" cx="530" cy="134" r="16"/>
+  <text class="mono" x="530" y="139" font-size="13" text-anchor="middle" font-weight="600">x</text>
+  <circle class="sel" cx="482" cy="200" r="15"/>
+  <text class="mono" x="482" y="205" font-size="12" text-anchor="middle">L</text>
+  <path d="M 482 216 L 442 268 L 522 268 Z" fill="#f6f8fa" stroke="#8c959f" stroke-width="1.5"/>
+
+  <text class="mono" x="556" y="190" font-size="13">dfs(L) = (8, 10)</text>
+  <text class="sub"  x="556" y="214" font-size="12"><tspan class="mono" font-weight="600">8</tspan>  = 强制<tspan font-weight="600" fill="#bf8700">选</tspan> L 时的子树最优</text>
+  <text class="sub"  x="556" y="236" font-size="12"><tspan class="mono" font-weight="600">10</tspan> = 强制<tspan font-weight="600">不选</tspan> L 时的子树最优</text>
+  <text class="sub"  x="556" y="262" font-size="12" fill="#1a7f37" font-weight="600">x 想选自己 → 取 10；不选 → 取 max</text>
+
+  <text class="sub" x="430" y="294" font-size="12.5">两种前提各留一份答案，父亲要哪份自己挑，</text>
+  <text class="sub" x="430" y="310" font-size="12.5">信息一位不丢。</text>
+
+  <!-- ===== 底部合同 ===== -->
+  <line x1="32" y1="340" x2="768" y2="340" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="366" font-size="14" font-weight="600">合同必须写成两份</text>
+  <text class="mono" x="32" y="392" font-size="13.5">dfs(node) = ( rob , notRob )</text>
+  <text class="sub"  x="290" y="392" font-size="13">rob = <tspan font-weight="600" fill="#1f2328">强制选</tspan> node 时，该子树的最大值　·　notRob = <tspan font-weight="600" fill="#1f2328">强制不选</tspan> node 时的最大值</text>
+  <text class="sub"  x="32" y="416" font-size="13">这就是<tspan font-weight="600" fill="#0969da">状态机 DP</tspan> 的做法：把「抹掉就没法用」的那一位信息，提升成状态的一个维度。</text>
+</svg>

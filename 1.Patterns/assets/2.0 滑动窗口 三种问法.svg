@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cell{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:4}
+    .win{fill:#ddf4ff;stroke:#0969da;stroke-width:2;rx:4}
+    .end{fill:#dafbe1;stroke:#1a7f37;stroke-width:2.5;rx:4}
+  </style>
+
+  <rect width="800" height="470" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">三种问法只差一件事：答案在<tspan fill="#cf222e">哪一步</tspan>更新</text>
+  <text class="sub" x="32" y="60">骨架都是「右指针扩张 → while 收缩左边界 → 更新答案」，区别只在 while 的条件和 update 的位置</text>
+
+  <!-- 三列 -->
+  <rect x="32" y="80" width="238" height="168" fill="#ffffff" stroke="#0969da" stroke-width="1.5" rx="8"/>
+  <text x="50" y="106" font-size="14" font-weight="600" fill="#0969da">求最长</text>
+  <text class="mono" x="50" y="132" font-size="11.5">add(nums[right])</text>
+  <text class="mono" x="50" y="152" font-size="11.5">while 窗口不合法:</text>
+  <text class="mono" x="50" y="170" font-size="11.5">    shrink()</text>
+  <text class="mono" x="50" y="190" font-size="11.5" fill="#cf222e">ans = max(ans, r-l+1)</text>
+  <text class="sub"  x="50" y="216" font-size="11.5">收缩到<tspan font-weight="600" fill="#1f2328">刚好合法</tspan>才量长度</text>
+  <text class="sub"  x="50" y="236" font-size="11.5">代表：3. 无重复字符最长子串</text>
+
+  <rect x="282" y="80" width="238" height="168" fill="#ffffff" stroke="#bf8700" stroke-width="1.5" rx="8"/>
+  <text x="300" y="106" font-size="14" font-weight="600" fill="#bf8700">求最短</text>
+  <text class="mono" x="300" y="132" font-size="11.5">add(nums[right])</text>
+  <text class="mono" x="300" y="152" font-size="11.5">while 窗口<tspan font-weight="600">合法</tspan>:</text>
+  <text class="mono" x="300" y="170" font-size="11.5" fill="#cf222e">    ans = min(ans, r-l+1)</text>
+  <text class="mono" x="300" y="190" font-size="11.5">    shrink()</text>
+  <text class="sub"  x="300" y="216" font-size="11.5">在 while <tspan font-weight="600" fill="#1f2328">里面</tspan>量，边缩边记</text>
+  <text class="sub"  x="300" y="236" font-size="11.5">代表：209. 长度最小的子数组</text>
+
+  <rect x="532" y="80" width="236" height="168" fill="#ffffff" stroke="#8250df" stroke-width="1.5" rx="8"/>
+  <text x="550" y="106" font-size="14" font-weight="600" fill="#8250df">求数量</text>
+  <text class="mono" x="550" y="132" font-size="11.5">add(nums[right])</text>
+  <text class="mono" x="550" y="152" font-size="11.5">while 窗口不合法:</text>
+  <text class="mono" x="550" y="170" font-size="11.5">    shrink()</text>
+  <text class="mono" x="550" y="190" font-size="11.5" fill="#cf222e">ans += r - l + 1</text>
+  <text class="sub"  x="550" y="216" font-size="11.5">不是 +1，是<tspan font-weight="600" fill="#1f2328">加一整批</tspan></text>
+  <text class="sub"  x="550" y="236" font-size="11.5">代表：713. 乘积小于 K 的子数组</text>
+
+  <!-- ans += r-l+1 图示 -->
+  <line x1="32" y1="272" x2="768" y2="272" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="296" font-size="14" font-weight="600" fill="#8250df">为什么计数是 ans += right − left + 1</text>
+
+  <rect class="cell" x="60"  y="312" width="46" height="38"/>
+  <rect class="win"  x="112" y="312" width="46" height="38"/>
+  <text class="mono" x="135" y="336" font-size="13" text-anchor="middle">5</text>
+  <rect class="win"  x="164" y="312" width="46" height="38"/>
+  <text class="mono" x="187" y="336" font-size="13" text-anchor="middle">2</text>
+  <rect class="end"  x="216" y="312" width="46" height="38"/>
+  <text class="mono" x="239" y="336" font-size="13" text-anchor="middle">6</text>
+  <rect class="cell" x="268" y="312" width="46" height="38"/>
+
+  <text class="mono" x="135" y="368" font-size="12" text-anchor="middle" fill="#0969da">left</text>
+  <text class="mono" x="239" y="368" font-size="12" text-anchor="middle" fill="#1a7f37">right</text>
+
+  <text class="sub" x="340" y="326" font-size="12.5">以 right 结尾、起点落在 [left, right] 内的子数组：</text>
+  <text class="mono" x="340" y="348" font-size="12">[6]　[2,6]　[5,2,6]</text>
+  <text class="sub" x="340" y="368" font-size="12.5">共 <tspan class="mono" font-weight="600" fill="#8250df">right − left + 1 = 3</tspan> 个，全都合法（窗口已收缩到合法）</text>
+
+  <!-- 底部：为什么 O(n) -->
+  <line x1="32" y1="392" x2="768" y2="392" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="416" font-size="14" font-weight="600">为什么是 O(n)：left 只增不减</text>
+  <text class="sub" x="32" y="438" font-size="13">每个元素最多被 right <tspan font-weight="600" fill="#1f2328">加入一次</tspan>、被 left <tspan font-weight="600" fill="#1f2328">移出一次</tspan>，内层 while 的总次数被 n 卡死 —— 和单调栈是同一套摊还分析。</text>
+  <text class="sub" x="32" y="460" font-size="13">前提是窗口状态<tspan font-weight="600" fill="#cf222e">可增量维护且可逆</tspan>（和、计数、种类数）；若要维护的是极值，减不掉，就得换 <tspan font-weight="600">单调队列</tspan>。</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .edge{stroke:#8c959f;stroke-width:1.5}
+    .nd{fill:#ffffff;stroke:#1f2328;stroke-width:2}
+    .sel{fill:#ffd8a8;stroke:#bf8700;stroke-width:3}
+    .ban{fill:#ffebe9;stroke:#cf222e;stroke-width:2}
+    .free{fill:#ddf4ff;stroke:#0969da;stroke-width:2}
+  </style>
+
+  <rect width="800" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">两条转移，各自的理由：一条没得选，一条随便选</text>
+  <text class="sub" x="32" y="60">约束只锁一层——选了 node 就锁死儿子，但<tspan font-weight="600" fill="#1f2328">孙子层完全自由</tspan>，而这份自由已经打包在 notRob 的定义里了</text>
+
+  <!-- ===== 左：选当前节点 ===== -->
+  <rect x="32" y="80" width="356" height="252" fill="#ffffff" stroke="#bf8700" stroke-width="1.5" rx="8"/>
+  <text x="50" y="106" font-size="14" font-weight="600" fill="#bf8700">rob：选当前节点 → 儿子必须不选，没有 max</text>
+
+  <line class="edge" x1="210" y1="146" x2="160" y2="186"/>
+  <line class="edge" x1="210" y1="146" x2="260" y2="186"/>
+  <line class="edge" x1="152" y1="212" x2="120" y2="248"/>
+  <line class="edge" x1="268" y1="212" x2="300" y2="248"/>
+
+  <circle class="sel" cx="210" cy="134" r="17"/>
+  <text class="mono" x="210" y="139" font-size="13" text-anchor="middle" font-weight="600">选</text>
+  <circle class="ban" cx="152" cy="198" r="15"/>
+  <text class="mono" x="152" y="203" font-size="12" text-anchor="middle" fill="#cf222e">✗</text>
+  <circle class="ban" cx="268" cy="198" r="15"/>
+  <text class="mono" x="268" y="203" font-size="12" text-anchor="middle" fill="#cf222e">✗</text>
+  <circle class="free" cx="112" cy="260" r="14"/>
+  <text class="mono" x="112" y="265" font-size="11" text-anchor="middle" fill="#0969da">自由</text>
+  <circle class="free" cx="308" cy="260" r="14"/>
+  <text class="mono" x="308" y="265" font-size="11" text-anchor="middle" fill="#0969da">自由</text>
+
+  <text class="mono" x="50" y="300" font-size="13">rob = node.val + l_not_rob + r_not_rob</text>
+  <text class="sub"  x="50" y="322" font-size="12">前提是「选了 node」⇒ 约束立刻生效，左右只能取 not_rob</text>
+
+  <!-- ===== 右：不选当前节点 ===== -->
+  <rect x="412" y="80" width="356" height="252" fill="#ffffff" stroke="#0969da" stroke-width="1.5" rx="8"/>
+  <text x="430" y="106" font-size="14" font-weight="600" fill="#0969da">notRob：不选当前节点 → 儿子毫无限制，各取 max</text>
+
+  <line class="edge" x1="590" y1="146" x2="540" y2="186"/>
+  <line class="edge" x1="590" y1="146" x2="640" y2="186"/>
+  <line class="edge" x1="532" y1="212" x2="500" y2="248"/>
+  <line class="edge" x1="648" y1="212" x2="680" y2="248"/>
+
+  <circle class="nd" cx="590" cy="134" r="17"/>
+  <text class="mono" x="590" y="139" font-size="12" text-anchor="middle">不选</text>
+  <circle class="free" cx="532" cy="198" r="15"/>
+  <text class="mono" x="532" y="203" font-size="11" text-anchor="middle" fill="#0969da">max</text>
+  <circle class="free" cx="648" cy="198" r="15"/>
+  <text class="mono" x="648" y="203" font-size="11" text-anchor="middle" fill="#0969da">max</text>
+  <circle class="nd" cx="492" cy="260" r="14"/>
+  <circle class="nd" cx="688" cy="260" r="14"/>
+
+  <text class="mono" x="430" y="300" font-size="12.5">notRob = max(l_rob, l_not) + max(r_rob, r_not)</text>
+  <text class="sub"  x="430" y="322" font-size="12">前提是「不选 node」⇒ 儿子选不选都合法，各取自己的冠军</text>
+
+  <!-- ===== 底部：两个合法性依据 ===== -->
+  <line x1="32" y1="352" x2="768" y2="352" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="376" font-size="14" font-weight="600">两个容易被跳过的合法性依据</text>
+  <text class="sub" x="32" y="398" font-size="13">① 为什么能对儿子取 max —— 「选」和「不选」是<tspan font-weight="600" fill="#1f2328">不重不漏的完备分类</tspan>，取冠军即全局冠军。</text>
+  <text class="sub" x="32" y="418" font-size="13">② 为什么左右能<tspan font-weight="600" fill="#1f2328">分别</tspan>取 max 再相加 —— 左右子树之间没有任何一条边相连，约束不耦合，两边最优可自由组合。</text>
+  <text class="sub" x="32" y="440" font-size="12.5" fill="#cf222e">（若题目改成「全树最多选 k 个」，②立刻崩掉——约束跨越了子树，必须再加一维 k。）</text>
+</svg>

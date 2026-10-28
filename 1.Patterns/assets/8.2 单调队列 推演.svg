@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" width="800" height="430">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .row{fill:#ffffff;stroke:#d0d7de;stroke-width:1}
+    .hi{fill:#fff8c5;stroke:#bf8700;stroke-width:1.5}
+  </style>
+
+  <rect width="800" height="430" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">逐轮推演：nums = [7, 2, 4, 1, 5]，k = 3</text>
+  <text class="sub" x="32" y="60">这个例子里<tspan font-weight="600" fill="#cf222e">两种出局各出现一次</tspan> —— 队尾被遮蔽（i=2）和队头过期（i=3）</text>
+
+  <!-- 表头 -->
+  <line x1="32" y1="82" x2="768" y2="82" stroke="#d0d7de" stroke-width="1"/>
+  <text class="sub" x="40"  y="102" font-size="12" font-weight="600">i</text>
+  <text class="sub" x="86"  y="102" font-size="12" font-weight="600">x</text>
+  <text class="sub" x="140" y="102" font-size="12" font-weight="600">① 入之后（队列存的值）</text>
+  <text class="sub" x="376" y="102" font-size="12" font-weight="600">② 出之后</text>
+  <text class="sub" x="520" y="102" font-size="12" font-weight="600">③ 答案</text>
+  <text class="sub" x="596" y="102" font-size="12" font-weight="600">发生了什么</text>
+  <line x1="32" y1="112" x2="768" y2="112" stroke="#d0d7de" stroke-width="1"/>
+
+  <text class="mono" x="40"  y="136" font-size="12.5">0</text>
+  <text class="mono" x="86"  y="136" font-size="12.5">7</text>
+  <text class="mono" x="140" y="136" font-size="12.5">[7]</text>
+  <text class="mono" x="376" y="136" font-size="12.5">[7]</text>
+  <text class="sub"  x="520" y="136" font-size="12.5">—</text>
+  <text class="sub"  x="596" y="136" font-size="12">窗口还没凑齐</text>
+
+  <text class="mono" x="40"  y="164" font-size="12.5">1</text>
+  <text class="mono" x="86"  y="164" font-size="12.5">2</text>
+  <text class="mono" x="140" y="164" font-size="12.5">[7, 2]</text>
+  <text class="mono" x="376" y="164" font-size="12.5">[7, 2]</text>
+  <text class="sub"  x="520" y="164" font-size="12.5">—</text>
+  <text class="sub"  x="596" y="164" font-size="12">2 &lt; 7，不弹，排在后面</text>
+
+  <rect class="hi" x="32" y="176" width="736" height="30"/>
+  <text class="mono" x="40"  y="196" font-size="12.5">2</text>
+  <text class="mono" x="86"  y="196" font-size="12.5">4</text>
+  <text class="mono" x="140" y="196" font-size="12.5" fill="#cf222e">[7, 4]　弹掉队尾 2</text>
+  <text class="mono" x="376" y="196" font-size="12.5">[7, 4]</text>
+  <text class="mono" x="520" y="196" font-size="12.5" font-weight="600">7</text>
+  <text class="sub"  x="596" y="196" font-size="12" fill="#cf222e" font-weight="600">遮蔽：4 又大又新</text>
+
+  <rect class="hi" x="32" y="206" width="736" height="30"/>
+  <text class="mono" x="40"  y="226" font-size="12.5">3</text>
+  <text class="mono" x="86"  y="226" font-size="12.5">1</text>
+  <text class="mono" x="140" y="226" font-size="12.5">[7, 4, 1]</text>
+  <text class="mono" x="376" y="226" font-size="12.5" fill="#bf8700">[4, 1]　弹掉队头 7</text>
+  <text class="mono" x="520" y="226" font-size="12.5" font-weight="600">4</text>
+  <text class="sub"  x="596" y="226" font-size="12" fill="#bf8700" font-weight="600">过期：7 滑出窗口</text>
+
+  <text class="mono" x="40"  y="256" font-size="12.5">4</text>
+  <text class="mono" x="86"  y="256" font-size="12.5">5</text>
+  <text class="mono" x="140" y="256" font-size="12.5" fill="#cf222e">[5]　　一次弹掉 1 和 4</text>
+  <text class="mono" x="376" y="256" font-size="12.5">[5]</text>
+  <text class="mono" x="520" y="256" font-size="12.5" font-weight="600">5</text>
+  <text class="sub"  x="596" y="256" font-size="12">一轮弹多个，靠摊还</text>
+  <line x1="32" y1="268" x2="768" y2="268" stroke="#d0d7de" stroke-width="1"/>
+
+  <text class="mono" x="32" y="294" font-size="14" font-weight="600">答案 = [7, 4, 5]</text>
+
+  <!-- 底部 -->
+  <line x1="32" y1="320" x2="768" y2="320" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="344" font-size="14" font-weight="600" fill="#bf8700">i = 3 这一行最值得盯着看</text>
+  <text class="sub" x="32" y="366" font-size="13">被弹掉的 7 <tspan font-weight="600" fill="#1f2328">仍然是队列里最大的那个</tspan> —— 它不是被谁比下去的，纯粹是因为滑出了窗口。</text>
+  <text class="sub" x="32" y="388" font-size="13">这就是单调栈没有、而单调队列必须处理的第二种出局；也是「最大值出窗后无法从剩余元素恢复」这句话的具体样子。</text>
+  <text class="sub" x="32" y="412" font-size="13">注意 i = 4 一次弹掉两个：<tspan font-weight="600" fill="#1f2328">单看某一轮 while 可能弹 k-1 个</tspan>，但全程总弹出次数不超过 n，所以整体仍是 O(n)。</text>
+</svg>

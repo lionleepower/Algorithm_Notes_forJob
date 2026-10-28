@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 450" width="820" height="450">
+  <defs>
+    <marker id="arF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600;fill:#0969da}
+    .nd{fill:#ffffff;stroke:#57606a;stroke-width:1.8}
+    .mid{fill:#ddf4ff;stroke:#0969da;stroke-width:2.2}
+    .lay{fill:#f6f8fa;stroke:#d0d7de;stroke-width:1.5;rx:8}
+    .ok{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.8;rx:6}
+    .no{fill:#ffebe9;stroke:#cf222e;stroke-width:2;rx:6}
+    .e{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#arF)}
+    .dash{stroke:#8c959f;stroke-width:1.6;stroke-dasharray:5 4;fill:none;marker-end:url(#arF)}
+  </style>
+
+  <rect width="820" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">Floyd 的状态是「允许借道谁」，k 是 DP 的阶段，所以必须在最外层</text>
+  <text class="mono sub" x="32" y="58">f[k][i][j] = 只允许把 {0, 1, …, k} 当中转点时，i 到 j 的最短距离</text>
+
+  <!-- 转移图 -->
+  <text class="cap" x="32" y="96">转移：第 k 个点，用不用？</text>
+
+  <circle class="nd"  cx="110" cy="180" r="26"/><text class="mono" x="110" y="186" font-size="16" text-anchor="middle">i</text>
+  <circle class="mid" cx="270" cy="126" r="26"/><text class="mono" x="270" y="132" font-size="16" text-anchor="middle">k</text>
+  <circle class="nd"  cx="430" cy="180" r="26"/><text class="mono" x="430" y="186" font-size="16" text-anchor="middle">j</text>
+
+  <path class="dash" d="M 137 180 L 402 180"/>
+  <text class="mono sub" x="270" y="204" font-size="12.5" text-anchor="middle">不用 k：f[k−1][i][j]</text>
+
+  <path class="e" d="M 130 162 L 246 138"/>
+  <text class="mono" x="176" y="140" font-size="12" fill="#0969da">f[k−1][i][k]</text>
+  <path class="e" d="M 294 138 L 410 162"/>
+  <text class="mono" x="364" y="140" font-size="12" fill="#0969da">f[k−1][k][j]</text>
+
+  <text class="mono" x="500" y="160" font-size="13" fill="#0969da">f[k][i][j] = min(</text>
+  <text class="mono" x="520" y="184" font-size="13" fill="#0969da">f[k−1][i][j],</text>
+  <text class="mono" x="520" y="206" font-size="13" fill="#0969da">f[k−1][i][k] + f[k−1][k][j])</text>
+  <text class="sub" x="500" y="232" font-size="12">两段子路径都不经过 k 本身，</text>
+  <text class="sub" x="500" y="252" font-size="12">所以可以直接查上一层的表。</text>
+
+  <line x1="32" y1="276" x2="788" y2="276" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- 循环顺序 -->
+  <text class="cap" x="32" y="302" font-size="14">为什么 k 不能挪进去</text>
+
+  <rect class="ok" x="52" y="316" width="330" height="112"/>
+  <text class="mono" x="70" y="342" font-size="13" fill="#1a7f37">for k in range(n):          # 阶段</text>
+  <text class="mono" x="70" y="366" font-size="13" fill="#1a7f37">　　for i in range(n):</text>
+  <text class="mono" x="70" y="390" font-size="13" fill="#1a7f37">　　　　for j in range(n):</text>
+  <text class="mono" x="70" y="414" font-size="13" fill="#1a7f37">　　　　　　f[i][j] = min(f[i][j], f[i][k]+f[k][j])</text>
+
+  <rect class="no" x="438" y="316" width="330" height="112"/>
+  <text class="mono" x="456" y="342" font-size="13" fill="#cf222e">for i in range(n):</text>
+  <text class="mono" x="456" y="366" font-size="13" fill="#cf222e">　　for j in range(n):</text>
+  <text class="mono" x="456" y="390" font-size="13" fill="#cf222e">　　　　for k in range(n):   ← 错</text>
+  <text class="sub"  x="456" y="416" font-size="12">算 f[i][j] 时要求「所有中转点都已考虑完」，</text>
+  <text class="sub"  x="456" y="434" font-size="12">但此刻别的 (i,j) 对还停在早期阶段，结果偏大。</text>
+
+  <text class="mono" x="52" y="446" font-size="12" fill="#1a7f37">k 维可以滚动掉：更新 f[i][k] 和 f[k][j] 时用到的仍是本层值，恰好相等，就地覆盖是安全的。</text>
+</svg>

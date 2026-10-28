@@ -1,0 +1,10 @@
+# Obsidian 本地配置（每个人的界面设置不同，不入库）
+.obsidian/
+.trash/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+__pycache__/

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .edge{stroke:#8c959f;stroke-width:1.5}
+    .hot{stroke:#8250df;stroke-width:4.5;stroke-linecap:round}
+    .nd{fill:#ffffff;stroke:#1f2328;stroke-width:2}
+    .win{fill:#fbefff;stroke:#8250df;stroke-width:2.5}
+  </style>
+
+  <rect width="800" height="470" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">多叉树的拐点：一次遍历同时完成「找最大两条链」和「打擂台」</text>
+  <text class="sub" x="32" y="60">二叉树拐点直接 l + r；多叉树有 k 个儿子，要挑最大的两条 —— 靠滚动配对，不用排序</text>
+
+  <!-- ===== 左：多叉节点 ===== -->
+  <line class="edge" x1="180" y1="112" x2="80"  y2="176"/>
+  <line class="hot"  x1="180" y1="112" x2="147" y2="176"/>
+  <line class="edge" x1="180" y1="112" x2="213" y2="176"/>
+  <line class="hot"  x1="180" y1="112" x2="280" y2="176"/>
+
+  <circle class="nd" cx="180" cy="100" r="17"/>
+  <text class="mono" x="180" y="105" font-size="14" text-anchor="middle" font-weight="600">x</text>
+
+  <circle class="nd"  cx="72"  cy="186" r="14"/>
+  <text class="mono"  x="72"  y="191" font-size="12" text-anchor="middle">y₁</text>
+  <circle class="win" cx="144" cy="186" r="14"/>
+  <text class="mono"  x="144" y="191" font-size="12" text-anchor="middle" font-weight="600">y₂</text>
+  <circle class="nd"  cx="216" cy="186" r="14"/>
+  <text class="mono"  x="216" y="191" font-size="12" text-anchor="middle">y₃</text>
+  <circle class="win" cx="288" cy="186" r="14"/>
+  <text class="mono"  x="288" y="191" font-size="12" text-anchor="middle" font-weight="600">y₄</text>
+
+  <text class="mono" x="72"  y="222" font-size="12" text-anchor="middle" fill="#57606a">3</text>
+  <text class="mono" x="144" y="222" font-size="12" text-anchor="middle" fill="#8250df" font-weight="600">6</text>
+  <text class="mono" x="216" y="222" font-size="12" text-anchor="middle" fill="#57606a">4</text>
+  <text class="mono" x="288" y="222" font-size="12" text-anchor="middle" fill="#8250df" font-weight="600">5</text>
+  <text class="sub"  x="180" y="244" font-size="12" text-anchor="middle">各儿子的 y_len = dfs(y) + 1</text>
+  <text class="sub"  x="180" y="264" font-size="12.5" text-anchor="middle" fill="#8250df" font-weight="600">拐点答案 = 最大两条 = 6 + 5 = 11</text>
+
+  <!-- ===== 右：逐轮推演表 ===== -->
+  <rect x="360" y="82" width="408" height="196" fill="#ffffff" stroke="#8250df" stroke-width="1.5" rx="8"/>
+  <text x="378" y="106" font-size="14" font-weight="600" fill="#8250df">逐轮推演：先配对，再更新</text>
+
+  <line x1="378" y1="118" x2="750" y2="118" stroke="#d0d7de" stroke-width="1"/>
+  <text class="sub" x="378" y="138" font-size="12" font-weight="600">轮次</text>
+  <text class="sub" x="440" y="138" font-size="12" font-weight="600">y_len</text>
+  <text class="sub" x="512" y="138" font-size="12" font-weight="600">① 配对 x_len+y_len</text>
+  <text class="sub" x="676" y="138" font-size="12" font-weight="600">② 更新 x_len</text>
+  <line x1="378" y1="148" x2="750" y2="148" stroke="#d0d7de" stroke-width="1"/>
+
+  <text class="mono" x="378" y="172" font-size="12">y₁</text>
+  <text class="mono" x="440" y="172" font-size="12">3</text>
+  <text class="mono" x="512" y="172" font-size="12">0 + 3 = 3　→ ans 3</text>
+  <text class="mono" x="676" y="172" font-size="12">3</text>
+
+  <text class="mono" x="378" y="196" font-size="12">y₂</text>
+  <text class="mono" x="440" y="196" font-size="12" font-weight="600" fill="#8250df">6</text>
+  <text class="mono" x="512" y="196" font-size="12">3 + 6 = 9　→ ans 9</text>
+  <text class="mono" x="676" y="196" font-size="12" font-weight="600" fill="#8250df">6</text>
+
+  <text class="mono" x="378" y="220" font-size="12">y₃</text>
+  <text class="mono" x="440" y="220" font-size="12">4</text>
+  <text class="mono" x="512" y="220" font-size="12">6 + 4 = 10　→ ans 10</text>
+  <text class="mono" x="676" y="220" font-size="12">6</text>
+
+  <text class="mono" x="378" y="244" font-size="12">y₄</text>
+  <text class="mono" x="440" y="244" font-size="12" font-weight="600" fill="#8250df">5</text>
+  <text class="mono" x="512" y="244" font-size="12" font-weight="600" fill="#8250df">6 + 5 = 11 → ans 11</text>
+  <text class="mono" x="676" y="244" font-size="12">6</text>
+  <line x1="378" y1="256" x2="750" y2="256" stroke="#d0d7de" stroke-width="1"/>
+  <text class="sub" x="378" y="272" font-size="11.5">答案在「第二大的那一轮」被算出来，其余轮次自动被 max 滤掉</text>
+
+  <!-- ===== 不变量 ===== -->
+  <rect x="32" y="296" width="736" height="66" fill="#ffffff" stroke="#0969da" stroke-width="1.5" rx="8"/>
+  <text x="50" y="320" font-size="14" font-weight="600" fill="#0969da">不变量（整段代码成立的唯一理由）</text>
+  <text class="sub" x="50" y="344" font-size="13">处理第 k 个儿子时，x_len 恰好是<tspan font-weight="600" fill="#1f2328">前 k-1 个儿子中最长的那条链</tspan> ⇒ x_len + y_len 的含义是「历史最优 + 当前这个」。</text>
+
+  <!-- ===== 顺序陷阱 ===== -->
+  <rect x="32" y="376" width="360" height="80" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5" rx="8"/>
+  <text x="50" y="400" font-size="13" font-weight="600" fill="#1a7f37">✓ 正确：旧值先配对</text>
+  <text class="mono" x="50" y="422" font-size="12.5">ans   = max(ans, x_len + y_len)</text>
+  <text class="mono" x="50" y="442" font-size="12.5">x_len = max(x_len, y_len)</text>
+
+  <rect x="408" y="376" width="360" height="80" fill="#ffffff" stroke="#cf222e" stroke-width="1.5" rx="8"/>
+  <text x="426" y="400" font-size="13" font-weight="600" fill="#cf222e">✗ 交换后：同一个儿子被用两次</text>
+  <text class="mono" x="426" y="422" font-size="12.5">x_len = max(x_len, y_len)</text>
+  <text class="mono" x="426" y="442" font-size="12.5">ans   = max(ans, x_len + y_len)</text>
+  <text class="mono" x="646" y="442" font-size="11" fill="#cf222e">← y_len+y_len</text>
+</svg>

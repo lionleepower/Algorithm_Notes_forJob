@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470">
+  <defs>
+    <marker id="p7up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .edge{stroke:#8c959f;stroke-width:1.5}
+    .nd{fill:#ffffff;stroke:#1f2328;stroke-width:2}
+    .ghost{fill:#f0f1f3;stroke:#c8ccd0;stroke-width:1.5;stroke-dasharray:4 3}
+    .hotY{stroke:#cf222e;stroke-width:5;stroke-linecap:round;fill:none}
+    .hotC{stroke:#1a7f37;stroke-width:5;stroke-linecap:round;fill:none}
+  </style>
+
+  <rect width="800" height="470" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">树形 DP 的双轨结构：报上去的和传上去的，不是同一个东西</text>
+  <text class="sub" x="32" y="60">同一次 dfs 里同时做两件事——这是一整类树形 DP 的通用骨架</text>
+
+  <!-- ===== 左panel：报拐点 ===== -->
+  <rect x="32" y="80" width="356" height="230" fill="#ffffff" stroke="#cf222e" stroke-width="1.5" rx="8"/>
+  <text x="50" y="106" font-size="14" font-weight="600" fill="#cf222e">① 向全局报「拐点路径」——用完即弃</text>
+
+  <line class="edge" x1="210" y1="132" x2="210" y2="168" stroke-dasharray="4 3"/>
+  <path class="hotY" d="M 133 264 L 163 218 L 210 178 L 257 218 L 287 264"/>
+  <line class="edge" x1="210" y1="178" x2="163" y2="218"/>
+  <line class="edge" x1="210" y1="178" x2="257" y2="218"/>
+  <line class="edge" x1="163" y1="218" x2="133" y2="264"/>
+  <line class="edge" x1="257" y1="218" x2="287" y2="264"/>
+
+  <circle class="ghost" cx="210" cy="126" r="13"/>
+  <text class="sub" x="210" y="131" font-size="11" text-anchor="middle">父</text>
+  <circle class="nd" cx="210" cy="178" r="15"/>
+  <text class="mono" x="210" y="183" font-size="13" text-anchor="middle" font-weight="600">x</text>
+  <circle class="nd" cx="163" cy="218" r="12"/>
+  <circle class="nd" cx="257" cy="218" r="12"/>
+  <circle class="nd" cx="133" cy="264" r="12"/>
+  <circle class="nd" cx="287" cy="264" r="12"/>
+
+  <text class="sub" x="118" y="292" font-size="12" fill="#cf222e">左链</text>
+  <text class="sub" x="272" y="292" font-size="12" fill="#cf222e">右链</text>
+
+  <text x="50" y="330" font-size="13" fill="#cf222e" font-weight="600">路径在 x 处已经分叉成「Y 字形」</text>
+  <text class="sub" x="50" y="350" font-size="12.5">父节点再往上接一条边就不是一条路径了 ⇒ 接不上去，</text>
+  <text class="sub" x="50" y="368" font-size="12.5">只能当场记进全局擂台 ans。</text>
+
+  <!-- ===== 右panel：传单链 ===== -->
+  <rect x="412" y="80" width="356" height="230" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5" rx="8"/>
+  <text x="430" y="106" font-size="14" font-weight="600" fill="#1a7f37">② 向父节点传「单链」——必须还是一条链</text>
+
+  <path class="hotC" d="M 513 264 L 543 218 L 590 178 L 590 139"/>
+  <line class="edge" x1="590" y1="178" x2="637" y2="218"/>
+  <line class="edge" x1="637" y1="218" x2="667" y2="264"/>
+  <line class="edge" x1="590" y1="178" x2="543" y2="218"/>
+  <line class="edge" x1="543" y1="218" x2="513" y2="264"/>
+
+  <circle class="ghost" cx="590" cy="126" r="13"/>
+  <text class="sub" x="590" y="131" font-size="11" text-anchor="middle">父</text>
+  <circle class="nd" cx="590" cy="178" r="15"/>
+  <text class="mono" x="590" y="183" font-size="13" text-anchor="middle" font-weight="600">x</text>
+  <circle class="nd" cx="543" cy="218" r="12"/>
+  <circle class="nd" cx="637" cy="218" r="12"/>
+  <circle class="nd" cx="513" cy="264" r="12"/>
+  <circle class="nd" cx="667" cy="264" r="12"/>
+
+  <text class="mono" x="612" y="150" font-size="12" fill="#1a7f37" font-weight="600">return</text>
+  <text class="sub" x="498" y="292" font-size="12" fill="#1a7f37">只取更长的那一侧</text>
+
+  <text x="430" y="330" font-size="13" fill="#1a7f37" font-weight="600">只往上接一个方向 ⇒ 左右两侧只能挑一条</text>
+  <text class="sub" x="430" y="350" font-size="12.5">父节点还要在它上面接一条边，接完必须仍是一条路径，</text>
+  <text class="sub" x="430" y="368" font-size="12.5">所以能向上传的只有单链。</text>
+
+  <!-- ===== 底部骨架 ===== -->
+  <line x1="32" y1="388" x2="768" y2="388" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="412" font-size="14" font-weight="600">通用骨架：一次 DFS，两条轨道</text>
+  <text class="mono" x="32" y="436" font-size="13">    ans = max(ans, 拐点值(l, r, node))</text>
+  <text class="sub"  x="330" y="436" font-size="12" fill="#cf222e">← 报答案：允许分叉，用完即弃</text>
+  <text class="mono" x="32" y="458" font-size="13">    return 单链值(l, r, node)</text>
+  <text class="sub"  x="330" y="458" font-size="12" fill="#1a7f37">← 传上去：必须是一条链</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .edge{stroke:#8c959f;stroke-width:1.5}
+    .blue{fill:#b6d7f5;stroke:#0969da;stroke-width:2.5}
+    .red{fill:#f5b7b1;stroke:#cf222e;stroke-width:2.5}
+  </style>
+
+  <rect width="800" height="460" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">推广到一般树：「至少一个儿子是蓝」不能靠枚举</text>
+  <text class="sub" x="32" y="60">k 个儿子就有 2ᵏ-1 种「谁装」的组合 —— 太麻烦；换个角度，它其实只是黄色的一次<tspan font-weight="600" fill="#1f2328">最小升级</tspan></text>
+
+  <!-- ===== 左：多叉节点 ===== -->
+  <line class="edge" x1="150" y1="118" x2="80"  y2="172"/>
+  <line class="edge" x1="150" y1="118" x2="150" y2="172"/>
+  <line class="edge" x1="150" y1="118" x2="220" y2="172"/>
+  <circle class="red" cx="150" cy="104" r="20"/>
+  <text class="mono" x="150" y="110" font-size="13" text-anchor="middle" font-weight="600">红</text>
+  <circle class="blue" cx="72"  cy="186" r="17"/>
+  <text class="mono" x="72"  y="192" font-size="12" text-anchor="middle">?</text>
+  <circle class="blue" cx="150" cy="186" r="17"/>
+  <text class="mono" x="150" y="192" font-size="12" text-anchor="middle">?</text>
+  <circle class="blue" cx="228" cy="186" r="17"/>
+  <text class="mono" x="228" y="192" font-size="12" text-anchor="middle">?</text>
+  <text class="sub" x="150" y="222" font-size="12" text-anchor="middle">每个儿子只能取 蓝 或 红（黄被排除）</text>
+  <text class="sub" x="150" y="242" font-size="12" text-anchor="middle" font-weight="600" fill="#cf222e">但整体至少要有一个蓝</text>
+
+  <rect x="32" y="258" width="236" height="90" fill="#ffffff" stroke="#cf222e" stroke-width="1.5" rx="8"/>
+  <text class="sub" x="48" y="280" font-size="12">朴素做法：枚举 7 种组合</text>
+  <text class="mono" x="48" y="300" font-size="11">蓝蓝蓝 / 蓝蓝红 / 蓝红蓝 / 蓝红红</text>
+  <text class="mono" x="48" y="318" font-size="11">红蓝蓝 / 红蓝红 / 红红蓝</text>
+  <text class="sub" x="48" y="340" font-size="12.5" fill="#cf222e" font-weight="600">儿子一多就爆炸 ✗</text>
+
+  <!-- ===== 右：化简 ===== -->
+  <rect x="292" y="82" width="476" height="152" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5" rx="8"/>
+  <text x="310" y="108" font-size="14" font-weight="600" fill="#1a7f37">换个角度：红色 = 黄色 + 一次最便宜的升级</text>
+  <text class="mono" x="310" y="140" font-size="13" fill="#bf8700">黄 = Σ min(蓝ᵢ, 红ᵢ)</text>
+  <text class="sub"  x="500" y="140" font-size="12">← 每个儿子各自取最优，不管有没有蓝</text>
+  <text class="mono" x="310" y="172" font-size="13" fill="#cf222e">红 = 黄 + max(0, min(蓝ᵢ - 红ᵢ))</text>
+  <text class="sub"  x="310" y="198" font-size="12.5">若黄里<tspan font-weight="600" fill="#1f2328">已经有儿子选了蓝</tspan> ⇒ 某个 蓝ᵢ-红ᵢ ≤ 0 ⇒ max 取 0，不加钱</text>
+  <text class="sub"  x="310" y="220" font-size="12.5">若<tspan font-weight="600" fill="#1f2328">全都选了红</tspan> ⇒ 所有差都为正 ⇒ 挑差值最小的那个儿子升级成蓝</text>
+
+  <!-- 算例 -->
+  <rect x="292" y="250" width="476" height="140" fill="#ffffff" stroke="#8250df" stroke-width="1.5" rx="8"/>
+  <text x="310" y="276" font-size="14" font-weight="600" fill="#8250df">算例：三个儿子的 (蓝, 红) 分别是 (5,2) (7,6) (5,1)</text>
+  <text class="mono" x="310" y="304" font-size="12.5">黄 = min(5,2) + min(7,6) + min(5,1) = 2 + 6 + 1 = 9</text>
+  <text class="sub"  x="310" y="326" font-size="12">三个儿子都选了红 ⇒ 一个蓝都没有，必须升级一个</text>
+  <text class="mono" x="310" y="350" font-size="12.5">差值 = 5-2=3　7-6=1　5-1=4　⇒　最小是 1（第 2 个儿子）</text>
+  <text class="mono" x="310" y="376" font-size="13" font-weight="600" fill="#8250df">红 = 9 + 1 = 10</text>
+
+  <!-- 底部 -->
+  <line x1="32" y1="408" x2="768" y2="408" stroke="#d0d7de" stroke-width="1"/>
+  <text class="mono" x="32" y="432" font-size="12.5" fill="#0969da">蓝 = Σ min(蓝ᵢ, 黄ᵢ) + cost[x]</text>
+  <text class="sub" x="330" y="432" font-size="12.5">三条式子里只有蓝允许儿子取黄 —— 因为 x 的摄像头正好还上那笔债</text>
+  <text class="sub" x="32" y="452" font-size="12.5">这套写法对二叉树同样成立，二叉只是 k = 2 的特例；答案仍是 <tspan class="mono" font-weight="600" fill="#1f2328">min(蓝, 红)</tspan>，根必须排除黄。</text>
+</svg>

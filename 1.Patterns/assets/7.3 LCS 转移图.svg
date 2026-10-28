@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" width="800" height="430">
+  <defs>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cell{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:6}
+    .tgt{fill:#ddf4ff;stroke:#0969da;stroke-width:2.5;rx:6}
+    .src{fill:#fff8c5;stroke:#bf8700;stroke-width:1.5;rx:6}
+    .eq{stroke:#1a7f37;stroke-width:2.5;fill:none;marker-end:url(#ag)}
+    .ne{stroke:#cf222e;stroke-width:2.5;fill:none;marker-end:url(#ar)}
+  </style>
+
+  <rect width="800" height="430" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">LCS 转移：f[i+1][j+1] 的三个来源</text>
+  <text class="sub" x="32" y="60">递推数组下标整体 +1，f[i+1][j+1] 对应递归的 dfs(i, j)</text>
+
+  <!-- 列头 -->
+  <text class="mono" x="200" y="106" font-size="15" text-anchor="middle" fill="#57606a">t[j]</text>
+  <text class="mono" x="340" y="106" font-size="15" text-anchor="middle" fill="#57606a">t[j+1]</text>
+  <!-- 行头 -->
+  <text class="mono" x="138" y="157" font-size="15" text-anchor="end" fill="#57606a">s[i]</text>
+  <text class="mono" x="138" y="261" font-size="15" text-anchor="end" fill="#57606a">s[i+1]</text>
+
+  <!-- 四个格子 -->
+  <rect class="src" x="150" y="120" width="100" height="64"/>
+  <text class="mono" x="200" y="158" font-size="14" text-anchor="middle">f[i][j]</text>
+
+  <rect class="src" x="290" y="120" width="100" height="64"/>
+  <text class="mono" x="340" y="158" font-size="14" text-anchor="middle">f[i][j+1]</text>
+
+  <rect class="src" x="150" y="224" width="100" height="64"/>
+  <text class="mono" x="200" y="262" font-size="14" text-anchor="middle">f[i+1][j]</text>
+
+  <rect class="tgt" x="290" y="224" width="100" height="64"/>
+  <text class="mono" x="340" y="262" font-size="14" text-anchor="middle" font-weight="600">f[i+1][j+1]</text>
+
+  <!-- 箭头 -->
+  <line class="eq" x1="253" y1="187" x2="286" y2="220"/>
+  <line class="ne" x1="340" y1="187" x2="340" y2="219"/>
+  <line class="ne" x1="253" y1="256" x2="285" y2="256"/>
+
+  <!-- 箭头标注 -->
+  <text class="mono" x="228" y="212" font-size="12" fill="#1a7f37" font-weight="600">+1</text>
+  <text class="mono" x="352" y="208" font-size="12" fill="#cf222e">max</text>
+  <text class="mono" x="262" y="246" font-size="12" fill="#cf222e">max</text>
+
+  <!-- 右侧说明 -->
+  <rect x="440" y="118" width="330" height="80" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5" rx="6"/>
+  <text x="456" y="142" font-size="14" font-weight="600" fill="#1a7f37">情况一　s[i] == t[j]　（走对角）</text>
+  <text class="mono" x="456" y="166" font-size="13">f[i+1][j+1] = f[i][j] + 1</text>
+  <text class="sub" x="456" y="186" font-size="12">两字符配成一对，长度 +1；另两支被支配，可剪</text>
+
+  <rect x="440" y="212" width="330" height="80" fill="#ffffff" stroke="#cf222e" stroke-width="1.5" rx="6"/>
+  <text x="456" y="236" font-size="14" font-weight="600" fill="#cf222e">情况二　s[i] != t[j]　（取上、左最大）</text>
+  <text class="mono" x="456" y="260" font-size="13">f[i+1][j+1] = max(f[i][j+1], f[i+1][j])</text>
+  <text class="sub" x="456" y="280" font-size="12">对角 f[i][j] 被这两支完整包含，属冗余可剪</text>
+
+  <!-- 底部要点 -->
+  <line x1="32" y1="326" x2="768" y2="326" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="352" font-size="14" font-weight="600">为什么不等时不用写 f[i][j]？</text>
+  <text class="sub" x="32" y="376" font-size="13">因为「s[i] 和 t[j] 都退场」的所有方案，已经被「只让 s[i] 退场」完整枚举过 ——</text>
+  <text class="mono" x="32" y="400" font-size="13" fill="#0969da">F(i-1, j-1) ⊆ F(i-1, j)</text>
+  <text class="sub" x="200" y="400" font-size="13">　多给一个字符，老方案一个都不会失效。</text>
+</svg>

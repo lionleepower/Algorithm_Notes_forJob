@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440">
+  <defs>
+    <marker id="ab7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .chip{fill:#ddf4ff;stroke:#0969da;stroke-width:1.5;rx:6}
+    .chip2{fill:#fff8c5;stroke:#bf8700;stroke-width:1.5;rx:6}
+    .swap{stroke:#0969da;stroke-width:2.2;fill:none;marker-end:url(#ab7)}
+  </style>
+
+  <rect width="800" height="440" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">进阶技巧：交换「状态」与「状态值」</text>
+  <text class="sub" x="32" y="60">同一件事的两种记法 —— 把长度从「值」挪到「下标」，数组就变得有序，于是能二分。</text>
+
+  <!-- 第一行：f -->
+  <text class="mono" x="40" y="140" font-size="15" font-weight="600">f[i]</text>
+  <text x="88" y="140" font-size="14">表示</text>
+  <rect class="chip2" x="130" y="116" width="200" height="32"/>
+  <text class="mono" x="230" y="138" font-size="14" text-anchor="middle">末尾元素为 nums[i]</text>
+  <text x="342" y="140" font-size="14">的 LIS 的</text>
+  <rect class="chip" x="424" y="116" width="80" height="32"/>
+  <text x="464" y="138" font-size="14" text-anchor="middle" font-weight="600">长度</text>
+  <text class="sub" x="524" y="140" font-size="12">状态 = 下标，值 = 长度　O(n²)</text>
+
+  <!-- 交换箭头 -->
+  <path class="swap" d="M 230 154 Q 300 215 424 268"/>
+  <path class="swap" d="M 464 154 Q 400 215 246 268"/>
+  <text x="560" y="216" font-size="14" font-weight="600" fill="#0969da">交换状态与状态值</text>
+
+  <!-- 第二行：g -->
+  <text class="mono" x="40" y="300" font-size="15" font-weight="600">g[k]</text>
+  <text x="88" y="300" font-size="14">表示</text>
+  <rect class="chip" x="130" y="276" width="176" height="32"/>
+  <text class="mono" x="218" y="298" font-size="14" text-anchor="middle" font-weight="600">长度为 k+1</text>
+  <text x="318" y="300" font-size="14">的递增子序列里</text>
+  <rect class="chip2" x="440" y="276" width="200" height="32"/>
+  <text x="540" y="298" font-size="14" text-anchor="middle">最小的末尾元素</text>
+  <text class="sub" x="656" y="300" font-size="12">状态 = 长度</text>
+
+  <!-- 底部要点 -->
+  <line x1="32" y1="336" x2="768" y2="336" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="362" font-size="14" font-weight="600" fill="#1a7f37">两条性质，缺一不可</text>
+  <text class="sub" x="32" y="386" font-size="13">① g 严格递增（否则砍掉末位就能造出更小的结尾，与「最小」矛盾）⇒ 可以二分。② len(g) 就是答案。</text>
+  <text class="sub" x="32" y="410" font-size="13">替换 g[k] 只让「长度 k+1 可达」这个事实的结尾变小，长度信息已被 len(g) 记住，不会丢解。</text>
+  <text class="mono" x="32" y="430" font-size="13" fill="#0969da">bisect_left(g, x) 返回的 k，加 1 正好就是 O(n²) 版里的 f[i]。</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <marker id="a41" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/>
+    </marker>
+    <marker id="g41" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .node{fill:#ffffff;stroke:#1f2328;stroke-width:1.8;rx:6}
+    .rev{fill:#fff8c5;stroke:#bf8700;stroke-width:2;rx:6}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#a41)}
+    .join{stroke:#1a7f37;stroke-width:2.4;fill:none;marker-end:url(#g41)}
+    .cut{stroke:#cf222e;stroke-width:2;stroke-dasharray:4 4}
+  </style>
+
+  <rect width="800" height="400" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">92 区间反转：最后两句为什么不能换顺序</text>
+  <text class="sub" x="32" y="58">反转 [2,4] 已完成。p0 全程没动过，它仍然指向「原区间头」—— 而原区间头现在是区间尾。</text>
+
+  <!-- 指针标注 -->
+  <text class="mono sub" x="159" y="102" font-size="12" text-anchor="middle">p0</text>
+  <text class="mono sub" x="279" y="102" font-size="12" text-anchor="middle">pre（新头）</text>
+  <text class="mono sub" x="447" y="102" font-size="12" text-anchor="middle">p0.next（旧头 = 新尾）</text>
+  <text class="mono sub" x="567" y="102" font-size="12" text-anchor="middle">cur</text>
+
+  <!-- 节点 -->
+  <rect class="node" x="48"  y="112" width="54" height="44"/>
+  <text class="mono" x="75" y="140" font-size="14" text-anchor="middle">dummy</text>
+  <line class="lnk" x1="104" y1="134" x2="128" y2="134"/>
+  <rect class="node" x="132" y="112" width="54" height="44"/>
+  <text class="mono" x="159" y="140" font-size="15" text-anchor="middle">1</text>
+
+  <line class="cut" x1="196" y1="134" x2="242" y2="134"/>
+
+  <rect class="rev"  x="252" y="112" width="54" height="44"/>
+  <text class="mono" x="279" y="140" font-size="15" text-anchor="middle">4</text>
+  <line class="lnk" x1="308" y1="134" x2="332" y2="134"/>
+  <rect class="rev"  x="336" y="112" width="54" height="44"/>
+  <text class="mono" x="363" y="140" font-size="15" text-anchor="middle">3</text>
+  <line class="lnk" x1="392" y1="134" x2="416" y2="134"/>
+  <rect class="rev"  x="420" y="112" width="54" height="44"/>
+  <text class="mono" x="447" y="140" font-size="15" text-anchor="middle">2</text>
+
+  <line class="cut" x1="484" y1="134" x2="530" y2="134"/>
+
+  <rect class="node" x="540" y="112" width="54" height="44"/>
+  <text class="mono" x="567" y="140" font-size="15" text-anchor="middle">5</text>
+
+  <!-- 两句接回 -->
+  <path class="join" d="M 447 160 Q 507 228 563 162"/>
+  <text class="mono" x="507" y="252" font-size="13" fill="#1a7f37" text-anchor="middle">① p0.next.next = cur</text>
+  <text class="sub"  x="507" y="272" font-size="12" text-anchor="middle">让新尾 2 接上后半段 5</text>
+
+  <path class="join" d="M 159 160 Q 219 228 275 162"/>
+  <text class="mono" x="219" y="252" font-size="13" fill="#1a7f37" text-anchor="middle">② p0.next = pre</text>
+  <text class="sub"  x="219" y="272" font-size="12" text-anchor="middle">让前驱 1 接上新头 4</text>
+
+  <!-- 底部 -->
+  <line x1="32" y1="300" x2="768" y2="300" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="324" font-size="14" font-weight="600" fill="#cf222e">顺序反了会怎样？</text>
+  <text class="sub" x="32" y="348" font-size="13">先写 ② 的话，p0.next 立刻改指向 4，「原区间头 2」这个唯一的把手就被弄丢了，再也接不回 5。</text>
+  <text class="mono" x="32" y="372" font-size="12.5" fill="#0969da">记法：旧头接后段（①）→ 新头接前段（②）。25 题多一句 p0 = 旧头，让 p0 移到本组的尾部。</text>
+  <text class="sub" x="32" y="392" font-size="12">左边 dummy 的作用：left = 1 时区间前驱不存在，加哨兵后 p0 一定有值，返回统一写 dummy.next。</text>
+</svg>

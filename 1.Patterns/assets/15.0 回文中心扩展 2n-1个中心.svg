@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 450" width="820" height="450">
+  <defs>
+    <marker id="arP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600;fill:#0969da}
+    .c{fill:#ffffff;stroke:#d0d7de;stroke-width:1.6;rx:5}
+    .hit{fill:#dafbe1;stroke:#1a7f37;stroke-width:2.2;rx:5}
+    .odd{fill:#0969da}
+    .even{fill:#cf222e}
+    .ar{stroke:#1a7f37;stroke-width:2;fill:none;marker-end:url(#arP)}
+  </style>
+
+  <rect width="820" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">中心扩展：长度为 n 的串有 2n−1 个中心，不是 n 个</text>
+  <text class="mono sub" x="32" y="58">s = "cbbd"　　枚举中心而不是枚举区间，把区间 DP 的 O(n²) 空间压成 O(1)</text>
+
+  <!-- 字符串 -->
+  <rect class="c" x="200" y="86" width="66" height="46"/><text class="mono" x="233" y="117" font-size="20" text-anchor="middle">c</text>
+  <rect class="hit" x="272" y="86" width="66" height="46"/><text class="mono" x="305" y="117" font-size="20" text-anchor="middle">b</text>
+  <rect class="hit" x="344" y="86" width="66" height="46"/><text class="mono" x="377" y="117" font-size="20" text-anchor="middle">b</text>
+  <rect class="c" x="416" y="86" width="66" height="46"/><text class="mono" x="449" y="117" font-size="20" text-anchor="middle">d</text>
+  <text class="mono sub" x="233" y="78" font-size="11" text-anchor="middle">0</text>
+  <text class="mono sub" x="305" y="78" font-size="11" text-anchor="middle">1</text>
+  <text class="mono sub" x="377" y="78" font-size="11" text-anchor="middle">2</text>
+  <text class="mono sub" x="449" y="78" font-size="11" text-anchor="middle">3</text>
+
+  <!-- 中心标记 -->
+  <circle class="odd" cx="233" cy="152" r="6"/>
+  <circle class="even" cx="269" cy="152" r="6"/>
+  <circle class="odd" cx="305" cy="152" r="6"/>
+  <circle class="even" cx="341" cy="152" r="6"/>
+  <circle class="odd" cx="377" cy="152" r="6"/>
+  <circle class="even" cx="413" cy="152" r="6"/>
+  <circle class="odd" cx="449" cy="152" r="6"/>
+
+  <text class="mono" x="520" y="146" font-size="12.5" fill="#0969da">● 4 个字符中心 → 奇数长度回文</text>
+  <text class="mono" x="520" y="168" font-size="12.5" fill="#cf222e">● 3 个缝隙中心 → 偶数长度回文</text>
+  <text class="mono sub" x="520" y="190" font-size="12.5">合计 2n − 1 = 7 个</text>
+
+  <path class="ar" d="M 341 170 L 341 196"/>
+  <text class="mono" x="356" y="196" font-size="12.5" fill="#1a7f37">从这个缝隙往两边扩，得到 "bb"</text>
+
+  <text class="sub" x="32" y="234" font-size="13"><tspan font-weight="600" fill="#cf222e">只枚举字符中心会漏掉全部偶数长度的回文</tspan> —— 本例里四个字符中心各自只能扩出长度 1，答案会错成 "c"。</text>
+
+  <line x1="32" y1="256" x2="788" y2="256" stroke="#d0d7de" stroke-width="1"/>
+
+  <text class="cap" x="32" y="282" font-size="14">用一个整数同时表示两类中心</text>
+
+  <text class="mono" x="52" y="312" font-size="12.5" fill="#0969da">for i in range(2 * n - 1):</text>
+  <text class="mono" x="52" y="334" font-size="12.5" fill="#0969da">　　l, r = i // 2, i // 2 + i % 2</text>
+  <text class="mono" x="52" y="356" font-size="12.5" fill="#0969da">　　while l &gt;= 0 and r &lt; n and s[l] == s[r]: l −= 1; r += 1</text>
+  <text class="mono" x="52" y="378" font-size="12.5" fill="#0969da">　　# 退出时真正的回文是 s[l+1 : r]，长度 r − l − 1</text>
+
+  <text class="sub" x="440" y="312" font-size="12.5">i 为偶数 ⇒ l == r，单字符中心；</text>
+  <text class="sub" x="440" y="334" font-size="12.5">i 为奇数 ⇒ r == l + 1，缝隙中心。</text>
+  <text class="sub" x="440" y="356" font-size="12.5">两种情况共用同一段扩展代码，</text>
+  <text class="sub" x="440" y="378" font-size="12.5">不必写两个循环。</text>
+
+  <text class="mono" x="32" y="414" font-size="12.5" fill="#cf222e">退出循环时 l 和 r 已经各自多走一步，长度必须写 r − l − 1，写成 r − l + 1 是本题第一高频错误。</text>
+  <text class="sub" x="32" y="438" font-size="12.5">复杂度：2n−1 个中心 × 每个最多扩 O(n) ⇒ 时间 O(n²)、空间 O(1)，比区间 DP 的 O(n²) 空间更优，面试首选。</text>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" width="820" height="420">
+  <defs>
+    <marker id="ar48" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600;fill:#0969da}
+    .c{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:4}
+    .hl{fill:#ddf4ff;stroke:#0969da;stroke-width:1.8;rx:4}
+    .ar{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#ar48)}
+    .diag{stroke:#cf222e;stroke-width:1.8;stroke-dasharray:5 4}
+  </style>
+
+  <rect width="820" height="420" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">48 旋转图像：顺时针 90° = 沿主对角线转置 + 每行左右翻转</text>
+  <text class="sub" x="32" y="58">两步都是「一次交换换两个格子」，所以整体是原地的；顺序不能反（先翻列再转置得到的是逆时针）。</text>
+
+  <!-- 原矩阵 -->
+  <text class="cap" x="60" y="106">原矩阵</text>
+  <rect class="hl" x="60"  y="118" width="46" height="42"/><text class="mono" x="83"  y="146" font-size="16" text-anchor="middle">1</text>
+  <rect class="c"  x="110" y="118" width="46" height="42"/><text class="mono" x="133" y="146" font-size="16" text-anchor="middle">2</text>
+  <rect class="c"  x="160" y="118" width="46" height="42"/><text class="mono" x="183" y="146" font-size="16" text-anchor="middle">3</text>
+  <rect class="c"  x="60"  y="164" width="46" height="42"/><text class="mono" x="83"  y="192" font-size="16" text-anchor="middle">4</text>
+  <rect class="hl" x="110" y="164" width="46" height="42"/><text class="mono" x="133" y="192" font-size="16" text-anchor="middle">5</text>
+  <rect class="c"  x="160" y="164" width="46" height="42"/><text class="mono" x="183" y="192" font-size="16" text-anchor="middle">6</text>
+  <rect class="c"  x="60"  y="210" width="46" height="42"/><text class="mono" x="83"  y="238" font-size="16" text-anchor="middle">7</text>
+  <rect class="c"  x="110" y="210" width="46" height="42"/><text class="mono" x="133" y="238" font-size="16" text-anchor="middle">8</text>
+  <rect class="hl" x="160" y="210" width="46" height="42"/><text class="mono" x="183" y="238" font-size="16" text-anchor="middle">9</text>
+  <line class="diag" x1="62" y1="120" x2="204" y2="250"/>
+
+  <path class="ar" d="M 226 186 L 288 186"/>
+  <text class="sub" x="257" y="176" font-size="12" text-anchor="middle">转置</text>
+
+  <!-- 转置后 -->
+  <text class="cap" x="310" y="106">转置后（行列互换）</text>
+  <rect class="hl" x="310" y="118" width="46" height="42"/><text class="mono" x="333" y="146" font-size="16" text-anchor="middle">1</text>
+  <rect class="c"  x="360" y="118" width="46" height="42"/><text class="mono" x="383" y="146" font-size="16" text-anchor="middle">4</text>
+  <rect class="c"  x="410" y="118" width="46" height="42"/><text class="mono" x="433" y="146" font-size="16" text-anchor="middle">7</text>
+  <rect class="c"  x="310" y="164" width="46" height="42"/><text class="mono" x="333" y="192" font-size="16" text-anchor="middle">2</text>
+  <rect class="hl" x="360" y="164" width="46" height="42"/><text class="mono" x="383" y="192" font-size="16" text-anchor="middle">5</text>
+  <rect class="c"  x="410" y="164" width="46" height="42"/><text class="mono" x="433" y="192" font-size="16" text-anchor="middle">8</text>
+  <rect class="c"  x="310" y="210" width="46" height="42"/><text class="mono" x="333" y="238" font-size="16" text-anchor="middle">3</text>
+  <rect class="c"  x="360" y="210" width="46" height="42"/><text class="mono" x="383" y="238" font-size="16" text-anchor="middle">6</text>
+  <rect class="hl" x="410" y="210" width="46" height="42"/><text class="mono" x="433" y="238" font-size="16" text-anchor="middle">9</text>
+  <line class="diag" x1="312" y1="120" x2="454" y2="250"/>
+
+  <path class="ar" d="M 476 186 L 538 186"/>
+  <text class="sub" x="507" y="176" font-size="12" text-anchor="middle">每行翻转</text>
+
+  <!-- 结果 -->
+  <text class="cap" x="560" y="106" fill="#1a7f37">顺时针 90°</text>
+  <rect class="c" x="560" y="118" width="46" height="42"/><text class="mono" x="583" y="146" font-size="16" text-anchor="middle">7</text>
+  <rect class="c" x="610" y="118" width="46" height="42"/><text class="mono" x="633" y="146" font-size="16" text-anchor="middle">4</text>
+  <rect class="c" x="660" y="118" width="46" height="42"/><text class="mono" x="683" y="146" font-size="16" text-anchor="middle">1</text>
+  <rect class="c" x="560" y="164" width="46" height="42"/><text class="mono" x="583" y="192" font-size="16" text-anchor="middle">8</text>
+  <rect class="c" x="610" y="164" width="46" height="42"/><text class="mono" x="633" y="192" font-size="16" text-anchor="middle">5</text>
+  <rect class="c" x="660" y="164" width="46" height="42"/><text class="mono" x="683" y="192" font-size="16" text-anchor="middle">2</text>
+  <rect class="c" x="560" y="210" width="46" height="42"/><text class="mono" x="583" y="238" font-size="16" text-anchor="middle">9</text>
+  <rect class="c" x="610" y="210" width="46" height="42"/><text class="mono" x="633" y="238" font-size="16" text-anchor="middle">6</text>
+  <rect class="c" x="660" y="210" width="46" height="42"/><text class="mono" x="683" y="238" font-size="16" text-anchor="middle">3</text>
+
+  <line x1="32" y1="278" x2="788" y2="278" stroke="#d0d7de" stroke-width="1"/>
+
+  <text x="32" y="304" font-size="14" font-weight="600" fill="#cf222e">转置的循环必须写 j 从 i+1 开始</text>
+  <text class="mono sub" x="32" y="328" font-size="12.5">for i in range(n): for j in range(i + 1, n): m[i][j], m[j][i] = m[j][i], m[i][j]</text>
+  <text class="sub" x="32" y="350" font-size="12.5">写成 range(n) 会把每一对 (i,j) 和 (j,i) 交换两次，等于什么都没做 —— 这是本题最高频的错法。</text>
+  <text class="mono" x="32" y="378" font-size="12.5" fill="#0969da">坐标公式：顺时针 (i, j) → (j, n−1−i)　　逆时针 (i, j) → (n−1−j, i)（转置 + 每列翻转）</text>
+  <text class="sub" x="32" y="402" font-size="12.5">面试若要求「一次到位」，就取四元组 (i,j) →(j,n−1−i) →(n−1−i,n−1−j) →(n−1−j,i) 一轮四赋值，外层只需遍历左上角 n/2 × (n+1)/2 个格子。</text>
+</svg>

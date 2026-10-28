@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 470" width="820" height="470">
+  <defs>
+    <marker id="arD3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c959f"/>
+    </marker>
+    <marker id="arR3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600;fill:#0969da}
+    .nd{fill:#ffffff;stroke:#57606a;stroke-width:1.8}
+    .done{fill:#dafbe1;stroke:#1a7f37;stroke-width:2.2}
+    .bad{fill:#ffebe9;stroke:#cf222e;stroke-width:2.4}
+    .e{stroke:#8c959f;stroke-width:1.6;fill:none;marker-end:url(#arD3)}
+    .en{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#arR3)}
+  </style>
+
+  <rect width="820" height="470" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">Dijkstra 的不变量：每次弹出的一定是「全局还没确定的点里最近的那个」</text>
+  <text class="sub" x="32" y="58">确定顺序按距离递增，一旦出堆就永不再改 —— 这个贪心成立的唯一前提是<tspan font-weight="600" fill="#cf222e">边权非负</tspan>。</text>
+
+  <!-- 正常图 -->
+  <text class="cap" x="32" y="94">① 从 0 出发，确定顺序 0 → 1 → 2 → 3 → 4</text>
+
+  <circle class="done" cx="80"  cy="180" r="26"/><text class="mono" x="80"  y="186" font-size="16" text-anchor="middle">0</text>
+  <circle class="done" cx="220" cy="130" r="26"/><text class="mono" x="220" y="136" font-size="16" text-anchor="middle">1</text>
+  <circle class="done" cx="220" cy="240" r="26"/><text class="mono" x="220" y="246" font-size="16" text-anchor="middle">2</text>
+  <circle class="done" cx="360" cy="180" r="26"/><text class="mono" x="360" y="186" font-size="16" text-anchor="middle">3</text>
+  <circle class="done" cx="490" cy="180" r="26"/><text class="mono" x="490" y="186" font-size="16" text-anchor="middle">4</text>
+
+  <path class="e" d="M 101 165 L 195 139"/><text class="mono" x="145" y="142" font-size="12">2</text>
+  <path class="e" d="M 101 196 L 195 232"/><text class="mono" x="140" y="228" font-size="12">5</text>
+  <path class="e" d="M 220 158 L 220 210"/><text class="mono" x="232" y="188" font-size="12">1</text>
+  <path class="e" d="M 243 146 L 340 168"/><text class="mono" x="290" y="146" font-size="12">7</text>
+  <path class="e" d="M 243 231 L 339 194"/><text class="mono" x="288" y="228" font-size="12">2</text>
+  <path class="e" d="M 386 180 L 462 180"/><text class="mono" x="424" y="170" font-size="12">1</text>
+
+  <text class="mono sub" x="560" y="120" font-size="12.5">出堆顺序与距离</text>
+  <text class="mono" x="560" y="146" font-size="13" fill="#1a7f37">0 (0)  →  1 (2)  →  2 (3)</text>
+  <text class="mono" x="560" y="170" font-size="13" fill="#1a7f37">→  3 (5)  →  4 (6)</text>
+  <text class="sub" x="560" y="200" font-size="12">距离单调不减。已确定点的距离</text>
+  <text class="sub" x="560" y="220" font-size="12">不可能再被更小的路径改写 ——</text>
+  <text class="sub" x="560" y="240" font-size="12">因为任何绕路都要先经过一条</text>
+  <text class="sub" x="560" y="260" font-size="12">非负边，只会更远。</text>
+
+  <line x1="32" y1="292" x2="788" y2="292" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- 负权反例 -->
+  <text class="cap" x="32" y="318" font-size="14" fill="#cf222e">② 有一条负权边，贪心立刻崩掉</text>
+
+  <circle class="nd"  cx="120" cy="392" r="26"/><text class="mono" x="120" y="398" font-size="16" text-anchor="middle">0</text>
+  <circle class="bad" cx="290" cy="360" r="26"/><text class="mono" x="290" y="366" font-size="16" text-anchor="middle">1</text>
+  <circle class="nd"  cx="290" cy="440" r="26"/><text class="mono" x="290" y="446" font-size="16" text-anchor="middle">2</text>
+
+  <path class="e"  d="M 143 380 L 265 366"/><text class="mono" x="200" y="366" font-size="12">2</text>
+  <path class="e"  d="M 143 404 L 265 434"/><text class="mono" x="196" y="432" font-size="12">5</text>
+  <path class="en" d="M 290 412 L 290 390"/><text class="mono" x="304" y="404" font-size="12" fill="#cf222e">−4</text>
+
+  <text class="mono" x="360" y="356" font-size="12.5" fill="#cf222e">Dijkstra 先弹出 1，判定 dis[1] = 2 并封存</text>
+  <text class="mono" x="360" y="382" font-size="12.5" fill="#cf222e">但真实最短路是 0 → 2 → 1 = 5 − 4 = 1</text>
+  <text class="sub"  x="360" y="410" font-size="12.5">「已确定就不再更新」的前提被负边破坏：</text>
+  <text class="sub"  x="360" y="430" font-size="12.5">绕远路反而能变近。</text>
+  <text class="mono" x="360" y="458" font-size="12.5" fill="#0969da">有负权边 ⇒ 换 Bellman-Ford / SPFA（还能顺带判负环）</text>
+</svg>

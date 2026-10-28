@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 470" width="860" height="470">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cell{fill:#ffffff;stroke:#d0d7de;stroke-width:1}
+    .d1{fill:#ffeff7;stroke:#bf3989;stroke-width:1}
+    .d2{fill:#ddf4ff;stroke:#0969da;stroke-width:1}
+    .num{font-size:12px;text-anchor:middle;font-family:"SF Mono",Consolas,monospace}
+    .cap{font-size:13.5px;font-weight:600}
+  </style>
+
+  <rect width="860" height="470" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="30" y="36">对角线的「门牌号」：把几何问题变成两个数字相等</text>
+  <text class="sub" x="30" y="58">沿 ↘ 走一步行 +1 列 +1，<tspan class="mono">r − c</tspan> 不变；沿 ↙ 走一步行 +1 列 −1，<tspan class="mono">r + c</tspan> 不变</text>
+
+  <!-- ============ 左盘：r - c（↘ 方向） ============ -->
+  <text class="cap" x="46" y="94" fill="#0969da">↘ 方向：同一条线上 r − c 恒定</text>
+  <g>
+    <!-- 5x5 网格，格子 52px，起点 (60,108) -->
+    <!-- 行 r=0..4 列 c=0..4，值 r-c -->
+    <g class="num">
+      <!-- r=0 -->
+      <rect class="d2" x="60" y="108" width="52" height="52"/><text x="86" y="140">0</text>
+      <rect class="cell" x="112" y="108" width="52" height="52"/><text x="138" y="140">-1</text>
+      <rect class="cell" x="164" y="108" width="52" height="52"/><text x="190" y="140">-2</text>
+      <rect class="cell" x="216" y="108" width="52" height="52"/><text x="242" y="140">-3</text>
+      <rect class="cell" x="268" y="108" width="52" height="52"/><text x="294" y="140">-4</text>
+      <!-- r=1 -->
+      <rect class="cell" x="60" y="160" width="52" height="52"/><text x="86" y="192">1</text>
+      <rect class="d2" x="112" y="160" width="52" height="52"/><text x="138" y="192">0</text>
+      <rect class="cell" x="164" y="160" width="52" height="52"/><text x="190" y="192">-1</text>
+      <rect class="cell" x="216" y="160" width="52" height="52"/><text x="242" y="192">-2</text>
+      <rect class="cell" x="268" y="160" width="52" height="52"/><text x="294" y="192">-3</text>
+      <!-- r=2 -->
+      <rect class="cell" x="60" y="212" width="52" height="52"/><text x="86" y="244">2</text>
+      <rect class="cell" x="112" y="212" width="52" height="52"/><text x="138" y="244">1</text>
+      <rect class="d2" x="164" y="212" width="52" height="52"/><text x="190" y="244">0</text>
+      <rect class="cell" x="216" y="212" width="52" height="52"/><text x="242" y="244">-1</text>
+      <rect class="cell" x="268" y="212" width="52" height="52"/><text x="294" y="244">-2</text>
+      <!-- r=3 -->
+      <rect class="cell" x="60" y="264" width="52" height="52"/><text x="86" y="296">3</text>
+      <rect class="cell" x="112" y="264" width="52" height="52"/><text x="138" y="296">2</text>
+      <rect class="cell" x="164" y="264" width="52" height="52"/><text x="190" y="296">1</text>
+      <rect class="d2" x="216" y="264" width="52" height="52"/><text x="242" y="296">0</text>
+      <rect class="cell" x="268" y="264" width="52" height="52"/><text x="294" y="296">-1</text>
+      <!-- r=4 -->
+      <rect class="cell" x="60" y="316" width="52" height="52"/><text x="86" y="348">4</text>
+      <rect class="cell" x="112" y="316" width="52" height="52"/><text x="138" y="348">3</text>
+      <rect class="cell" x="164" y="316" width="52" height="52"/><text x="190" y="348">2</text>
+      <rect class="cell" x="216" y="316" width="52" height="52"/><text x="242" y="348">1</text>
+      <rect class="d2" x="268" y="316" width="52" height="52"/><text x="294" y="348">0</text>
+    </g>
+    <path d="M70 118 L310 358" stroke="#0969da" stroke-width="2.5" fill="none" opacity="0.55"/>
+    <text class="mono" x="60" y="386" font-size="12" fill="#0969da">整条蓝线上 r − c ≡ 0，取值范围 −(n−1) … n−1</text>
+  </g>
+
+  <!-- ============ 右盘：r + c（↙ 方向） ============ -->
+  <text class="cap" x="470" y="94" fill="#bf3989">↙ 方向：同一条线上 r + c 恒定</text>
+  <g>
+    <g class="num">
+      <!-- r=0 -->
+      <rect class="cell" x="484" y="108" width="52" height="52"/><text x="510" y="140">0</text>
+      <rect class="cell" x="536" y="108" width="52" height="52"/><text x="562" y="140">1</text>
+      <rect class="cell" x="588" y="108" width="52" height="52"/><text x="614" y="140">2</text>
+      <rect class="cell" x="640" y="108" width="52" height="52"/><text x="666" y="140">3</text>
+      <rect class="d1" x="692" y="108" width="52" height="52"/><text x="718" y="140">4</text>
+      <!-- r=1 -->
+      <rect class="cell" x="484" y="160" width="52" height="52"/><text x="510" y="192">1</text>
+      <rect class="cell" x="536" y="160" width="52" height="52"/><text x="562" y="192">2</text>
+      <rect class="cell" x="588" y="160" width="52" height="52"/><text x="614" y="192">3</text>
+      <rect class="d1" x="640" y="160" width="52" height="52"/><text x="666" y="192">4</text>
+      <rect class="cell" x="692" y="160" width="52" height="52"/><text x="718" y="192">5</text>
+      <!-- r=2 -->
+      <rect class="cell" x="484" y="212" width="52" height="52"/><text x="510" y="244">2</text>
+      <rect class="cell" x="536" y="212" width="52" height="52"/><text x="562" y="244">3</text>
+      <rect class="d1" x="588" y="212" width="52" height="52"/><text x="614" y="244">4</text>
+      <rect class="cell" x="640" y="212" width="52" height="52"/><text x="666" y="244">5</text>
+      <rect class="cell" x="692" y="212" width="52" height="52"/><text x="718" y="244">6</text>
+      <!-- r=3 -->
+      <rect class="cell" x="484" y="264" width="52" height="52"/><text x="510" y="296">3</text>
+      <rect class="d1" x="536" y="264" width="52" height="52"/><text x="562" y="296">4</text>
+      <rect class="cell" x="588" y="264" width="52" height="52"/><text x="614" y="296">5</text>
+      <rect class="cell" x="640" y="264" width="52" height="52"/><text x="666" y="296">6</text>
+      <rect class="cell" x="692" y="264" width="52" height="52"/><text x="718" y="296">7</text>
+      <!-- r=4 -->
+      <rect class="d1" x="484" y="316" width="52" height="52"/><text x="510" y="348">4</text>
+      <rect class="cell" x="536" y="316" width="52" height="52"/><text x="562" y="348">5</text>
+      <rect class="cell" x="588" y="316" width="52" height="52"/><text x="614" y="348">6</text>
+      <rect class="cell" x="640" y="316" width="52" height="52"/><text x="666" y="348">7</text>
+      <rect class="cell" x="692" y="316" width="52" height="52"/><text x="718" y="348">8</text>
+    </g>
+    <path d="M734 118 L494 358" stroke="#bf3989" stroke-width="2.5" fill="none" opacity="0.55"/>
+    <text class="mono" x="484" y="386" font-size="12" fill="#bf3989">整条粉线上 r + c ≡ 4，取值范围 0 … 2n−2</text>
+  </g>
+
+  <!-- 底部结论 -->
+  <rect x="30" y="402" width="800" height="52" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5" rx="8"/>
+  <text x="46" y="424" font-size="13">于是「两皇后同对角线」这个<tspan font-weight="600">几何</tspan>问题，变成「两个门牌号相等」这个<tspan font-weight="600">代数</tspan>问题：</text>
+  <text class="mono" x="46" y="445" font-size="13" fill="#cf222e">if r + c == R + C or r - c == R - C:　return False　　# 等价于 abs(r-R) == abs(c-C)，但比大小更省事</text>
+</svg>

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .col{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:5}
+    .match{fill:#dafbe1;stroke:#1a7f37;stroke-width:2;rx:5}
+    .sub2{fill:#fff8c5;stroke:#bf8700;stroke-width:2;rx:5}
+    .del{fill:#ffebe9;stroke:#cf222e;stroke-width:2;rx:5}
+    .ins{fill:#ddf4ff;stroke:#0969da;stroke-width:2;rx:5}
+  </style>
+
+  <rect width="800" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">编辑距离 = 最优「对齐」，不是模拟编辑</text>
+  <text class="sub" x="32" y="60">把 s 写上排、t 写下排，允许插空格；每一列只有三种形态，min 挑最便宜的</text>
+
+  <!-- 三种列形态 -->
+  <text x="32" y="96" font-size="15" font-weight="600">最右一列的三种可能（不重不漏）</text>
+
+  <!-- 形态1 替换/匹配 -->
+  <rect class="sub2" x="40" y="112" width="220" height="96"/>
+  <text class="mono" x="70" y="140" font-size="16">s[i]</text>
+  <text class="mono" x="70" y="166" font-size="16">t[j]</text>
+  <text x="130" y="140" font-size="13" fill="#57606a">两个都用掉</text>
+  <text class="mono" x="130" y="166" font-size="13" fill="#bf8700">dfs(i-1, j-1)</text>
+  <text x="70" y="194" font-size="13" font-weight="600">相同=匹配(0)　不同=替换(1)</text>
+
+  <!-- 形态2 删除 -->
+  <rect class="del" x="285" y="112" width="220" height="96"/>
+  <text class="mono" x="315" y="140" font-size="16">s[i]</text>
+  <text class="mono" x="315" y="166" font-size="16" fill="#8c959f">＿</text>
+  <text x="375" y="140" font-size="13" fill="#57606a">只用掉 s[i]</text>
+  <text class="mono" x="375" y="166" font-size="13" fill="#cf222e">dfs(i-1, j)</text>
+  <text x="315" y="194" font-size="13" font-weight="600">删除（t[j] 还留着）代价 1</text>
+
+  <!-- 形态3 插入 -->
+  <rect class="ins" x="530" y="112" width="230" height="96"/>
+  <text class="mono" x="560" y="140" font-size="16" fill="#8c959f">＿</text>
+  <text class="mono" x="560" y="166" font-size="16">t[j]</text>
+  <text x="620" y="140" font-size="13" fill="#57606a">只用掉 t[j]</text>
+  <text class="mono" x="620" y="166" font-size="13" fill="#0969da">dfs(i, j-1)</text>
+  <text x="560" y="194" font-size="13" font-weight="600">插入（s[i] 一个没花）代价 1</text>
+
+  <!-- 分隔 -->
+  <line x1="32" y1="232" x2="768" y2="232" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- 实例对齐 -->
+  <text x="32" y="262" font-size="15" font-weight="600">实例：s = "horse" → t = "ros"，答案 3</text>
+
+  <!-- 5 列对齐图 -->
+  <g>
+    <!-- col1 替换 -->
+    <rect class="sub2" x="120" y="280" width="86" height="86"/>
+    <text class="mono" x="163" y="310" font-size="20" text-anchor="middle">h</text>
+    <text class="mono" x="163" y="344" font-size="20" text-anchor="middle">r</text>
+    <text x="163" y="386" font-size="13" text-anchor="middle" font-weight="600" fill="#bf8700">替换</text>
+    <text class="mono" x="163" y="406" font-size="14" text-anchor="middle">1</text>
+
+    <!-- col2 匹配 -->
+    <rect class="match" x="216" y="280" width="86" height="86"/>
+    <text class="mono" x="259" y="310" font-size="20" text-anchor="middle">o</text>
+    <text class="mono" x="259" y="344" font-size="20" text-anchor="middle">o</text>
+    <text x="259" y="386" font-size="13" text-anchor="middle" font-weight="600" fill="#1a7f37">匹配</text>
+    <text class="mono" x="259" y="406" font-size="14" text-anchor="middle">0</text>
+
+    <!-- col3 删除 -->
+    <rect class="del" x="312" y="280" width="86" height="86"/>
+    <text class="mono" x="355" y="310" font-size="20" text-anchor="middle">r</text>
+    <text class="mono" x="355" y="344" font-size="20" text-anchor="middle" fill="#8c959f">＿</text>
+    <text x="355" y="386" font-size="13" text-anchor="middle" font-weight="600" fill="#cf222e">删除</text>
+    <text class="mono" x="355" y="406" font-size="14" text-anchor="middle">1</text>
+
+    <!-- col4 匹配 -->
+    <rect class="match" x="408" y="280" width="86" height="86"/>
+    <text class="mono" x="451" y="310" font-size="20" text-anchor="middle">s</text>
+    <text class="mono" x="451" y="344" font-size="20" text-anchor="middle">s</text>
+    <text x="451" y="386" font-size="13" text-anchor="middle" font-weight="600" fill="#1a7f37">匹配</text>
+    <text class="mono" x="451" y="406" font-size="14" text-anchor="middle">0</text>
+
+    <!-- col5 删除 -->
+    <rect class="del" x="504" y="280" width="86" height="86"/>
+    <text class="mono" x="547" y="310" font-size="20" text-anchor="middle">e</text>
+    <text class="mono" x="547" y="344" font-size="20" text-anchor="middle" fill="#8c959f">＿</text>
+    <text x="547" y="386" font-size="13" text-anchor="middle" font-weight="600" fill="#cf222e">删除</text>
+    <text class="mono" x="547" y="406" font-size="14" text-anchor="middle">1</text>
+  </g>
+
+  <!-- 行标 -->
+  <text class="mono" x="106" y="310" font-size="15" text-anchor="end" fill="#57606a">s:</text>
+  <text class="mono" x="106" y="344" font-size="15" text-anchor="end" fill="#57606a">t:</text>
+
+  <!-- 合计 -->
+  <text class="mono" x="612" y="330" font-size="18" font-weight="600">= 3</text>
+  <text class="sub" x="612" y="352" font-size="12">总代价</text>
+
+  <text class="sub" x="32" y="436" font-size="13">递归从右往左建表：先定最后一列，再退到子问题——指针退不退，只看这一列吃掉了哪一侧的字符。</text>
+</svg>

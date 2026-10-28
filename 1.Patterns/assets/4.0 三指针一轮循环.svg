@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <marker id="a40" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .node{fill:#ffffff;stroke:#1f2328;stroke-width:1.8;rx:6}
+    .done{fill:#ddf4ff;stroke:#0969da;stroke-width:2;rx:6}
+    .now{fill:#fff8c5;stroke:#bf8700;stroke-width:2;rx:6}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#a40)}
+  </style>
+
+  <rect width="800" height="400" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">一轮循环 = 把 cur 从原链表摘下来，接到 pre 前面</text>
+  <text class="sub" x="32" y="58">不变量：pre 永远是「已反转部分的头」，cur 永远是「还没反转部分的头」</text>
+
+  <!-- ① 轮次开始 -->
+  <text class="sub" x="32" y="94" font-size="13" font-weight="600">① 本轮开始（以 1 → 2 → 3 的第 2 轮为例）</text>
+  <text class="mono sub" x="88"  y="110" font-size="12" text-anchor="middle">pre</text>
+  <text class="mono sub" x="238" y="110" font-size="12" text-anchor="middle">cur</text>
+  <text class="mono sub" x="314" y="110" font-size="12" text-anchor="middle">nxt</text>
+
+  <rect class="done" x="64"  y="118" width="48" height="38"/>
+  <text class="mono" x="88" y="143" font-size="15" text-anchor="middle">1</text>
+  <line class="lnk" x1="114" y1="137" x2="136" y2="137"/>
+  <text class="mono sub" x="142" y="142" font-size="12">None</text>
+
+  <rect class="now"  x="214" y="118" width="48" height="38"/>
+  <text class="mono" x="238" y="143" font-size="15" text-anchor="middle">2</text>
+  <line class="lnk" x1="264" y1="137" x2="288" y2="137"/>
+  <rect class="node" x="290" y="118" width="48" height="38"/>
+  <text class="mono" x="314" y="143" font-size="15" text-anchor="middle">3</text>
+  <line class="lnk" x1="340" y1="137" x2="360" y2="137"/>
+  <text class="mono sub" x="366" y="142" font-size="12">None</text>
+
+  <!-- ② 轮次结束 -->
+  <text class="sub" x="32" y="196" font-size="13" font-weight="600">② 四步之后</text>
+  <text class="mono sub" x="88"  y="212" font-size="12" text-anchor="middle">pre</text>
+  <text class="mono sub" x="314" y="212" font-size="12" text-anchor="middle">cur</text>
+
+  <rect class="done" x="64"  y="220" width="48" height="38"/>
+  <text class="mono" x="88" y="245" font-size="15" text-anchor="middle">2</text>
+  <line class="lnk" x1="114" y1="239" x2="138" y2="239"/>
+  <rect class="done" x="140" y="220" width="48" height="38"/>
+  <text class="mono" x="164" y="245" font-size="15" text-anchor="middle">1</text>
+  <line class="lnk" x1="190" y1="239" x2="212" y2="239"/>
+  <text class="mono sub" x="218" y="244" font-size="12">None</text>
+
+  <rect class="now"  x="290" y="220" width="48" height="38"/>
+  <text class="mono" x="314" y="245" font-size="15" text-anchor="middle">3</text>
+  <line class="lnk" x1="340" y1="239" x2="360" y2="239"/>
+  <text class="mono sub" x="366" y="244" font-size="12">None</text>
+
+  <!-- 右侧四步 -->
+  <rect x="470" y="96" width="300" height="176" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5" rx="8"/>
+  <text class="mono" x="490" y="124" font-size="13">nxt = cur.next</text>
+  <text class="sub"  x="490" y="142" font-size="12">先记住后路，否则下一句就断链</text>
+  <text class="mono" x="490" y="170" font-size="13">cur.next = pre</text>
+  <text class="sub"  x="490" y="188" font-size="12">唯一真正「反转」的一句</text>
+  <text class="mono" x="490" y="216" font-size="13">pre = cur</text>
+  <text class="sub"  x="490" y="234" font-size="12">已反转区吞掉 cur</text>
+  <text class="mono" x="490" y="256" font-size="13">cur = nxt</text>
+
+  <!-- 底部 -->
+  <line x1="32" y1="296" x2="768" y2="296" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="320" font-size="14" font-weight="600">两句必背的收尾</text>
+  <text class="sub" x="32" y="344" font-size="13">循环条件 while cur：cur 走到 None 就说明原链表处理完了。</text>
+  <text class="sub" x="32" y="368" font-size="13">此时 cur 是 None，pre 才是新头 —— 所以 return pre，不是 return cur。</text>
+  <text class="mono" x="32" y="390" font-size="12.5" fill="#0969da">口诀：存下一个 → 反指前一个 → pre 前进 → cur 前进</text>
+</svg>

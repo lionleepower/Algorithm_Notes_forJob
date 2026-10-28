@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" width="820" height="440">
+  <defs>
+    <marker id="ar12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cell{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:5}
+    .A{fill:#ddf4ff;stroke:#0969da;stroke-width:1.5;rx:5}
+    .B{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.5;rx:5}
+    .span{stroke:#cf222e;stroke-width:2;fill:none}
+  </style>
+
+  <rect width="820" height="440" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">189 轮转数组：旋转就是把 A|B 变成 B|A，三次反转刚好做到这件事</text>
+  <text class="mono sub" x="32" y="58">恒等式：reverse( reverse(A) · reverse(B) ) = B · A　　n = 7, k = 3，A = [1,2,3,4]，B = [5,6,7]</text>
+
+  <!-- step 0 -->
+  <text class="sub" x="150" y="106" text-anchor="end" font-size="12.5">原数组　A | B</text>
+  <rect class="A" x="170" y="88" width="60" height="34"/><text class="mono" x="200" y="111" font-size="15" text-anchor="middle">1</text>
+  <rect class="A" x="236" y="88" width="60" height="34"/><text class="mono" x="266" y="111" font-size="15" text-anchor="middle">2</text>
+  <rect class="A" x="302" y="88" width="60" height="34"/><text class="mono" x="332" y="111" font-size="15" text-anchor="middle">3</text>
+  <rect class="A" x="368" y="88" width="60" height="34"/><text class="mono" x="398" y="111" font-size="15" text-anchor="middle">4</text>
+  <rect class="B" x="434" y="88" width="60" height="34"/><text class="mono" x="464" y="111" font-size="15" text-anchor="middle">5</text>
+  <rect class="B" x="500" y="88" width="60" height="34"/><text class="mono" x="530" y="111" font-size="15" text-anchor="middle">6</text>
+  <rect class="B" x="566" y="88" width="60" height="34"/><text class="mono" x="596" y="111" font-size="15" text-anchor="middle">7</text>
+
+  <!-- step 1 -->
+  <text class="sub" x="150" y="176" text-anchor="end" font-size="12.5">① 整体反转</text>
+  <rect class="B" x="170" y="158" width="60" height="34"/><text class="mono" x="200" y="181" font-size="15" text-anchor="middle">7</text>
+  <rect class="B" x="236" y="158" width="60" height="34"/><text class="mono" x="266" y="181" font-size="15" text-anchor="middle">6</text>
+  <rect class="B" x="302" y="158" width="60" height="34"/><text class="mono" x="332" y="181" font-size="15" text-anchor="middle">5</text>
+  <rect class="A" x="368" y="158" width="60" height="34"/><text class="mono" x="398" y="181" font-size="15" text-anchor="middle">4</text>
+  <rect class="A" x="434" y="158" width="60" height="34"/><text class="mono" x="464" y="181" font-size="15" text-anchor="middle">3</text>
+  <rect class="A" x="500" y="158" width="60" height="34"/><text class="mono" x="530" y="181" font-size="15" text-anchor="middle">2</text>
+  <rect class="A" x="566" y="158" width="60" height="34"/><text class="mono" x="596" y="181" font-size="15" text-anchor="middle">1</text>
+  <text class="mono sub" x="646" y="181" font-size="12">reverse(B) · reverse(A) —— 两块已就位，只是各自内部倒了</text>
+
+  <!-- step 2 -->
+  <text class="sub" x="150" y="246" text-anchor="end" font-size="12.5">② 反转前 k 个</text>
+  <rect class="B" x="170" y="228" width="60" height="34"/><text class="mono" x="200" y="251" font-size="15" text-anchor="middle">5</text>
+  <rect class="B" x="236" y="228" width="60" height="34"/><text class="mono" x="266" y="251" font-size="15" text-anchor="middle">6</text>
+  <rect class="B" x="302" y="228" width="60" height="34"/><text class="mono" x="332" y="251" font-size="15" text-anchor="middle">7</text>
+  <rect class="A" x="368" y="228" width="60" height="34"/><text class="mono" x="398" y="251" font-size="15" text-anchor="middle">4</text>
+  <rect class="A" x="434" y="228" width="60" height="34"/><text class="mono" x="464" y="251" font-size="15" text-anchor="middle">3</text>
+  <rect class="A" x="500" y="228" width="60" height="34"/><text class="mono" x="530" y="251" font-size="15" text-anchor="middle">2</text>
+  <rect class="A" x="566" y="228" width="60" height="34"/><text class="mono" x="596" y="251" font-size="15" text-anchor="middle">1</text>
+  <path class="span" d="M 172 222 L 172 214 L 360 214 L 360 222"/>
+
+  <!-- step 3 -->
+  <text class="sub" x="150" y="316" text-anchor="end" font-size="12.5">③ 反转后 n−k 个</text>
+  <rect class="B" x="170" y="298" width="60" height="34"/><text class="mono" x="200" y="321" font-size="15" text-anchor="middle">5</text>
+  <rect class="B" x="236" y="298" width="60" height="34"/><text class="mono" x="266" y="321" font-size="15" text-anchor="middle">6</text>
+  <rect class="B" x="302" y="298" width="60" height="34"/><text class="mono" x="332" y="321" font-size="15" text-anchor="middle">7</text>
+  <rect class="A" x="368" y="298" width="60" height="34"/><text class="mono" x="398" y="321" font-size="15" text-anchor="middle">1</text>
+  <rect class="A" x="434" y="298" width="60" height="34"/><text class="mono" x="464" y="321" font-size="15" text-anchor="middle">2</text>
+  <rect class="A" x="500" y="298" width="60" height="34"/><text class="mono" x="530" y="321" font-size="15" text-anchor="middle">3</text>
+  <rect class="A" x="566" y="298" width="60" height="34"/><text class="mono" x="596" y="321" font-size="15" text-anchor="middle">4</text>
+  <path class="span" d="M 370 292 L 370 284 L 626 284 L 626 292"/>
+  <text class="mono" x="646" y="321" font-size="12.5" fill="#1a7f37">B · A ✓</text>
+
+  <line x1="32" y1="352" x2="788" y2="352" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="378" font-size="14" font-weight="600" fill="#cf222e">两个必写的细节</text>
+  <text class="mono sub" x="32" y="402" font-size="12.5">1. k %= n —— k 可以大于 n，不取模时切分点越界，前两次反转的区间会是空的。</text>
+  <text class="mono sub" x="32" y="424" font-size="12.5">2. 必须原地改：nums = nums[-k:] + nums[:-k] 只是重新绑定局部名字，调用方看到的还是旧数组，要写 nums[:] = ...</text>
+</svg>

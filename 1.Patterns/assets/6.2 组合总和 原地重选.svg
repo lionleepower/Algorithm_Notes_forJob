@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 450" width="880" height="450">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:14px;font-weight:600}
+    .box{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5}
+    .nd{font-size:12px;text-anchor:middle;font-family:"SF Mono",Consolas,monospace}
+    .lb{font-size:11px;fill:#57606a;font-family:"SF Mono",Consolas,monospace}
+    .edge{stroke:#8c959f;stroke-width:1.4;fill:none}
+  </style>
+  <defs>
+    <marker id="loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0969da"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="30" y="36">同样 candidates = [2, 3]，target = 6：改一个字母，答案完全不同</text>
+  <text class="sub" x="30" y="58">只看「选中」那条分支——左边把 i 推进一格，右边让 i 原地不动</text>
+
+  <!-- ========== 左：dfs(i+1) ========== -->
+  <rect class="box" x="30" y="78" width="396" height="300" rx="8" stroke="#cf222e"/>
+  <text class="cap" x="48" y="106" fill="#cf222e">✗ 选中后 dfs(i + 1, t - c[i])</text>
+  <text class="lb" x="48" y="126">每个数最多用一次 → 最大只能凑出 2 + 3 = 5</text>
+
+  <g class="nd">
+    <rect x="150" y="146" width="128" height="30" rx="6" fill="#ffffff" stroke="#1f2328" stroke-width="1.6"/>
+    <text x="214" y="166">dfs(0, t=6)</text>
+    <path class="edge" d="M214 176 L214 206"/>
+    <text class="lb" x="224" y="196" text-anchor="start">选 2</text>
+    <rect x="150" y="208" width="128" height="30" rx="6" fill="#ffebe9" stroke="#cf222e" stroke-width="1.6"/>
+    <text x="214" y="228">dfs(1, t=4)</text>
+    <path class="edge" d="M214 238 L214 268"/>
+    <text class="lb" x="224" y="258" text-anchor="start">选 3</text>
+    <rect x="150" y="270" width="128" height="30" rx="6" fill="#ffebe9" stroke="#cf222e" stroke-width="1.6"/>
+    <text x="214" y="290">dfs(2, t=1)</text>
+  </g>
+  <text class="lb" x="290" y="290" text-anchor="start" fill="#cf222e">i == n，撤</text>
+
+  <rect x="48" y="316" width="360" height="46" rx="6" fill="#ffebe9" stroke="#cf222e" stroke-width="1.2"/>
+  <text x="62" y="338" font-size="12.5">下标一路单调前进，<tspan font-weight="600">2 用过就再也回不来</tspan>。</text>
+  <text x="62" y="356" font-size="12.5" font-weight="600" fill="#cf222e">结果：一个答案都凑不出来。</text>
+
+  <!-- ========== 右：dfs(i) ========== -->
+  <rect class="box" x="448" y="78" width="402" height="300" rx="8" stroke="#0969da"/>
+  <text class="cap" x="466" y="106" fill="#0969da">✓ 选中后 dfs(i, t - c[i])</text>
+  <text class="lb" x="466" y="126">i 原地不动 → 下一层还能再选同一个数</text>
+
+  <g class="nd">
+    <rect x="530" y="146" width="128" height="30" rx="6" fill="#ffffff" stroke="#1f2328" stroke-width="1.6"/>
+    <text x="594" y="166">dfs(0, t=6)</text>
+    <path class="edge" d="M594 176 L594 202"/>
+    <text class="lb" x="604" y="194" text-anchor="start">选 2</text>
+    <rect x="530" y="204" width="128" height="30" rx="6" fill="#ddf4ff" stroke="#0969da" stroke-width="1.6"/>
+    <text x="594" y="224">dfs(0, t=4)</text>
+    <path class="edge" d="M594 234 L594 260"/>
+    <text class="lb" x="604" y="252" text-anchor="start">选 2</text>
+    <rect x="530" y="262" width="128" height="30" rx="6" fill="#ddf4ff" stroke="#0969da" stroke-width="1.6"/>
+    <text x="594" y="282">dfs(0, t=2)</text>
+    <path class="edge" d="M594 292 L594 318"/>
+    <text class="lb" x="604" y="310" text-anchor="start">选 2</text>
+    <rect x="530" y="320" width="128" height="30" rx="6" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.8"/>
+    <text x="594" y="340">dfs(0, t=0)</text>
+  </g>
+
+  <!-- 自环 -->
+  <path d="M666 160 C724 140 724 236 668 220" stroke="#0969da" stroke-width="1.8" fill="none" marker-end="url(#loop)"/>
+  <text class="lb" x="732" y="176" text-anchor="start" fill="#0969da">下标</text>
+  <text class="lb" x="732" y="192" text-anchor="start" fill="#0969da">原地</text>
+  <text class="lb" x="732" y="208" text-anchor="start" fill="#0969da">自环</text>
+
+  <text class="lb" x="676" y="341" text-anchor="start" fill="#1a7f37">收 [2,2,2]</text>
+  <text class="lb" x="466" y="366" text-anchor="start">另一条路径「不选 2、连选两次 3」收 [3,3]，共 2 个答案</text>
+
+  <!-- 底部 -->
+  <rect x="30" y="392" width="820" height="44" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5" rx="8"/>
+  <text x="46" y="414" font-size="13">「不选」那条分支<tspan font-weight="600">两边都写 </tspan><tspan class="mono">dfs(i + 1, t)</tspan>——它保证每个数字<tspan font-weight="600">只在一个地方</tspan>被决定用几次，</text>
+  <text x="46" y="430" font-size="13">这正是答案不重复的原因：一个组合对应「每种数各用几个」的唯一一组计数。</text>
+</svg>

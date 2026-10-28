@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <marker id="q2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .stp{fill:#ffffff;stroke:#0969da;stroke-width:2;rx:8}
+    .ar{stroke:#57606a;stroke-width:2.5;fill:none;marker-end:url(#q2a)}
+  </style>
+
+  <rect width="800" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">三步顺序：入 → 出 → 记录</text>
+  <text class="sub" x="32" y="60">本题唯一的思维陷阱。顺序不是习惯，是被<tspan font-weight="600" fill="#1f2328">依赖关系</tspan>定下来的</text>
+
+  <!-- 三步 -->
+  <rect class="stp" x="32" y="82" width="228" height="120"/>
+  <text x="50" y="108" font-size="15" font-weight="600" fill="#0969da">① 入</text>
+  <text class="mono" x="50" y="132" font-size="11.5">while q and nums[q[-1]] &lt;= x:</text>
+  <text class="mono" x="50" y="150" font-size="11.5">    q.pop()</text>
+  <text class="mono" x="50" y="168" font-size="11.5">q.append(i)</text>
+  <text class="sub" x="50" y="192" font-size="11.5">新元素永远在窗口内，入队不会制造越界</text>
+
+  <path class="ar" d="M 266 142 L 292 142"/>
+
+  <rect class="stp" x="298" y="82" width="204" height="120"/>
+  <text x="316" y="108" font-size="15" font-weight="600" fill="#0969da">② 出</text>
+  <text class="mono" x="316" y="132" font-size="11.5">if i - q[0] &gt;= k:</text>
+  <text class="mono" x="316" y="150" font-size="11.5">    q.popleft()</text>
+  <text class="sub" x="316" y="176" font-size="11.5">踢掉滑出窗口的队头</text>
+  <text class="sub" x="316" y="194" font-size="11.5">用 if 不用 while，见下</text>
+
+  <path class="ar" d="M 508 142 L 534 142"/>
+
+  <rect class="stp" x="540" y="82" width="228" height="120"/>
+  <text x="558" y="108" font-size="15" font-weight="600" fill="#0969da">③ 记录</text>
+  <text class="mono" x="558" y="132" font-size="11.5">if i &gt;= k - 1:</text>
+  <text class="mono" x="558" y="150" font-size="11.5">    ans.append(nums[q[0]])</text>
+  <text class="sub" x="558" y="176" font-size="11.5">读答案的前提：队头已完成两轮清理</text>
+  <text class="sub" x="558" y="194" font-size="11.5">第一个完整窗口在 i = k-1 凑齐</text>
+
+  <!-- 打乱的后果 -->
+  <line x1="32" y1="228" x2="768" y2="228" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="252" font-size="14" font-weight="600">打乱顺序会怎样（都实测过）</text>
+
+  <rect x="32" y="266" width="360" height="110" fill="#ffffff" stroke="#bf8700" stroke-width="1.5" rx="8"/>
+  <text x="50" y="290" font-size="13" font-weight="600" fill="#bf8700">把「出」提到「入」前面 —— 逻辑仍对，但要多判空</text>
+  <text class="sub" x="50" y="312" font-size="12">「入」在最前保证了<tspan font-weight="600" fill="#1f2328">入队后 q 必然非空</tspan>，</text>
+  <text class="sub" x="50" y="330" font-size="12">后面两次 q[0] 访问都<tspan font-weight="600" fill="#1f2328">不用判空</tspan>。</text>
+  <text class="mono" x="50" y="352" font-size="11.5" fill="#cf222e">调换后照抄 if i - q[0] &gt;= k → IndexError</text>
+  <text class="sub" x="50" y="370" font-size="11.5">（补上 if q and … 就又对了，只是白写一个判空）</text>
+
+  <rect x="408" y="266" width="360" height="110" fill="#ffffff" stroke="#cf222e" stroke-width="1.5" rx="8"/>
+  <text x="426" y="290" font-size="13" font-weight="600" fill="#cf222e">把「记录」提到「出」前面 —— 直接错</text>
+  <text class="sub" x="426" y="312" font-size="12">队头可能还没过期清理，读到<tspan font-weight="600" fill="#1f2328">脏数据</tspan>。</text>
+  <text class="mono" x="426" y="334" font-size="11.5">nums = [9,1,1,1], k = 2</text>
+  <text class="mono" x="426" y="352" font-size="11.5" fill="#cf222e">得到 [9,9,1]　正确 [9,1,1]</text>
+  <text class="sub" x="426" y="370" font-size="11.5">随机对拍 3000 组，错 1242 组</text>
+
+  <!-- if vs while -->
+  <line x1="32" y1="396" x2="768" y2="396" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="418" font-size="13" font-weight="600">「出」为什么用 if 而不是 while</text>
+  <text class="sub" x="32" y="440" font-size="12.5">每轮 i 只前进一格，窗口只滑动一格，<tspan font-weight="600" fill="#1f2328">至多一个下标过期</tspan>。写 while 也对，但暴露了没想清楚。</text>
+</svg>

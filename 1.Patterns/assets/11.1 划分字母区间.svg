@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 450" width="820" height="450">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:13px;font-weight:600;fill:#0969da}
+    .c{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:5}
+    .s1{fill:#ddf4ff;stroke:#0969da;stroke-width:1.8;rx:5}
+    .s2{fill:#dafbe1;stroke:#1a7f37;stroke-width:1.8;rx:5}
+    .s3{fill:#fff8c5;stroke:#bf8700;stroke-width:1.8;rx:5}
+    .endbar{fill:none;stroke:#cf222e;stroke-width:2.4}
+    .hit{fill:#cf222e}
+  </style>
+
+  <rect width="820" height="450" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="36">763 划分字母区间：同一个骨架，far 换成「本段字母最后一次出现的位置」</text>
+  <text class="mono sub" x="32" y="58">s = "abacbdefe"　last = {a:2, b:4, c:3, d:5, e:8, f:7}</text>
+
+  <!-- 下标行 -->
+  <text class="mono sub" x="104" y="98" font-size="12" text-anchor="end">下标</text>
+  <text class="mono sub" x="146" y="98" font-size="12" text-anchor="middle">0</text>
+  <text class="mono sub" x="216" y="98" font-size="12" text-anchor="middle">1</text>
+  <text class="mono sub" x="286" y="98" font-size="12" text-anchor="middle">2</text>
+  <text class="mono sub" x="356" y="98" font-size="12" text-anchor="middle">3</text>
+  <text class="mono sub" x="426" y="98" font-size="12" text-anchor="middle">4</text>
+  <text class="mono sub" x="496" y="98" font-size="12" text-anchor="middle">5</text>
+  <text class="mono sub" x="566" y="98" font-size="12" text-anchor="middle">6</text>
+  <text class="mono sub" x="636" y="98" font-size="12" text-anchor="middle">7</text>
+  <text class="mono sub" x="706" y="98" font-size="12" text-anchor="middle">8</text>
+
+  <!-- 字符 -->
+  <rect class="s1" x="112" y="110" width="68" height="42"/><text class="mono" x="146" y="139" font-size="18" text-anchor="middle">a</text>
+  <rect class="s1" x="182" y="110" width="68" height="42"/><text class="mono" x="216" y="139" font-size="18" text-anchor="middle">b</text>
+  <rect class="s1" x="252" y="110" width="68" height="42"/><text class="mono" x="286" y="139" font-size="18" text-anchor="middle">a</text>
+  <rect class="s1" x="322" y="110" width="68" height="42"/><text class="mono" x="356" y="139" font-size="18" text-anchor="middle">c</text>
+  <rect class="s1" x="392" y="110" width="68" height="42"/><text class="mono" x="426" y="139" font-size="18" text-anchor="middle">b</text>
+  <rect class="s2" x="462" y="110" width="68" height="42"/><text class="mono" x="496" y="139" font-size="18" text-anchor="middle">d</text>
+  <rect class="s3" x="532" y="110" width="68" height="42"/><text class="mono" x="566" y="139" font-size="18" text-anchor="middle">e</text>
+  <rect class="s3" x="602" y="110" width="68" height="42"/><text class="mono" x="636" y="139" font-size="18" text-anchor="middle">f</text>
+  <rect class="s3" x="672" y="110" width="68" height="42"/><text class="mono" x="706" y="139" font-size="18" text-anchor="middle">e</text>
+
+  <!-- end 扩张轨迹 -->
+  <text class="cap" x="104" y="184" text-anchor="end" font-size="12.5">end</text>
+  <path class="endbar" d="M 114 178 L 300 178"/>
+  <text class="mono" x="306" y="182" font-size="11.5" fill="#cf222e">i=0 读 a ⇒ end = 2</text>
+
+  <path class="endbar" d="M 114 202 L 440 202"/>
+  <text class="mono" x="446" y="206" font-size="11.5" fill="#cf222e">i=1 读 b ⇒ end = 4（b 在 4 才结束，本段被迫拉长）</text>
+
+  <path class="endbar" d="M 114 226 L 440 226"/>
+  <circle class="hit" cx="440" cy="226" r="5"/>
+  <text class="mono" x="452" y="230" font-size="11.5" fill="#cf222e">i=4 时 i == end ⇒ 结算第 1 段，长度 5</text>
+
+  <path class="endbar" d="M 464 250 L 510 250"/>
+  <circle class="hit" cx="510" cy="250" r="5"/>
+  <text class="mono" x="522" y="254" font-size="11.5" fill="#cf222e">i=5 读 d，d 只出现一次 ⇒ 立刻结算，长度 1</text>
+
+  <path class="endbar" d="M 534 274 L 720 274"/>
+  <circle class="hit" cx="720" cy="274" r="5"/>
+  <text class="mono" x="534" y="296" font-size="11.5" fill="#cf222e">i=6 读 e ⇒ end = 8；i=8 时 i == end ⇒ 结算第 3 段，长度 3</text>
+
+  <text class="mono" x="32" y="330" font-size="14" fill="#1a7f37" font-weight="600">答案 = [5, 1, 3]</text>
+
+  <line x1="32" y1="348" x2="788" y2="348" stroke="#d0d7de" stroke-width="1"/>
+
+  <text x="32" y="376" font-size="14" font-weight="600" fill="#0969da">和 45 是同一个骨架</text>
+  <text class="mono sub" x="32" y="400" font-size="12.5">45：far = max(far, i + nums[i])　　763：end = max(end, last[s[i]])　　两者都是「本段还必须覆盖到哪里」</text>
+  <text class="sub" x="32" y="424" font-size="12.5">出口也一样：<tspan class="mono">i == end</tspan> 时结算一次并开启下一段。45 结算的是「跳跃次数 +1」，763 结算的是「切一刀、记录长度」。</text>
+  <text class="sub" x="32" y="444" font-size="12.5">正确性：一旦某个字母在本段出现，它的所有出现都必须在本段内，所以 end 只能被动地往右推 —— 贪心在这里没有选择余地，因此必然最优。</text>
+</svg>

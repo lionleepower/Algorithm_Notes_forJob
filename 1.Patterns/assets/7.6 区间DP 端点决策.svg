@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440">
+  <defs>
+    <marker id="p6ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+    <marker id="p6ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .ch{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:6}
+    .end{fill:#dafbe1;stroke:#1a7f37;stroke-width:2.5;rx:6}
+    .bad{fill:#ffebe9;stroke:#cf222e;stroke-width:2.5;rx:6}
+    .inner{fill:#ddf4ff;stroke:#0969da;stroke-width:2;rx:6}
+    .eq{stroke:#1a7f37;stroke-width:2.5;fill:none;marker-end:url(#p6ag)}
+    .ne{stroke:#cf222e;stroke-width:2.5;fill:none;marker-end:url(#p6ar)}
+  </style>
+
+  <rect width="800" height="440" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">区间 DP 只问一句话：两个端点 s[i] 和 s[j] 怎么处理？</text>
+  <text class="sub" x="32" y="60">dfs(i, j) = 子串 s[i..j]（闭区间）内部的最长回文子序列长度　·　入口 dfs(0, n-1)</text>
+
+  <!-- ===== 情况 A ===== -->
+  <rect x="32" y="80" width="356" height="176" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5" rx="8"/>
+  <text x="50" y="106" font-size="14" font-weight="600" fill="#1a7f37">情况 A　s[i] 与 s[j] 相等　→　成对吃掉，不取 max</text>
+
+  <rect class="end"   x="56"  y="122" width="52" height="48"/>
+  <text class="mono" x="82"  y="153" font-size="18" text-anchor="middle" font-weight="600">a</text>
+  <rect class="inner" x="116" y="122" width="52" height="48"/>
+  <text class="mono" x="142" y="153" font-size="18" text-anchor="middle">b</text>
+  <rect class="inner" x="176" y="122" width="52" height="48"/>
+  <text class="mono" x="202" y="153" font-size="18" text-anchor="middle">c</text>
+  <rect class="end"   x="236" y="122" width="52" height="48"/>
+  <text class="mono" x="262" y="153" font-size="18" text-anchor="middle" font-weight="600">a</text>
+
+  <text class="mono" x="82"  y="188" font-size="14" text-anchor="middle" fill="#1a7f37">i</text>
+  <text class="mono" x="262" y="188" font-size="14" text-anchor="middle" fill="#1a7f37">j</text>
+
+  <line class="eq" x1="100" y1="200" x2="128" y2="200"/>
+  <line class="eq" x1="244" y1="200" x2="216" y2="200"/>
+  <text class="sub" x="172" y="205" font-size="12" text-anchor="middle" fill="#0969da">dfs(i+1, j-1)</text>
+
+  <text class="mono" x="50" y="232" font-size="14">dfs(i, j) = dfs(i+1, j-1) + 2</text>
+  <text class="sub"  x="50" y="250" font-size="12">两端同时内缩一格，长度 +2；另外两支被支配，可剪</text>
+
+  <!-- ===== 情况 B ===== -->
+  <rect x="412" y="80" width="356" height="176" fill="#ffffff" stroke="#cf222e" stroke-width="1.5" rx="8"/>
+  <text x="430" y="106" font-size="14" font-weight="600" fill="#cf222e">情况 B　s[i] 与 s[j] 不等　→　至少丢掉一个端点</text>
+
+  <rect class="bad" x="436" y="122" width="52" height="48"/>
+  <text class="mono" x="462" y="153" font-size="18" text-anchor="middle" font-weight="600">a</text>
+  <rect class="ch"  x="496" y="122" width="52" height="48"/>
+  <text class="mono" x="522" y="153" font-size="18" text-anchor="middle">b</text>
+  <rect class="ch"  x="556" y="122" width="52" height="48"/>
+  <text class="mono" x="582" y="153" font-size="18" text-anchor="middle">c</text>
+  <rect class="bad" x="616" y="122" width="52" height="48"/>
+  <text class="mono" x="642" y="153" font-size="18" text-anchor="middle" font-weight="600">b</text>
+
+  <text class="mono" x="462" y="188" font-size="14" text-anchor="middle" fill="#cf222e">i</text>
+  <text class="mono" x="642" y="188" font-size="14" text-anchor="middle" fill="#cf222e">j</text>
+
+  <line class="ne" x1="462" y1="198" x2="490" y2="198"/>
+  <text class="mono" x="500" y="203" font-size="12" fill="#cf222e">丢左端 → dfs(i+1, j)</text>
+  <line class="ne" x1="642" y1="222" x2="614" y2="222"/>
+  <text class="mono" x="500" y="227" font-size="12" fill="#cf222e">丢右端 → dfs(i, j-1)</text>
+
+  <text class="mono" x="430" y="250" font-size="14">dfs(i, j) = max(dfs(i+1, j), dfs(i, j-1))</text>
+
+  <!-- ===== 底部 ===== -->
+  <line x1="32" y1="282" x2="768" y2="282" stroke="#d0d7de" stroke-width="1"/>
+
+  <text x="32" y="310" font-size="14" font-weight="600" fill="#1a7f37">① 相等时为什么不用 max —— 交换论证</text>
+  <text class="sub" x="32" y="332" font-size="13">任一最优回文子序列的首尾字符落在 p &lt; q，把这两个字符换成位置 i、j 的字符：中间部分仍在 (i, j) 内，</text>
+  <text class="sub" x="32" y="352" font-size="13">且 s[i] 与 s[j] 相等，换完仍是回文且长度不变 ⇒ 总存在一个最优解恰好用上两个端点。</text>
+
+  <text x="32" y="384" font-size="14" font-weight="600" fill="#cf222e">② base 必须写两格 —— i &gt; j 返回 0（空区间）；i 与 j 相等返回 1（单字符）</text>
+  <text class="sub" x="32" y="406" font-size="13">漏掉后者，dfs(i, i) 会落进「相等」分支返回 dfs(i+1, i-1) + 2 = 2 ——</text>
+  <text x="32" y="426" font-size="13" fill="#cf222e" font-weight="600">一个字符被当成两个用，不报错、不越界，答案静默偏大。这是本题唯一的静默 bug 点。</text>
+</svg>

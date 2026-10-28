@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" width="880" height="430">
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cap{font-size:14px;font-weight:600}
+    .box{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5}
+    .sm{font-size:12px;fill:#57606a}
+    .pt{font-size:12.5px;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1a7f37"/>
+    </marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0969da"/>
+    </marker>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8250df"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="430" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="30" y="36">「选中之后，下标往哪走」——一个参数决定题型</text>
+  <text class="sub" x="30" y="58">骨架完全相同，差别只在<tspan class="mono" font-weight="600" fill="#1f2328">「选」那条分支递归时传的下标</tspan></text>
+
+  <!-- ① i+1 -->
+  <rect class="box" x="30" y="80" width="266" height="248" rx="8" stroke="#1a7f37"/>
+  <text class="cap" x="48" y="108" fill="#1a7f37">① 往前走一格：每个数最多用一次</text>
+  <text class="mono" x="48" y="132" font-size="13" fill="#1a7f37">dfs(i + 1, ...)</text>
+
+  <g class="mono pt">
+    <rect x="66" y="152" width="52" height="30" rx="6" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.6"/>
+    <text x="92" y="172">i</text>
+    <path d="M126 167 L184 167" stroke="#1a7f37" stroke-width="1.8" fill="none" marker-end="url(#g)"/>
+    <text x="155" y="158" font-size="11" fill="#1a7f37">选中</text>
+    <rect x="192" y="152" width="52" height="30" rx="6" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.6"/>
+    <text x="218" y="172">i+1</text>
+  </g>
+
+  <text class="sm" x="48" y="212">这个数<tspan font-weight="600" fill="#1f2328">再也回不去</tspan>了，</text>
+  <text class="sm" x="48" y="232">所以每个元素至多出现一次。</text>
+  <rect x="48" y="246" width="230" height="66" rx="6" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.2"/>
+  <text x="62" y="268" font-size="12.5" font-weight="600" fill="#1a7f37">78 子集 · 77 组合 · 216</text>
+  <text x="62" y="288" font-size="12">本篇 77 用的是倒序 <tspan class="mono">dfs(i-1)</tspan>，</text>
+  <text x="62" y="304" font-size="12">方向相反，含义一样：走掉不回头。</text>
+
+  <!-- ② i 原地 -->
+  <rect class="box" x="308" y="80" width="266" height="248" rx="8" stroke="#0969da"/>
+  <text class="cap" x="326" y="108" fill="#0969da">② 留在原地：同一个数可以无限重复</text>
+  <text class="mono" x="326" y="132" font-size="13" fill="#0969da">dfs(i, ...)</text>
+
+  <g class="mono pt">
+    <rect x="396" y="152" width="52" height="30" rx="6" fill="#ddf4ff" stroke="#0969da" stroke-width="1.6"/>
+    <text x="422" y="172">i</text>
+    <path d="M448 158 C500 138 500 196 450 178" stroke="#0969da" stroke-width="1.8" fill="none" marker-end="url(#b)"/>
+    <text x="500" y="170" font-size="11" fill="#0969da" text-anchor="start">选中后</text>
+    <text x="500" y="185" font-size="11" fill="#0969da" text-anchor="start">i 不动</text>
+  </g>
+
+  <text class="sm" x="326" y="212">下标没前进，<tspan font-weight="600" fill="#1f2328">下一层还能再选它</tspan>，</text>
+  <text class="sm" x="326" y="232">重复几次由剩余目标 t 决定。</text>
+  <rect x="326" y="246" width="230" height="66" rx="6" fill="#ddf4ff" stroke="#0969da" stroke-width="1.2"/>
+  <text x="340" y="268" font-size="12.5" font-weight="600" fill="#0969da">39 组合总和（完全背包）</text>
+  <text x="340" y="288" font-size="12">不选那条分支照旧 <tspan class="mono">dfs(i+1, t)</tspan>，</text>
+  <text x="340" y="304" font-size="12">保证每个数只在一处被决定次数。</text>
+
+  <!-- ③ 从头扫 -->
+  <rect class="box" x="586" y="80" width="264" height="248" rx="8" stroke="#8250df"/>
+  <text class="cap" x="604" y="108" fill="#8250df">③ 每层从头扫：用一次，但顺序有别</text>
+  <text class="mono" x="604" y="132" font-size="13" fill="#8250df">for j in range(n)</text>
+
+  <g class="mono pt">
+    <rect x="622" y="152" width="34" height="30" rx="6" fill="#fbefff" stroke="#8250df" stroke-width="1.6"/>
+    <text x="639" y="172">0</text>
+    <rect x="660" y="152" width="34" height="30" rx="6" fill="#fbefff" stroke="#8250df" stroke-width="1.6"/>
+    <text x="677" y="172">1</text>
+    <rect x="698" y="152" width="34" height="30" rx="6" fill="#fbefff" stroke="#8250df" stroke-width="1.6"/>
+    <text x="715" y="172">2</text>
+    <rect x="736" y="152" width="34" height="30" rx="6" fill="#fbefff" stroke="#8250df" stroke-width="1.6"/>
+    <text x="753" y="172">3</text>
+    <path d="M622 192 L770 192" stroke="#8250df" stroke-width="1.8" fill="none" marker-end="url(#p)"/>
+    <text x="696" y="208" font-size="11" fill="#8250df">每层都从 0 扫到 n-1</text>
+  </g>
+
+  <text class="sm" x="604" y="232">靠 <tspan class="mono">on_path</tspan> 挡住已用过的。</text>
+  <rect x="604" y="246" width="228" height="66" rx="6" fill="#fbefff" stroke="#8250df" stroke-width="1.2"/>
+  <text x="618" y="268" font-size="12.5" font-weight="600" fill="#8250df">46 全排列 · 51 N 皇后</text>
+  <text x="618" y="288" font-size="12">下标不再单调前进，所以必须</text>
+  <text x="618" y="304" font-size="12">额外记账「谁被用过」。</text>
+
+  <!-- 底部 -->
+  <rect x="30" y="342" width="820" height="66" fill="#ffffff" stroke="#cf222e" stroke-width="1.6" rx="8"/>
+  <text x="46" y="366" font-size="13.5">写 39 时最容易犯的错，就是顺手把「选」那条写成 <tspan class="mono" fill="#cf222e">dfs(i + 1, t - c[i])</tspan>——</text>
+  <text x="46" y="388" font-size="13.5">代码照样跑、照样出答案，但<tspan font-weight="600">每个数只能用一次</tspan>，答案会少一大半，而且<tspan font-weight="600" fill="#cf222e">不报错</tspan>。</text>
+</svg>

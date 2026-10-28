@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <marker id="ag4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+    </marker>
+    <marker id="as4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c959f"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .cell{fill:#ffffff;stroke:#d0d7de;stroke-width:1.5;rx:6}
+    .tgt{fill:#ddf4ff;stroke:#0969da;stroke-width:2.5;rx:6}
+    .src{fill:#fff8c5;stroke:#bf8700;stroke-width:1.5;rx:6}
+    .win{stroke:#1a7f37;stroke-width:2.5;fill:none;marker-end:url(#ag4)}
+    .cand{stroke:#8c959f;stroke-width:1.8;fill:none;stroke-dasharray:5 4;marker-end:url(#as4)}
+  </style>
+
+  <rect width="800" height="400" fill="#fbfbfd" rx="10"/>
+
+  <text class="ttl" x="32" y="38">f[i] = 以 nums[i] 结尾的最长严格递增子序列长度</text>
+  <text class="sub" x="32" y="60">转移 = 枚举「上一个选谁」：f[i] = max(f[j]) + 1，其中 j &lt; i 且 nums[j] &lt; nums[i]</text>
+
+  <!-- 候选箭头（画在数组上方） -->
+  <path class="cand" d="M 259 146 Q 382 88 500 143"/>
+  <path class="cand" d="M 341 146 Q 423 98 502 143"/>
+  <path class="win"  d="M 423 146 Q 466 110 503 143"/>
+  <text class="mono sub" x="300" y="86" font-size="12">nums[2]=2 ✓ f=1</text>
+  <text class="mono sub" x="330" y="112" font-size="12">nums[3]=5 ✓ f=2</text>
+  <text class="mono" x="446" y="106" font-size="12" fill="#1a7f37" font-weight="600">f[j]=2 最大</text>
+
+  <!-- 数组格子 -->
+  <rect class="cell" x="60"  y="150" width="70" height="52"/>
+  <rect class="cell" x="142" y="150" width="70" height="52"/>
+  <rect class="src"  x="224" y="150" width="70" height="52"/>
+  <rect class="src"  x="306" y="150" width="70" height="52"/>
+  <rect class="src"  x="388" y="150" width="70" height="52"/>
+  <rect class="tgt"  x="470" y="150" width="70" height="52"/>
+  <rect class="cell" x="552" y="150" width="70" height="52"/>
+  <rect class="cell" x="634" y="150" width="70" height="52"/>
+
+  <text class="mono" x="95"  y="183" font-size="15" text-anchor="middle">10</text>
+  <text class="mono" x="177" y="183" font-size="15" text-anchor="middle">9</text>
+  <text class="mono" x="259" y="183" font-size="15" text-anchor="middle">2</text>
+  <text class="mono" x="341" y="183" font-size="15" text-anchor="middle">5</text>
+  <text class="mono" x="423" y="183" font-size="15" text-anchor="middle">3</text>
+  <text class="mono" x="505" y="183" font-size="15" text-anchor="middle" font-weight="600">7</text>
+  <text class="mono" x="587" y="183" font-size="15" text-anchor="middle">101</text>
+  <text class="mono" x="669" y="183" font-size="15" text-anchor="middle">18</text>
+
+  <!-- f 行 -->
+  <text class="mono sub" x="46" y="232" font-size="13" text-anchor="end">f</text>
+  <text class="mono" x="95"  y="232" font-size="14" text-anchor="middle">1</text>
+  <text class="mono" x="177" y="232" font-size="14" text-anchor="middle">1</text>
+  <text class="mono" x="259" y="232" font-size="14" text-anchor="middle">1</text>
+  <text class="mono" x="341" y="232" font-size="14" text-anchor="middle">2</text>
+  <text class="mono" x="423" y="232" font-size="14" text-anchor="middle">2</text>
+  <text class="mono" x="505" y="232" font-size="14" text-anchor="middle" fill="#0969da" font-weight="600">3</text>
+  <text class="mono" x="587" y="232" font-size="14" text-anchor="middle">4</text>
+  <text class="mono" x="669" y="232" font-size="14" text-anchor="middle">4</text>
+
+  <text class="mono sub" x="46" y="254" font-size="11" text-anchor="end">i</text>
+  <text class="mono sub" x="95"  y="254" font-size="11" text-anchor="middle">0</text>
+  <text class="mono sub" x="177" y="254" font-size="11" text-anchor="middle">1</text>
+  <text class="mono sub" x="259" y="254" font-size="11" text-anchor="middle">2</text>
+  <text class="mono sub" x="341" y="254" font-size="11" text-anchor="middle">3</text>
+  <text class="mono sub" x="423" y="254" font-size="11" text-anchor="middle">4</text>
+  <text class="mono sub" x="505" y="254" font-size="11" text-anchor="middle">5</text>
+  <text class="mono sub" x="587" y="254" font-size="11" text-anchor="middle">6</text>
+  <text class="mono sub" x="669" y="254" font-size="11" text-anchor="middle">7</text>
+
+  <!-- 底部说明 -->
+  <line x1="32" y1="282" x2="768" y2="282" stroke="#d0d7de" stroke-width="1"/>
+  <text x="32" y="308" font-size="14" font-weight="600">为什么定义里必须带「以 i 结尾」？</text>
+  <text class="sub" x="32" y="332" font-size="13">前缀定义「nums[0..i] 的 LIS」只报长度、不报结尾是几，无法判断 nums[i] 能否接上 —— 有后效性。</text>
+  <text class="sub" x="32" y="354" font-size="13">把缺的信息（上一个选的数）锁进状态：强制 nums[i] 被选中且作结尾，条件 nums[j] &lt; nums[i] 就成了纯局部判断。</text>
+  <text x="32" y="380" font-size="13" fill="#cf222e" font-weight="600">代价：定义强制选 i ⇒ 答案是 max(f)，不是 f[n-1]。</text>
+</svg>

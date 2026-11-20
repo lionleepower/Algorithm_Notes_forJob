@@ -1,7 +1,7 @@
 #python/list #python/syntax #status/review
 
 > [!info] 知识图谱
-> 总览：[[0.0 Patterns 算法知识图谱]] · 相关应用：[[5.2 前中后序遍历]]
+> 总览：[[0.0 Patterns 算法知识图谱]] · 相关应用：[[原始稿件/5.2.1 前中后序遍历|前中后序遍历]]
 
 # Python list 的 append 与 +=：加「一个元素」还是加「一串元素」
 

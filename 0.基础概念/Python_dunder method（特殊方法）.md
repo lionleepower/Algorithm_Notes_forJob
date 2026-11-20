@@ -11,7 +11,7 @@
 
 ### 不用它会有什么问题
 
-回到 [[23. 合并 K 个升序链表]]：把 `ListNode` 塞进堆里会炸。
+回到 23. 合并 K 个升序链表：把 `ListNode` 塞进堆里会炸。
 
 ```python
 h = [head for head in lists if head]
@@ -353,7 +353,7 @@ class _NodeIterator:
 |---|---|---|
 |一次性排序，比较标准临时|`sorted(xs, key=...)`|不碰类，最轻量；`key` 只算一次，比 `__lt__` 快|
 |进 `heapq`，类不归你|猴子补丁 `__lt__` 或 tuple 包装|`heapq` **没有** `key=` 参数|
-|进 `heapq`，不想污染全局|tuple 包装 `(key, i, obj)`|见 [[23. 合并 K 个升序链表]]，需 tiebreaker|
+|进 `heapq`，不想污染全局|tuple 包装 `(key, i, obj)`|见 23. 合并 K 个升序链表，需 tiebreaker|
 |类归你、比较是内在语义|类里定义 `__lt__`|正规做法，可读性最好|
 |要全套比较运算符|`@total_ordering` 或 `@dataclass(order=True)`|少写四个方法|
 |纯数据容器|`@dataclass` / `NamedTuple`|自动生成 `__init__` `__repr__` `__eq__`|
@@ -431,6 +431,6 @@ class Item:
 
 ---
 
-相关笔记：[[23. 合并 K 个升序链表]]（`heapq` 与 `__lt__` 的实战场景）、[[堆与优先队列]]
+相关笔记：23. 合并 K 个升序链表（`heapq` 与 `__lt__` 的实战场景）、[[10.0 堆 TopK与对顶堆|堆与优先队列]]
 
 算法标签：`python-syntax` `special-method` `dunder` `operator-overloading` `protocol`

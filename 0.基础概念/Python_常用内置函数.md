@@ -205,7 +205,54 @@ records = [("Bob", 90), ("Alice", 90), ("Carol", 85)]
 records.sort(key=lambda item: (-item[1], item[0]))
 ```
 
-### 3.3 字母异位词中的排序签名
+### 3.3 降序：`reverse=True` 与 `reverse()` 不等价
+
+降序有三种写法，但只有两种真正等价：
+
+| 写法 | 相等元素的相对顺序 | 结论 |
+| --- | --- | --- |
+| `nums.sort(reverse=True)` | 保持 | ✓ 首选 |
+| `nums.sort(key=lambda v: -v)` | 保持 | 等价，但多一次函数调用，且只适用于数值 |
+| `nums.sort()` 再 `nums.reverse()` | **被颠倒** | ✗ 不等价 |
+
+> [!warning]- 为什么先排序再 `reverse()` 是错的
+>
+> ```python
+> # 第二项只是来源标号，用来看相等元素有没有被挪动
+> data = [(3, "a"), (1, "b"), (3, "c"), (2, "d"), (3, "e")]
+>
+> x = data[:]
+> x.sort(key=lambda t: t[0], reverse=True)
+> # [(3,'a'), (3,'c'), (3,'e'), (2,'d'), (1,'b')]   三个 3 的来源顺序 a c e
+>
+> y = data[:]
+> y.sort(key=lambda t: t[0])
+> y.reverse()
+> # [(3,'e'), (3,'c'), (3,'a'), (2,'d'), (1,'b')]   三个 3 的来源顺序 e c a  ← 被反转
+> ```
+>
+> `reverse=True` 作用在**比较层面**：Timsort 按取反后的顺序比较，`key` 相同的元素依然不交换，稳定性成立。
+>
+> `reverse()` 作用在**结果层面**：它把已经稳定排好的列表整段翻过来，`key` 相同的那一段自然跟着倒过来。
+>
+> 元素是裸数字时两者输出完全一致（随机数据怎么测都一样），所以这个 bug 极难在刷题阶段暴露——一旦元素带上第二维信息（原下标、姓名、二级排序键），它就会在「同分按姓名升序」这类需求上给出错误顺序。
+
+所以「主键降序、次键升序」永远用 3.2 的元组 `key` 一次排完，不要先排再反转：
+
+```python
+records = [("Alice", 90), ("Bob", 90), ("Carol", 85)]
+
+records.sort(key=lambda item: (-item[1], item[0]))
+# ['Alice', 'Bob', 'Carol']   ✓ 分数降序，同分按姓名升序
+
+records.sort(key=lambda item: item[1])  # 升序后为 Carol, Alice, Bob
+records.reverse()
+# ['Bob', 'Alice', 'Carol']   ✗ 同分的 Alice/Bob 顺序反了
+```
+
+两步法拿到的是「原相对顺序反过来」，而不是「次键升序」——两者只有在原始数据恰好逆序排列时才碰巧一致。
+
+### 3.4 字母异位词中的排序签名
 
 ```python
 s = "tea"
@@ -219,7 +266,8 @@ signature = "".join(characters)  # "aet"
 >
 > - `sorted()` 和 `list.sort()`：时间复杂度 $O(n\log n)$。
 > - `sorted()` 会创建结果列表，额外需要 $O(n)$ 级别的结果空间。
-> - Python 排序是稳定的：`key` 相同时保持原相对顺序。
+> - Python 排序（Timsort）是稳定的：`key` 相同时保持原相对顺序。
+> - 稳定性只对**排序本身**成立：排完再调 `reverse()` 会把相等元素整段倒过来，降序要用 `reverse=True`（见 3.3）。
 
 ---
 

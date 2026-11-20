@@ -210,4 +210,4 @@ def build_tree(data):
     return root
 ```
 
-相关笔记：[[二叉搜索树 BST]]、[[树的遍历 BFS 与 DFS]]、[[堆 heap 与优先队列]]
+相关笔记：[[5.3 二叉搜索树|二叉搜索树 BST]]、[[5.4 层序遍历|树的遍历 BFS 与 DFS]]、[[10.0 堆 TopK与对顶堆|堆 heap 与优先队列]]

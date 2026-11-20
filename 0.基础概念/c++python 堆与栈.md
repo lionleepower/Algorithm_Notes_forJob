@@ -532,6 +532,6 @@ def solve(candidates):
 
 ---
 
-相关笔记：[[25. K 个一组翻转链表]]、[[20. 有效的括号]]（栈的对照）、[[295. 数据流的中位数]]（双堆）
+相关笔记：25. K 个一组翻转链表、20. 有效的括号（栈的对照）、295. 数据流的中位数（双堆）
 
 算法标签：`heap` `priority-queue` `k-way-merge` `linked-list` `divide-and-conquer`

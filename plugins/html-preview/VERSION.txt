@@ -1,0 +1,4 @@
+HTML-Preview 1.0.9
+来源: https://github.com/sunshinelife83/obsidian-html-preview (Releases)
+许可: MIT, 见 LICENSE
+文件未经修改。

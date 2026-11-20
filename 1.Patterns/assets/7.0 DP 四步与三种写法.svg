@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <marker id="a70" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/>
+    </marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .step{fill:#ddf4ff;stroke:#0969da;stroke-width:2}
+    .ex{fill:#ffffff;stroke:#8c959f;stroke-width:1.5}
+    .way{fill:#fff8c5;stroke:#bf8700;stroke-width:2}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#a70)}
+  </style>
+  <rect width="800" height="420" fill="#fbfbfd" rx="10"/>
+  <text class="ttl" x="32" y="36">DP 的四步，与同一个思路的三种写法</text>
+  <text class="sub" x="32" y="58">以「爬楼梯」为例：每次走 1 级或 2 级，到第 n 级有几种走法</text>
+
+  <!-- 四步 -->
+  <rect class="step" x="30" y="86" width="170" height="54" rx="10"/>
+  <text x="115" y="108" font-size="14" font-weight="600" text-anchor="middle">① 定义状态</text>
+  <text class="sub" x="115" y="128" font-size="12" text-anchor="middle">f(i) 表示什么</text>
+  <rect class="step" x="224" y="86" width="170" height="54" rx="10"/>
+  <text x="309" y="108" font-size="14" font-weight="600" text-anchor="middle">② 写转移</text>
+  <text class="sub" x="309" y="128" font-size="12" text-anchor="middle">f(i) 从谁来</text>
+  <rect class="step" x="418" y="86" width="170" height="54" rx="10"/>
+  <text x="503" y="108" font-size="14" font-weight="600" text-anchor="middle">③ 定初值</text>
+  <text class="sub" x="503" y="128" font-size="12" text-anchor="middle">最小的子问题</text>
+  <rect class="step" x="612" y="86" width="158" height="54" rx="10"/>
+  <text x="691" y="108" font-size="14" font-weight="600" text-anchor="middle">④ 定顺序与答案</text>
+  <text class="sub" x="691" y="128" font-size="12" text-anchor="middle">谁先算；答案在哪</text>
+  <path class="lnk" d="M 202 113 L 220 113"/>
+  <path class="lnk" d="M 396 113 L 414 113"/>
+  <path class="lnk" d="M 590 113 L 608 113"/>
+
+  <rect class="ex" x="30" y="150" width="170" height="52" rx="8"/>
+  <text class="mono" x="115" y="172" font-size="12" text-anchor="middle">f(i) = 走到第 i 级</text>
+  <text class="mono" x="115" y="190" font-size="12" text-anchor="middle">的方法数</text>
+  <rect class="ex" x="224" y="150" width="170" height="52" rx="8"/>
+  <text class="mono" x="309" y="172" font-size="12" text-anchor="middle">f(i) = f(i-1)</text>
+  <text class="mono" x="309" y="190" font-size="12" text-anchor="middle">      + f(i-2)</text>
+  <rect class="ex" x="418" y="150" width="170" height="52" rx="8"/>
+  <text class="mono" x="503" y="172" font-size="12" text-anchor="middle">f(0) = 1</text>
+  <text class="mono" x="503" y="190" font-size="12" text-anchor="middle">f(1) = 1</text>
+  <rect class="ex" x="612" y="150" width="158" height="52" rx="8"/>
+  <text class="mono" x="691" y="172" font-size="12" text-anchor="middle">i 从小到大</text>
+  <text class="mono" x="691" y="190" font-size="12" text-anchor="middle">答案 f(n)</text>
+
+  <!-- 三种写法 -->
+  <text x="32" y="246" font-size="14" font-weight="600">同一个转移，三种写法（越往右越快、越省心）</text>
+  <rect class="way" x="30" y="262" width="200" height="84" rx="10"/>
+  <text x="130" y="286" font-size="14" font-weight="600" text-anchor="middle">暴力递归</text>
+  <text class="mono" x="130" y="308" font-size="12" text-anchor="middle">dfs(i) = dfs(i-1)+dfs(i-2)</text>
+  <text class="sub" x="130" y="330" font-size="12" text-anchor="middle">同一个 i 被反复算 → 指数级</text>
+
+  <rect class="way" x="300" y="262" width="200" height="84" rx="10"/>
+  <text x="400" y="286" font-size="14" font-weight="600" text-anchor="middle">记忆化搜索</text>
+  <text class="mono" x="400" y="308" font-size="12" text-anchor="middle">@cache 加在 dfs 上</text>
+  <text class="sub" x="400" y="330" font-size="12" text-anchor="middle">每个状态只算一次</text>
+
+  <rect class="way" x="570" y="262" width="200" height="84" rx="10"/>
+  <text x="670" y="286" font-size="14" font-weight="600" text-anchor="middle">递推（循环）</text>
+  <text class="mono" x="670" y="308" font-size="12" text-anchor="middle">f[i] = f[i-1] + f[i-2]</text>
+  <text class="sub" x="670" y="330" font-size="12" text-anchor="middle">自底向上，还能滚动数组</text>
+
+  <path class="lnk" d="M 234 304 L 296 304"/>
+  <path class="lnk" d="M 504 304 L 566 304"/>
+  <text class="sub" x="265" y="292" font-size="11" text-anchor="middle">加缓存</text>
+  <text class="sub" x="535" y="292" font-size="11" text-anchor="middle">翻译成循环</text>
+
+  <text class="sub" x="32" y="384" font-size="12">能用 DP 的两把尺：重叠子问题（同一个状态会被算很多次）+ 无后效性（状态一旦确定，未来只取决于它，不取决于怎么走到的）。</text>
+  <text class="sub" x="32" y="404" font-size="12">面试里先把「定义状态」和「转移」说清楚，写成递归，再按需要改成记忆化或递推。</text>
+</svg>

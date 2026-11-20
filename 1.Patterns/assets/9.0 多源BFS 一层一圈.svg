@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/></marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/></marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .sm{font-size:12px;fill:#57606a}
+    .box{fill:#ffffff;stroke:#1f2328;stroke-width:1.6}
+    .blue{fill:#ddf4ff;stroke:#0969da;stroke-width:2}
+    .red{fill:#ffebe9;stroke:#cf222e;stroke-width:2}
+    .yel{fill:#fff8c5;stroke:#bf8700;stroke-width:2}
+    .grn{fill:#dafbe1;stroke:#1a7f37;stroke-width:2}
+    .dash{fill:none;stroke:#8c959f;stroke-width:1.6;stroke-dasharray:5 3}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#ar)}
+    .lnkb{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#arb)}
+    .lnkr{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#arr)}
+    .thin{stroke:#8c959f;stroke-width:1.4;fill:none}
+  </style>
+  <rect width="800" height="400" fill="#fbfbfd" rx="10"/>
+  <text class="ttl" x="32" y="36">多源 BFS：所有起点同时出发，一层一层往外扩</text>
+  <text class="sub" x="32" y="58">格子里的数字 = 被感染（到达）的时间；队列里每一轮处理的恰好是同一层</text>
+  <rect x="40" y="90" width="52" height="52" rx="6" fill="#ffebe9" stroke="#cf222e" stroke-width="2.4"/>
+  <text class="mono" x="66.0" y="121.0" text-anchor="middle" style="font-size:16px;">0</text>
+  <rect x="96" y="90" width="52" height="52" rx="6" fill="#fff1cc" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="122.0" y="121.0" text-anchor="middle" style="font-size:16px;">1</text>
+  <rect x="152" y="90" width="52" height="52" rx="6" fill="#fff8c5" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="178.0" y="121.0" text-anchor="middle" style="font-size:16px;">2</text>
+  <rect x="208" y="90" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="234.0" y="121.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="264" y="90" width="52" height="52" rx="6" fill="#dafbe1" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="290.0" y="121.0" text-anchor="middle" style="font-size:16px;">4</text>
+  <rect x="40" y="146" width="52" height="52" rx="6" fill="#fff1cc" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="66.0" y="177.0" text-anchor="middle" style="font-size:16px;">1</text>
+  <rect x="96" y="146" width="52" height="52" rx="6" fill="#fff8c5" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="122.0" y="177.0" text-anchor="middle" style="font-size:16px;">2</text>
+  <rect x="152" y="146" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="178.0" y="177.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="208" y="146" width="52" height="52" rx="6" fill="#dafbe1" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="234.0" y="177.0" text-anchor="middle" style="font-size:16px;">4</text>
+  <rect x="264" y="146" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="290.0" y="177.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="40" y="202" width="52" height="52" rx="6" fill="#fff8c5" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="66.0" y="233.0" text-anchor="middle" style="font-size:16px;">2</text>
+  <rect x="96" y="202" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="122.0" y="233.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="152" y="202" width="52" height="52" rx="6" fill="#dafbe1" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="178.0" y="233.0" text-anchor="middle" style="font-size:16px;">4</text>
+  <rect x="208" y="202" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="234.0" y="233.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="264" y="202" width="52" height="52" rx="6" fill="#fff8c5" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="290.0" y="233.0" text-anchor="middle" style="font-size:16px;">2</text>
+  <rect x="40" y="258" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="66.0" y="289.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="96" y="258" width="52" height="52" rx="6" fill="#dafbe1" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="122.0" y="289.0" text-anchor="middle" style="font-size:16px;">4</text>
+  <rect x="152" y="258" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="178.0" y="289.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="208" y="258" width="52" height="52" rx="6" fill="#fff8c5" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="234.0" y="289.0" text-anchor="middle" style="font-size:16px;">2</text>
+  <rect x="264" y="258" width="52" height="52" rx="6" fill="#fff1cc" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="290.0" y="289.0" text-anchor="middle" style="font-size:16px;">1</text>
+  <rect x="40" y="314" width="52" height="52" rx="6" fill="#dafbe1" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="66.0" y="345.0" text-anchor="middle" style="font-size:16px;">4</text>
+  <rect x="96" y="314" width="52" height="52" rx="6" fill="#eef7e4" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="122.0" y="345.0" text-anchor="middle" style="font-size:16px;">3</text>
+  <rect x="152" y="314" width="52" height="52" rx="6" fill="#fff8c5" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="178.0" y="345.0" text-anchor="middle" style="font-size:16px;">2</text>
+  <rect x="208" y="314" width="52" height="52" rx="6" fill="#fff1cc" stroke="#8c959f" stroke-width="1.2"/>
+  <text class="mono" x="234.0" y="345.0" text-anchor="middle" style="font-size:16px;">1</text>
+  <rect x="264" y="314" width="52" height="52" rx="6" fill="#ffebe9" stroke="#cf222e" stroke-width="2.4"/>
+  <text class="mono" x="290.0" y="345.0" text-anchor="middle" style="font-size:16px;">0</text>
+  <text class="sm" x="40" y="392">红框 = 起点（时间 0）</text>
+  <text class="sub" x="360" y="104" style="font-weight:600;">队列每一轮的内容</text>
+  <rect class="red" x="360" y="120" width="400" height="44" rx="8"/>
+  <text class="mono" x="374" y="147" style="font-size:13px;font-weight:600;">第 0 轮</text>
+  <text class="sub" x="450" y="147">两个起点同时入队</text>
+  <rect class="yel" x="360" y="176" width="400" height="44" rx="8"/>
+  <text class="mono" x="374" y="203" style="font-size:13px;font-weight:600;">第 1 轮</text>
+  <text class="sub" x="450" y="203">它们各自的上下左右</text>
+  <rect class="yel" x="360" y="232" width="400" height="44" rx="8"/>
+  <text class="mono" x="374" y="259" style="font-size:13px;font-weight:600;">第 2 轮</text>
+  <text class="sub" x="450" y="259">再外一圈……</text>
+  <rect class="box" x="360" y="288" width="400" height="44" rx="8"/>
+  <text class="mono" x="374" y="315" style="font-size:13px;font-weight:600;">……</text>
+  <text class="sub" x="450" y="315">直到队列空或没有新鲜的格子</text>
+  <text class="sub" x="360" y="360">「先冻结本层长度，再逐个出队」就是把层切开的那一刀。</text>
+  <text class="sub" x="360" y="380">答案（分钟数）= 最后一层的层号。</text>
+</svg>

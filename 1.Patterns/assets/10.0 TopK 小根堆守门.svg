@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="800" height="380">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/></marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/></marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .sm{font-size:12px;fill:#57606a}
+    .box{fill:#ffffff;stroke:#1f2328;stroke-width:1.6}
+    .blue{fill:#ddf4ff;stroke:#0969da;stroke-width:2}
+    .red{fill:#ffebe9;stroke:#cf222e;stroke-width:2}
+    .yel{fill:#fff8c5;stroke:#bf8700;stroke-width:2}
+    .grn{fill:#dafbe1;stroke:#1a7f37;stroke-width:2}
+    .dash{fill:none;stroke:#8c959f;stroke-width:1.6;stroke-dasharray:5 3}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#ar)}
+    .lnkb{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#arb)}
+    .lnkr{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#arr)}
+    .thin{stroke:#8c959f;stroke-width:1.4;fill:none}
+  </style>
+  <rect width="800" height="380" fill="#fbfbfd" rx="10"/>
+  <text class="ttl" x="32" y="36">TopK：用大小为 k 的小根堆，堆顶就是「目前第 k 大」</text>
+  <text class="sub" x="32" y="58">求第 3 大：数据流 5, 2, 8, 1, 9, 7 一个个进来</text>
+  <text class="sub" x="32" y="100" style="font-weight:600;">数据流</text>
+  <rect class="box" x="110" y="80" width="54" height="36" rx="6"/>
+  <text class="mono" x="137.0" y="103.0" text-anchor="middle" style="font-size:15px;">5</text>
+  <rect class="box" x="174" y="80" width="54" height="36" rx="6"/>
+  <text class="mono" x="201.0" y="103.0" text-anchor="middle" style="font-size:15px;">2</text>
+  <rect class="box" x="238" y="80" width="54" height="36" rx="6"/>
+  <text class="mono" x="265.0" y="103.0" text-anchor="middle" style="font-size:15px;">8</text>
+  <rect class="box" x="302" y="80" width="54" height="36" rx="6"/>
+  <text class="mono" x="329.0" y="103.0" text-anchor="middle" style="font-size:15px;">1</text>
+  <rect class="box" x="366" y="80" width="54" height="36" rx="6"/>
+  <text class="mono" x="393.0" y="103.0" text-anchor="middle" style="font-size:15px;">9</text>
+  <rect class="box" x="430" y="80" width="54" height="36" rx="6"/>
+  <text class="mono" x="457.0" y="103.0" text-anchor="middle" style="font-size:15px;">7</text>
+  <text class="sub" x="120" y="168" text-anchor="middle" style="font-weight:600;">读完 5, 2, 8</text>
+  <path class="thin" d="M 120 224 L 76 244"/>
+  <path class="thin" d="M 120 224 L 164 244"/>
+  <circle class="yel" cx="120" cy="206" r="20"/>
+  <text class="mono" x="120" y="211" text-anchor="middle" style="font-size:15px;">2</text>
+  <circle class="box" cx="76" cy="262" r="20"/>
+  <text class="mono" x="76" y="267" text-anchor="middle" style="font-size:15px;">5</text>
+  <circle class="box" cx="164" cy="262" r="20"/>
+  <text class="mono" x="164" y="267" text-anchor="middle" style="font-size:15px;">8</text>
+  <text class="sm" x="120" y="312" text-anchor="middle">堆满了，堆顶 2 = 第 3 大</text>
+  <text class="sub" x="330" y="168" text-anchor="middle" style="font-weight:600;">1 ≤ 堆顶 2：丢弃</text>
+  <path class="thin" d="M 330 224 L 286 244"/>
+  <path class="thin" d="M 330 224 L 374 244"/>
+  <circle class="yel" cx="330" cy="206" r="20"/>
+  <text class="mono" x="330" y="211" text-anchor="middle" style="font-size:15px;">2</text>
+  <circle class="box" cx="286" cy="262" r="20"/>
+  <text class="mono" x="286" y="267" text-anchor="middle" style="font-size:15px;">5</text>
+  <circle class="box" cx="374" cy="262" r="20"/>
+  <text class="mono" x="374" y="267" text-anchor="middle" style="font-size:15px;">8</text>
+  <text class="sm" x="330" y="312" text-anchor="middle">进不了前 3 大</text>
+  <text class="sub" x="540" y="168" text-anchor="middle" style="font-weight:600;">9 &gt; 堆顶 2：替换</text>
+  <path class="thin" d="M 540 224 L 496 244"/>
+  <path class="thin" d="M 540 224 L 584 244"/>
+  <circle class="yel" cx="540" cy="206" r="20"/>
+  <text class="mono" x="540" y="211" text-anchor="middle" style="font-size:15px;">5</text>
+  <circle class="box" cx="496" cy="262" r="20"/>
+  <text class="mono" x="496" y="267" text-anchor="middle" style="font-size:15px;">9</text>
+  <circle class="box" cx="584" cy="262" r="20"/>
+  <text class="mono" x="584" y="267" text-anchor="middle" style="font-size:15px;">8</text>
+  <text class="sm" x="540" y="312" text-anchor="middle">弹出 2，压入 9，堆顶变 5</text>
+  <path class="lnk" d="M 190 230 L 250 230"/>
+  <path class="lnk" d="M 400 230 L 470 230"/>
+  <text class="sub" x="32" y="352">每个数最多一次 O(log k) 的堆操作 → 总时间 O(n log k)，空间 O(k)；比整体排序 O(n log n) 更省。</text>
+</svg>

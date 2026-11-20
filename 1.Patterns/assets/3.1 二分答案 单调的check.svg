@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="800" height="380">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/></marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/></marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .sm{font-size:12px;fill:#57606a}
+    .box{fill:#ffffff;stroke:#1f2328;stroke-width:1.6}
+    .blue{fill:#ddf4ff;stroke:#0969da;stroke-width:2}
+    .red{fill:#ffebe9;stroke:#cf222e;stroke-width:2}
+    .yel{fill:#fff8c5;stroke:#bf8700;stroke-width:2}
+    .grn{fill:#dafbe1;stroke:#1a7f37;stroke-width:2}
+    .dash{fill:none;stroke:#8c959f;stroke-width:1.6;stroke-dasharray:5 3}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#ar)}
+    .lnkb{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#arb)}
+    .lnkr{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#arr)}
+    .thin{stroke:#8c959f;stroke-width:1.4;fill:none}
+  </style>
+  <rect width="800" height="380" fill="#fbfbfd" rx="10"/>
+  <text class="ttl" x="32" y="36">二分答案：在「答案的取值轴」上二分，check 的结果必须单调</text>
+  <text class="sub" x="32" y="58">例：吃香蕉，速度 k 越大越容易在 h 小时内吃完——k 轴上 check 是 红…红 蓝…蓝</text>
+  <text class="sub" x="32" y="100" style="font-weight:600;">求「最小可行值」（875 爱吃香蕉的珂珂）</text>
+  <rect class="red" x="70" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="97.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=1</text>
+  <text class="sm" x="97.0" y="176" text-anchor="middle" style="fill:#cf222e;">太慢</text>
+  <rect class="red" x="130" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="157.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=2</text>
+  <text class="sm" x="157.0" y="176" text-anchor="middle" style="fill:#cf222e;">太慢</text>
+  <rect class="red" x="190" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="217.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=3</text>
+  <text class="sm" x="217.0" y="176" text-anchor="middle" style="fill:#cf222e;">太慢</text>
+  <rect class="blue" x="250" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="277.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=4</text>
+  <text class="sm" x="277.0" y="176" text-anchor="middle" style="fill:#0969da;">满足</text>
+  <rect class="blue" x="310" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="337.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=5</text>
+  <text class="sm" x="337.0" y="176" text-anchor="middle" style="fill:#0969da;">满足</text>
+  <rect class="blue" x="370" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="397.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=6</text>
+  <text class="sm" x="397.0" y="176" text-anchor="middle" style="fill:#0969da;">满足</text>
+  <rect class="blue" x="430" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="457.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=7</text>
+  <text class="sm" x="457.0" y="176" text-anchor="middle" style="fill:#0969da;">满足</text>
+  <rect class="blue" x="490" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="517.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=8</text>
+  <text class="sm" x="517.0" y="176" text-anchor="middle" style="fill:#0969da;">满足</text>
+  <rect class="blue" x="550" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="577.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=9</text>
+  <text class="sm" x="577.0" y="176" text-anchor="middle" style="fill:#0969da;">满足</text>
+  <rect class="blue" x="610" y="116" width="54" height="40" rx="6"/>
+  <text class="mono" x="637.0" y="141.0" text-anchor="middle" style="font-size:13px;">k=10</text>
+  <text class="sm" x="637.0" y="176" text-anchor="middle" style="fill:#0969da;">满足</text>
+  <path class="lnkb" d="M 277.0 200 L 277.0 186"/>
+  <text class="sub" x="277.0" y="218" text-anchor="middle" style="fill:#0969da;font-weight:600;">答案 = 第一个蓝 = right</text>
+  <text class="sub" x="32" y="262" style="font-weight:600;">求「最大可行值」（2915 最多合金数：投入越多越难满足）</text>
+  <rect class="blue" x="70" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="97.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=1</text>
+  <rect class="blue" x="130" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="157.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=2</text>
+  <rect class="blue" x="190" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="217.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=3</text>
+  <rect class="blue" x="250" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="277.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=4</text>
+  <rect class="blue" x="310" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="337.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=5</text>
+  <rect class="blue" x="370" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="397.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=6</text>
+  <rect class="red" x="430" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="457.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=7</text>
+  <rect class="red" x="490" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="517.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=8</text>
+  <rect class="red" x="550" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="577.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=9</text>
+  <rect class="red" x="610" y="278" width="54" height="40" rx="6"/>
+  <text class="mono" x="637.0" y="303.0" text-anchor="middle" style="font-size:13px;">x=10</text>
+  <path class="lnkb" d="M 397.0 352 L 397.0 328"/>
+  <text class="sub" x="397.0" y="374" text-anchor="middle" style="fill:#0969da;font-weight:600;">答案 = 最后一个蓝 = left</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/></marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/></marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .sm{font-size:12px;fill:#57606a}
+    .box{fill:#ffffff;stroke:#1f2328;stroke-width:1.6}
+    .blue{fill:#ddf4ff;stroke:#0969da;stroke-width:2}
+    .red{fill:#ffebe9;stroke:#cf222e;stroke-width:2}
+    .yel{fill:#fff8c5;stroke:#bf8700;stroke-width:2}
+    .grn{fill:#dafbe1;stroke:#1a7f37;stroke-width:2}
+    .dash{fill:none;stroke:#8c959f;stroke-width:1.6;stroke-dasharray:5 3}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#ar)}
+    .lnkb{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#arb)}
+    .lnkr{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#arr)}
+    .thin{stroke:#8c959f;stroke-width:1.4;fill:none}
+  </style>
+  <rect width="800" height="400" fill="#fbfbfd" rx="10"/>
+  <text class="ttl" x="32" y="36">递归 = 先「递」到最小的子问题，再一层层「归」回来拼答案</text>
+  <text class="sub" x="32" y="58">以 maxDepth 为例：深度 = max(左深度, 右深度) + 1</text>
+  <path class="thin" d="M 150 140 L 90 195"/>
+  <path class="thin" d="M 150 140 L 210 195"/>
+  <circle class="blue" cx="150" cy="120" r="22"/>
+  <text class="mono" x="150" y="125" text-anchor="middle" style="font-size:15px;">A</text>
+  <circle class="blue" cx="80" cy="210" r="22"/>
+  <text class="mono" x="80" y="215" text-anchor="middle" style="font-size:15px;">B</text>
+  <circle class="blue" cx="220" cy="210" r="22"/>
+  <text class="mono" x="220" y="215" text-anchor="middle" style="font-size:15px;">C</text>
+  <text class="sm" x="150" y="290" text-anchor="middle">A 的两个孩子 B、C 都是叶子</text>
+  <text class="sub" x="430" y="96" style="font-weight:600;">调用栈</text>
+  <rect class="box" x="430" y="106" width="300" height="36" rx="7"/>
+  <text class="mono" x="442" y="129" style="font-size:13px;">maxDepth(A)  等 B、C 的结果</text>
+  <rect class="box" x="450" y="152" width="280" height="36" rx="7"/>
+  <text class="mono" x="462" y="175" style="font-size:13px;">maxDepth(B)  等左右 None</text>
+  <rect class="yel" x="470" y="198" width="260" height="36" rx="7"/>
+  <text class="mono" x="482" y="221" style="font-size:13px;">maxDepth(None) → 0</text>
+  <path class="lnk" d="M 406 112 L 406 112 L 406 232 L 422 232"/>
+  <text class="ttl" x="396" y="176" text-anchor="middle">递</text>
+  <path class="lnkb" d="M 744 238 L 744 238 L 744 124 L 734 124"/>
+  <text class="ttl" x="758" y="186" text-anchor="middle" style="fill:#0969da;">归</text>
+  <text class="mono" x="430" y="262" style="font-size:12.5px;">None→0；B、C→1；A→max(1,1)+1=2</text>
+  <rect class="yel" x="32" y="310" width="736" height="70" rx="10"/>
+  <text class="sub" x="48" y="334" style="font-weight:600;">递归的三件事</text>
+  <text class="sub" x="48" y="356">① 终止条件：最小子问题直接给答案　② 缩小问题：拆给同一个函数　③ 合并答案：用子问题结果拼出自己的</text>
+</svg>

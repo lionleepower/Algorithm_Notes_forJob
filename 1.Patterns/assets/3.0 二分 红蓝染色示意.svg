@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2328"/></marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#cf222e"/></marker>
+  </defs>
+  <style>
+    text{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;fill:#1f2328}
+    .mono{font-family:"SF Mono",Consolas,"Courier New",monospace}
+    .ttl{font-size:18px;font-weight:600}
+    .sub{font-size:13px;fill:#57606a}
+    .sm{font-size:12px;fill:#57606a}
+    .box{fill:#ffffff;stroke:#1f2328;stroke-width:1.6}
+    .blue{fill:#ddf4ff;stroke:#0969da;stroke-width:2}
+    .red{fill:#ffebe9;stroke:#cf222e;stroke-width:2}
+    .yel{fill:#fff8c5;stroke:#bf8700;stroke-width:2}
+    .grn{fill:#dafbe1;stroke:#1a7f37;stroke-width:2}
+    .dash{fill:none;stroke:#8c959f;stroke-width:1.6;stroke-dasharray:5 3}
+    .lnk{stroke:#1f2328;stroke-width:1.8;fill:none;marker-end:url(#ar)}
+    .lnkb{stroke:#0969da;stroke-width:2;fill:none;marker-end:url(#arb)}
+    .lnkr{stroke:#cf222e;stroke-width:2;fill:none;marker-end:url(#arr)}
+    .thin{stroke:#8c959f;stroke-width:1.4;fill:none}
+  </style>
+  <rect width="800" height="360" fill="#fbfbfd" rx="10"/>
+  <text class="ttl" x="32" y="36">红蓝染色：left 永远是红，right 永远是蓝，答案就是 right</text>
+  <text class="sub" x="32" y="58">找第一个 ≥ 9 的位置；红 = 不满足，蓝 = 满足；红色一定全在蓝色左边</text>
+  <text class="sub" x="32" y="86" style="font-weight:600;">开始：两端是数组外的哨兵，还没有任何位置被染色</text>
+  <rect class="dash" x="48" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="75.0" y="125.0" text-anchor="middle" style="font-size:13px;">-1</text>
+  <rect class="dash" x="606" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="633.0" y="125.0" text-anchor="middle" style="font-size:13px;">n</text>
+  <rect class="box" x="110" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="137.0" y="125.0" text-anchor="middle" style="font-size:15px;">1</text>
+  <text class="sm" x="137.0" y="158" text-anchor="middle">0</text>
+  <rect class="box" x="172" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="199.0" y="125.0" text-anchor="middle" style="font-size:15px;">3</text>
+  <text class="sm" x="199.0" y="158" text-anchor="middle">1</text>
+  <rect class="box" x="234" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="261.0" y="125.0" text-anchor="middle" style="font-size:15px;">5</text>
+  <text class="sm" x="261.0" y="158" text-anchor="middle">2</text>
+  <rect class="yel" x="296" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="323.0" y="125.0" text-anchor="middle" style="font-size:15px;">7</text>
+  <text class="sm" x="323.0" y="158" text-anchor="middle">3</text>
+  <rect class="box" x="358" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="385.0" y="125.0" text-anchor="middle" style="font-size:15px;">9</text>
+  <text class="sm" x="385.0" y="158" text-anchor="middle">4</text>
+  <rect class="box" x="420" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="447.0" y="125.0" text-anchor="middle" style="font-size:15px;">11</text>
+  <text class="sm" x="447.0" y="158" text-anchor="middle">5</text>
+  <rect class="box" x="482" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="509.0" y="125.0" text-anchor="middle" style="font-size:15px;">13</text>
+  <text class="sm" x="509.0" y="158" text-anchor="middle">6</text>
+  <rect class="box" x="544" y="100" width="54" height="40" rx="6"/>
+  <text class="mono" x="571.0" y="125.0" text-anchor="middle" style="font-size:15px;">15</text>
+  <text class="sm" x="571.0" y="158" text-anchor="middle">7</text>
+  <text class="mono" x="75.0" y="178" text-anchor="middle" style="font-size:13px;fill:#cf222e;font-weight:600;">left</text>
+  <text class="mono" x="633.0" y="178" text-anchor="middle" style="font-size:13px;fill:#0969da;font-weight:600;">right</text>
+  <text class="mono" x="323.0" y="194" text-anchor="middle" style="font-size:13px;fill:#bf8700;font-weight:600;">mid</text>
+  <text class="sub" x="32" y="226" style="font-weight:600;">结束：left + 1 == right，红蓝贴在一起</text>
+  <rect class="dash" x="48" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="75.0" y="265.0" text-anchor="middle" style="font-size:13px;">-1</text>
+  <rect class="dash" x="606" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="633.0" y="265.0" text-anchor="middle" style="font-size:13px;">n</text>
+  <rect class="red" x="110" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="137.0" y="265.0" text-anchor="middle" style="font-size:15px;">1</text>
+  <text class="sm" x="137.0" y="298" text-anchor="middle">0</text>
+  <rect class="red" x="172" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="199.0" y="265.0" text-anchor="middle" style="font-size:15px;">3</text>
+  <text class="sm" x="199.0" y="298" text-anchor="middle">1</text>
+  <rect class="red" x="234" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="261.0" y="265.0" text-anchor="middle" style="font-size:15px;">5</text>
+  <text class="sm" x="261.0" y="298" text-anchor="middle">2</text>
+  <rect class="red" x="296" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="323.0" y="265.0" text-anchor="middle" style="font-size:15px;">7</text>
+  <text class="sm" x="323.0" y="298" text-anchor="middle">3</text>
+  <rect class="blue" x="358" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="385.0" y="265.0" text-anchor="middle" style="font-size:15px;">9</text>
+  <text class="sm" x="385.0" y="298" text-anchor="middle">4</text>
+  <rect class="blue" x="420" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="447.0" y="265.0" text-anchor="middle" style="font-size:15px;">11</text>
+  <text class="sm" x="447.0" y="298" text-anchor="middle">5</text>
+  <rect class="blue" x="482" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="509.0" y="265.0" text-anchor="middle" style="font-size:15px;">13</text>
+  <text class="sm" x="509.0" y="298" text-anchor="middle">6</text>
+  <rect class="blue" x="544" y="240" width="54" height="40" rx="6"/>
+  <text class="mono" x="571.0" y="265.0" text-anchor="middle" style="font-size:15px;">15</text>
+  <text class="sm" x="571.0" y="298" text-anchor="middle">7</text>
+  <text class="mono" x="323.0" y="318" text-anchor="middle" style="font-size:13px;fill:#cf222e;font-weight:600;">left</text>
+  <text class="mono" x="385.0" y="318" text-anchor="middle" style="font-size:13px;fill:#0969da;font-weight:600;">right</text>
+  <text class="sub" x="32" y="345">每轮把 mid 染成红或蓝并入对应边界；答案不是「找到某个值」，而是「红蓝交界处的第一个蓝」。</text>
+</svg>
